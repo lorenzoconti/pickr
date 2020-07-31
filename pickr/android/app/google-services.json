@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "681553241317",
+    "firebase_url": "https://app-pickr.firebaseio.com",
+    "project_id": "app-pickr",
+    "storage_bucket": "app-pickr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681553241317:android:83400c67144bfe0a73a00c",
+        "android_client_info": {
+          "package_name": "lc.app.pickr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681553241317-4b0bblqihob791jn8v3fqrau9r8mfqr8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdwNeGgCxANqxKG0F375f0itO4Vq7tYMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "681553241317-4b0bblqihob791jn8v3fqrau9r8mfqr8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

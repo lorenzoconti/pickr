@@ -1,4 +1,4 @@
-package com.example.pickr
+package lc.app.pickr
 
 import io.flutter.embedding.android.FlutterActivity
 
