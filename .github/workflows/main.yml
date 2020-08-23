@@ -11,8 +11,8 @@ jobs:
       with:
         java-version: '12.x'
     - uses: subosito/flutter-action@v1
-    - run: cd pickr
-    - run: flutter upgrade
-    - run: flutter doctor
-    - run: flutter pub get
-    - run: flutter test 
+    - run: |
+        cd pickr
+        ls -a
+        flutter pub get
+        flutter test
