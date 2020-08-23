@@ -1,0 +1,1 @@
+enum Suit { ORI, SPADE, BASTONI, COPPE }

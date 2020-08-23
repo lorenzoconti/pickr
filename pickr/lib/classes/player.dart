@@ -1,13 +1,15 @@
 import 'package:pickr/classes/card.dart';
 
-import 'package:flutter/material.dart';
-
-import 'user.dart';
-
 class Player {
-  User user;
-  List<GameCard> hand = List<GameCard>();
-  Player({@required this.user});
+  List<GamingCard> _cards;
+  String id;
 
-  String toString() => user.id + " " + hand.toString();
+  Player({String id}) {
+    this.id = id;
+    this._cards = List<GamingCard>();
+  }
+
+  get hand => _cards;
+
+  set hand(List<GamingCard> cards) => this._cards = cards;
 }

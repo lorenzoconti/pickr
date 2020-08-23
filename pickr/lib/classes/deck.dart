@@ -1,38 +1,39 @@
-import 'package:pickr/enum/suits.dart';
+import 'package:pickr/exceptions/out_of_bound_exception.dart';
 import 'package:quiver/iterables.dart';
 
-import 'card.dart';
+import 'package:pickr/classes/card.dart';
+import 'package:pickr/enums/suits.dart';
 
 class Deck {
-  List<GameCard> _cards;
-  Deck();
+  List<GamingCard> _cards;
 
-  /// Creates a standard deck, composed of 10 different cards of each suit
-  void init() {
-    _cards = List<GameCard>();
-    for (var num in range(1, 11))
-      for (var suit in Suit.values) _cards.add(GameCard(num: num, suit: suit));
+  Deck() {
+    _cards = List<GamingCard>();
   }
 
-  /// Randomly sort the deck
+  get cards => _cards;
+
+  void init() {
+    for (var num in range(1, 11))
+      for (var suit in Suit.values)
+        _cards.add(GamingCard(num: num, suit: suit));
+  }
+
   void shuffle() => this._cards.shuffle();
 
-  /// Returns the first card of the deck
-  GameCard pick() => _cards.isNotEmpty ? _cards.removeAt(0) : null;
+  GamingCard pick() =>
+      _cards.isNotEmpty ? _cards.removeAt(0) : throw OutOfBoundException();
 
-  /// Retunrs the last [n] cards of the deck
-  List<GameCard> pickSome(int n) {
-    if (_cards.length > 3) {
-      List<GameCard> cards = List<GameCard>();
-      for (int i = 0; i < n; i++) cards.add(_cards.removeAt(0));
-      return cards;
-    }
-    return null;
+  List<GamingCard> picks(int n) {
+    if (_cards.length >= n) {
+      List<GamingCard> _pickedcards = List<GamingCard>();
+      for (int i = 0; i < n; i++) _pickedcards.add(_cards.removeAt(0));
+      return _pickedcards;
+    } else
+      throw OutOfBoundException();
   }
 
-  /// Utility method: prints the entire deck
   void show() => _cards.forEach((print));
 
-  /// Utility method: prints the number of cards in the deck
-  void noc() => print(_cards.length);
+  int noc() => _cards.length;
 }
