@@ -1,0 +1,107 @@
+scenario Pickr_NuSMV
+load Pickr_NuSMV.asm
+set operazione := JOIN;
+step
+check numOfPlayers = 1;
+check hand(lorenzo) = 4;
+check stato = WAITING_PLAYERS;
+check joined = true;
+set operazione := JOIN;
+set lobby := INVITE;
+step
+check numOfPlayers = 2;
+check hand(lorenzo) = 4;
+check stato = WAITING_PLAYERS;
+check joined = true;
+set operazione := JOIN;
+set lobby := INVITE;
+step
+check numOfPlayers = 3;
+check hand(lorenzo) = 4;
+check stato = WAITING_PLAYERS;
+check joined = true;
+set operazione := JOIN;
+set lobby := INVITE;
+step
+check numOfPlayers = 4;
+check hand(lorenzo) = 4;
+check stato = WAITING_PLAYERS;
+check joined = true;
+set operazione := JOIN;
+set lobby := LEAVE;
+step
+check numOfPlayers = 3;
+check hand(lorenzo) = 0;
+check stato = MENU;
+check joined = false;
+set operazione := JOIN;
+set lobby := LEAVE;
+step
+check numOfPlayers = 4;
+check hand(lorenzo) = 4;
+check stato = WAITING_PLAYERS;
+check joined = true;
+set operazione := JOIN;
+set lobby := INVITE;
+step
+check numOfPlayers = 5;
+check hand(lorenzo) = 4;
+check stato = PLAYING;
+check joined = true;
+set operazione := JOIN;
+set lobby := INVITE;
+set azione := DROP;
+step
+check numOfPlayers = 5;
+check hand(lorenzo) = 3;
+check stato = PLAYING;
+check joined = true;
+set operazione := JOIN;
+set lobby := INVITE;
+set azione := DROP;
+step
+check numOfPlayers = 5;
+check hand(lorenzo) = 2;
+check stato = PLAYING;
+check joined = true;
+set operazione := JOIN;
+set lobby := INVITE;
+set azione := DROP;
+step
+check numOfPlayers = 5;
+check hand(lorenzo) = 1;
+check stato = PLAYING;
+check joined = true;
+set operazione := JOIN;
+set lobby := INVITE;
+set azione := DROP;
+step
+check numOfPlayers = 0;
+check hand(lorenzo) = 0;
+check stato = MENU;
+check joined = false;
+set operazione := JOIN;
+set lobby := INVITE;
+set azione := DROP;
+step
+check numOfPlayers = 1;
+check hand(lorenzo) = 4;
+check stato = WAITING_PLAYERS;
+check joined = true;
+set operazione := JOIN;
+set lobby := LEAVE;
+set azione := DROP;
+step
+check numOfPlayers = 0;
+check hand(lorenzo) = 0;
+check stato = MENU;
+check joined = false;
+set operazione := LOGOUT;
+set lobby := LEAVE;
+set azione := DROP;
+step
+check numOfPlayers = 0;
+check hand(lorenzo) = 0;
+check stato = INSERISCI_USERNAME;
+check joined = false;
+step

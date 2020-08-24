@@ -1,0 +1,107 @@
+scenario Pickr
+load prova.asm
+set username := lorenzo;
+set password := "password";
+step
+check stato = MENU;
+check utenteAttivo = lorenzo;
+set username := lorenzo;
+set password := "password";
+set operazione := JOIN;
+step
+check stato = WAITING_PLAYERS;
+check utenteAttivo = lorenzo;
+check numOfPlayers = 1;
+check joined = true;
+set username := lorenzo;
+set password := "password";
+set operazione := JOIN;
+set lobby := INVITE;
+step
+check stato = WAITING_PLAYERS;
+check utenteAttivo = lorenzo;
+check numOfPlayers = 2;
+check joined = true;
+set username := lorenzo;
+set password := "password";
+set operazione := JOIN;
+set lobby := INVITE;
+step
+check stato = WAITING_PLAYERS;
+check utenteAttivo = lorenzo;
+check numOfPlayers = 3;
+check joined = true;
+set username := lorenzo;
+set password := "password";
+set operazione := JOIN;
+set lobby := INVITE;
+step
+check stato = WAITING_PLAYERS;
+check utenteAttivo = lorenzo;
+check numOfPlayers = 4;
+check joined = true;
+set username := lorenzo;
+set password := "password";
+set operazione := JOIN;
+set lobby := INVITE;
+step
+check stato = PLAYING;
+check utenteAttivo = lorenzo;
+check numOfPlayers = 5;
+check joined = true;
+set username := lorenzo;
+set password := "password";
+set operazione := JOIN;
+set lobby := INVITE;
+set azione := DROP;
+step
+check stato = PLAYING;
+check utenteAttivo = lorenzo;
+check numOfPlayers = 5;
+check joined = true;
+check hand(lorenzo) = 3;
+set username := lorenzo;
+set password := "password";
+set operazione := JOIN;
+set lobby := INVITE;
+set azione := DROP;
+step
+check stato = PLAYING;
+check utenteAttivo = lorenzo;
+check numOfPlayers = 5;
+check joined = true;
+check hand(lorenzo) = 2;
+set username := lorenzo;
+set password := "password";
+set operazione := JOIN;
+set lobby := INVITE;
+set azione := DROP;
+step
+check stato = PLAYING;
+check utenteAttivo = lorenzo;
+check numOfPlayers = 5;
+check joined = true;
+check hand(lorenzo) = 1;
+set username := lorenzo;
+set password := "password";
+set operazione := JOIN;
+set lobby := INVITE;
+set azione := DROP;
+step
+check stato = MENU;
+check utenteAttivo = lorenzo;
+check numOfPlayers = 0;
+check joined = false;
+check hand(lorenzo) = 0;
+set username := lorenzo;
+set password := "password";
+set operazione := LOGOUT;
+set lobby := INVITE;
+set azione := DROP;
+step
+check stato = INSERISCI_USERNAME;
+check utenteAttivo = lorenzo;
+check numOfPlayers = 0;
+check joined = false;
+check hand(lorenzo) = 0;
+step
