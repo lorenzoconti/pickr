@@ -18,6 +18,8 @@ class _LobbyPageState extends State<LobbyPage> {
     //
     GameSession game = GameProvider.of(context).game;
 
+    print(game.check());
+
     return Scaffold(
         body: Container(
       margin: EdgeInsets.all(10),

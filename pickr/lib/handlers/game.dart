@@ -50,10 +50,13 @@ class GameSession implements GameSessionInterface {
   }
 
   bool check() {
+    print(_type);
+    print(_gameSettings);
+
     if (_type == GameType.BRISCOLA_CHIAMATA && _gameSettings["numPlayers"] != 5)
       return false;
     if (_type == GameType.BRISCOLA &&
-        (_gameSettings["numPlayers"] != 2 || _gameSettings["numPlayers"] != 4))
+        (_gameSettings["numPlayers"] != 2 && _gameSettings["numPlayers"] != 4))
       return false;
     return true;
   }
