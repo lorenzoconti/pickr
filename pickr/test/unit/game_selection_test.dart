@@ -18,7 +18,8 @@ void main() async {
   var decoder = new FirstOccurrenceSettingsDetector(
       eols: ['\r\n', '\n'], textDelimiters: ['"', "'"]);
 
-  final input = new File('./test/unit/pickr.csv').openRead();
+  //final input = new File('./test/unit/pickr.csv').openRead();
+  final input = new File('test/unit/pickr.csv').openRead();
   final List<List<dynamic>> fields = await input
       .transform(utf8.decoder)
       .transform(new CsvToListConverter(csvSettingsDetector: decoder))
