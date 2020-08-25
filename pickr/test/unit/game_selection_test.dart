@@ -21,7 +21,7 @@ void main() async {
   var decoder = new FirstOccurrenceSettingsDetector(
       eols: ['\r\n', '\n'], textDelimiters: ['"', "'"]);
 
-  String toAbsPath(path, [basedir = null]) {
+  String toAbsPath(path, basedir) {
     Path.Context context;
     if (Platform.isWindows) {
       context = new Path.Context(style: Path.Style.windows);
