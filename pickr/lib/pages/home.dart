@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pickr/classes/settings.dart';
 import 'package:pickr/enums/games.dart';
 import 'package:pickr/handlers/game.dart';
 import 'package:pickr/providers/game-provider.dart';
@@ -36,8 +37,6 @@ class _HomePageState extends State<HomePage> {
     //
     final GameSession game = GameProvider.of(context).game;
 
-    game.mockSettings();
-
     return Scaffold(
         appBar: AppBar(title: Text("Pickr")), body: _buildBody(game));
   }
@@ -58,10 +57,10 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.symmetric(horizontal: 10),
             margin: EdgeInsets.symmetric(horizontal: 10),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RaisedButton(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: _buildOptions(game)
+                /*RaisedButton(
                     onPressed: () => _onButtonPressed(GameType.BRISCOLA, game),
                     child: Text("Briscola Classica")),
                 RaisedButton(
@@ -73,9 +72,9 @@ class _HomePageState extends State<HomePage> {
                     child: Text("Domino")),
                 RaisedButton(
                     onPressed: () => _onButtonPressed(GameType.MARIANNA, game),
-                    child: Text("Marianna")),
-              ],
-            ),
+                    child: Text("Marianna")),*/
+
+                ),
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -89,6 +88,17 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  List<Widget> _buildOptions(GameSession game) {
+    //
+    List<Widget> options = List<Widget>();
+    game.settings.forEach((setting) {
+      options.add(RaisedButton(
+          onPressed: () => _onButtonPressed(setting.type, game),
+          child: Text(setting.type.toShortString())));
+    });
+    return options;
   }
 
   /// When the user selects a game type, updates the [_type] and

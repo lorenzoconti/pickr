@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:pickr/enums/auth_mode.dart';
 import 'package:pickr/handlers/auth.dart';
 import 'package:pickr/providers/auth-provider.dart';
+import 'package:pickr/providers/game-provider.dart';
+import 'package:pickr/handlers/game.dart';
 import 'package:pickr/utils/validators.dart';
 
 class AuthPage extends StatefulWidget {
@@ -51,8 +53,13 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   void callback(String user) {
+    //
+    GameSession game = GameProvider.of(context).game;
+
     if (user != null)
-      Navigator.of(context).pushReplacementNamed('/home');
+      game
+          .getSettings()
+          .then((value) => Navigator.of(context).pushReplacementNamed('/home'));
     else
       showDialog(context: context, child: Text("error"));
   }

@@ -1,6 +1,7 @@
 import 'package:pickr/classes/settings.dart';
 import 'package:pickr/enums/games.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pickr/utils/csv_utils.dart';
 
 class GameSessionInterface {}
 
@@ -20,6 +21,8 @@ class GameSession implements GameSessionInterface {
   /// List of the settings, one setting for every game type.
   List<Settings> _settings = List<Settings>();
 
+  List<Settings> get settings => _settings;
+
   /// Selected setting based on [_type]
   Settings _selectedSetting;
 
@@ -31,6 +34,7 @@ class GameSession implements GameSessionInterface {
   void setSetting(GameType type) {
     //
     _type = type;
+    _gameSettings.clear();
     _selectedSetting = _settings.firstWhere((element) => element.type == type,
         orElse: () => null);
   }
@@ -80,6 +84,38 @@ class GameSession implements GameSessionInterface {
         (_selectedSetting.availableScore ? 1 : 0);
   }
 
+  Future<void> getSettings() async {
+    await db.collection("settings").getDocuments().then((querySnapshot) {
+      querySnapshot.documents.forEach((result) {
+        if (result.data["available"] == "true") {
+          _settings.add(Settings(
+              available: UtilsCSV.booleanCSV(result.data["available"]),
+              availableNumPlayers:
+                  UtilsCSV.booleanCSV(result.data["availableNumPlayers"]),
+              availableScore:
+                  UtilsCSV.booleanCSV(result.data["availableScore"]),
+              maxScore: UtilsCSV.scoreCSV(result.data["maxScore"]),
+              numOptions: UtilsCSV.numberCSV(result.data["numOptions"]),
+              numPlayers: UtilsCSV.playersCSV(result.data["numPlayers"]),
+              type: UtilsCSV.typeCSV(result.data["type"])));
+        } else {
+          _settings.add(Settings(
+              available: false,
+              availableNumPlayers: false,
+              availableScore: false,
+              maxScore: [0],
+              numOptions: 0,
+              numPlayers: [0],
+              type: UtilsCSV.typeCSV(result.data["type"])));
+        }
+      });
+    });
+
+    _settings.forEach((element) {
+      print(element);
+    });
+  }
+
   Future<void> createLobby() async {
     //
 
@@ -92,25 +128,5 @@ class GameSession implements GameSessionInterface {
     lobby = ref.documentID;
 
     print(lobby);
-  }
-
-  void mockSettings() {
-    _settings.add(Settings(
-        available: true,
-        availableNumPlayers: true,
-        availableScore: true,
-        numOptions: 2,
-        numPlayers: [2, 4],
-        maxScore: [5, 10, 20],
-        type: GameType.BRISCOLA));
-    //
-    _settings.add(Settings(
-        available: true,
-        availableNumPlayers: false,
-        availableScore: true,
-        numOptions: 1,
-        numPlayers: [5],
-        maxScore: [5, 10, 20],
-        type: GameType.BRISCOLA_CHIAMATA));
   }
 }
