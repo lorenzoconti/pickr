@@ -25,12 +25,6 @@ class BriscolaChiamata extends Game {
   }
 
   @override
-  GamingCard rule() {
-    // TODO: implement rule
-    throw UnimplementedError();
-  }
-
-  @override
   void spread() {
     players.forEach((player) {
       player.hand = deck.picks(_numcards);
