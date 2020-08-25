@@ -6,16 +6,16 @@ import 'package:pickr/classes/player.dart';
 abstract class Game {
   //
 
-  int _numplayers;
-  int _score;
+  int numplayers;
+  int score;
   int _round = 1;
   Deck _deck;
   List<GamingCard> _table;
   List<Player> _players;
 
   Game({@required int numplayers, @required int score}) {
-    _numplayers = numplayers;
-    _score = score;
+    numplayers = numplayers;
+    score = score;
     _deck = Deck();
     _table = List<GamingCard>();
     _players = List<Player>();
