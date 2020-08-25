@@ -10,6 +10,9 @@ import 'package:pickr/enums/games.dart';
 import 'package:pickr/handlers/game.dart';
 import 'package:pickr/utils/csv_utils.dart';
 
+import 'package:path/path.dart' as Path;
+import 'dart:io' show Platform, Directory;
+
 void main() async {
   //
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,8 +21,27 @@ void main() async {
   var decoder = new FirstOccurrenceSettingsDetector(
       eols: ['\r\n', '\n'], textDelimiters: ['"', "'"]);
 
+  String toAbsPath(path, [basedir = null]) {
+    Path.Context context;
+    if (Platform.isWindows) {
+      context = new Path.Context(style: Path.Style.windows);
+    } else {
+      context = new Path.Context(style: Path.Style.posix);
+    }
+    basedir ??= Path.dirname(Platform.script.toFilePath());
+    path = context.join(basedir, path);
+    print(path);
+    return context.normalize(path);
+  }
+
+  var path = toAbsPath("./test/unit/pickr.csv", Directory.current.path);
+
+  path = path.replaceAll(RegExp(r'\\'), '\\\\');
+
+  print(path);
+
   //final input = new File('./test/unit/pickr.csv').openRead();
-  final input = new File('test/unit/pickr.csv').openRead();
+  final input = new File(path).openRead();
   final List<List<dynamic>> fields = await input
       .transform(utf8.decoder)
       .transform(new CsvToListConverter(csvSettingsDetector: decoder))
