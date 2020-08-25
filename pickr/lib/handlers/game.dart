@@ -49,6 +49,15 @@ class GameSession implements GameSessionInterface {
     return _gameSettings.length;
   }
 
+  bool check() {
+    if (_type == GameType.BRISCOLA_CHIAMATA && _gameSettings["numPlayers"] != 5)
+      return false;
+    if (_type == GameType.BRISCOLA &&
+        (_gameSettings["numPlayers"] != 2 || _gameSettings["numPlayers"] != 4))
+      return false;
+    return true;
+  }
+
   /// Checks that the user selected at least one option
   /// of each selectable setting.
   bool everythingChecked() {

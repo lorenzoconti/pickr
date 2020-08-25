@@ -91,6 +91,15 @@ void main() async {
         //
         game.setting = setting;
         expect(game.currentSetting != null, true);
+
+        ///Consistency Check
+        if (!game.currentSetting.availableNumPlayers)
+          game.addOption("numPlayer", game.currentSetting.numPlayers[0]);
+
+        if (!game.currentSetting.availableScore)
+          game.addOption("maxScore", game.currentSetting.maxScore[0]);
+
+        game.check();
       });
 
       //
