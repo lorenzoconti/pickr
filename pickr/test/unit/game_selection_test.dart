@@ -34,7 +34,8 @@ void main() async {
     return context.normalize(path);
   }
 
-  var path = toAbsPath("./test/unit/pickr.csv", Directory.current.path);
+  // var path = toAbsPath("./test/unit/pickr.csv", Directory.current.path);
+  var path = toAbsPath("./unit/pickr.csv", Directory.current.path);
 
   path = path.replaceAll(RegExp(r'\\'), '\\\\');
 
