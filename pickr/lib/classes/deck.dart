@@ -11,7 +11,7 @@ class Deck {
     _cards = List<GamingCard>();
   }
 
-  get cards => _cards;
+  List<GamingCard> get cards => _cards;
 
   void init() {
     for (var num in range(1, 11))

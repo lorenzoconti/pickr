@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pickr/classes/card.dart';
 import 'package:pickr/classes/deck.dart';
 import 'package:pickr/classes/games/briscola_chiamata.dart';
+import 'package:pickr/classes/games/game.dart';
 import 'package:pickr/exceptions/out_of_bound_exception.dart';
 
 void main() {
@@ -37,9 +38,9 @@ void main() {
   });
 
   test('Game Test', () {
-    Briscola game = Briscola();
+    Game game = BriscolaChiamata();
     //
-    expect(game.runtimeType, Briscola);
+    expect(game.runtimeType, BriscolaChiamata);
     expect(game.cards.length, 0);
     expect(game.players.isEmpty, true);
 

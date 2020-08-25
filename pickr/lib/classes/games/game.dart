@@ -1,28 +1,35 @@
+import 'package:flutter/material.dart';
 import 'package:pickr/classes/card.dart';
 import 'package:pickr/classes/deck.dart';
-import 'package:pickr/classes/games/settings.dart';
 import 'package:pickr/classes/player.dart';
 
 abstract class Game {
+  //
+
+  int _numplayers;
+  int _score;
   int _round = 1;
   Deck _deck;
   List<GamingCard> _table;
   List<Player> _players;
-  GameSettings _settings;
 
-  Game({GameSettings settings}) {
+  Game({@required int numplayers, @required int score}) {
+    _numplayers = numplayers;
+    _score = score;
     _deck = Deck();
     _table = List<GamingCard>();
     _players = List<Player>();
-    this._settings = settings;
   }
 
-  get deck => _deck;
-  get players => _players;
-  get round => _round;
-  get table => _table;
-  get cards => _deck.cards;
-  get settings => _settings;
+  Deck get deck => _deck;
+  List<Player> get players => _players;
+  int get round => _round;
+  List<GamingCard> get table => _table;
+  List<GamingCard> get cards => _deck.cards;
+
+  void spread();
+
+  // GamingCard rule();
 
   void addPlayer({String id});
 
