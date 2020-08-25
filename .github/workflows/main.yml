@@ -13,6 +13,7 @@ jobs:
     - uses: subosito/flutter-action@v1
     - run: |
         cd pickr
+        echo $PWD
         ls -a
         flutter pub get
         flutter analyze
