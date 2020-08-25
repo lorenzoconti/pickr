@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pickr/classes/settings.dart';
 import 'package:pickr/enums/games.dart';
 import 'package:pickr/handlers/game.dart';
 import 'package:pickr/providers/game-provider.dart';
