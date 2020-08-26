@@ -34,14 +34,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     //
-    final GameSession game = GameProvider.of(context).game;
+    final GameSessionInterface game = GameProvider.of(context).game;
 
     return Scaffold(
         appBar: AppBar(title: Text("Pickr")), body: _buildBody(game));
   }
 
   /// Builds the body of the page.
-  Widget _buildBody(GameSession game) {
+  Widget _buildBody(GameSessionInterface game) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  List<Widget> _buildOptions(GameSession game) {
+  List<Widget> _buildOptions(GameSessionInterface game) {
     //
     List<Widget> options = List<Widget>();
     game.settings.forEach((setting) {
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
 
   /// When the user selects a game type, updates the [_type] and
   /// [_selectedSetting] in order to show the correct settings section below.
-  void _onButtonPressed(GameType type, GameSession game) {
+  void _onButtonPressed(GameType type, GameSessionInterface game) {
     setState(() {
       game.setSetting(type);
       _selected = true;
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   /// Builds the settings section.
-  Widget _settingsSection(GameSession game) {
+  Widget _settingsSection(GameSessionInterface game) {
     List<Widget> _settingWidgets = List<Widget>();
 
     /// Adds the section title

@@ -3,7 +3,24 @@ import 'package:pickr/enums/games.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pickr/utils/csv_utils.dart';
 
-class GameSessionInterface {}
+abstract class GameSessionInterface {
+  //
+  Settings get currentSetting;
+  List<Settings> get settings;
+  String get lobby;
+
+  set setSettings(List<Settings> list);
+
+  void setSetting(GameType type);
+  int addOption(String title, Object value);
+  Future<void> createLobby();
+
+  Future<List<Settings>> getSettings();
+
+  Future<void> fetch();
+
+  bool check();
+}
 
 class GameSession implements GameSessionInterface {
   //
@@ -13,7 +30,9 @@ class GameSession implements GameSessionInterface {
   GameType _type;
 
   ///
-  String lobby;
+  String _lobby;
+
+  String get lobby => _lobby;
 
   /// (Key,Value) map that contains the settings options the user selected
   Map<String, Object> _gameSettings = Map<String, Object>();
@@ -29,6 +48,8 @@ class GameSession implements GameSessionInterface {
   Settings get currentSetting => _selectedSetting;
 
   set setting(Settings setting) => _selectedSetting = setting;
+
+  set setSettings(List<Settings> list) => _settings = list;
 
   /// Sets the current settings options based on the game type the user selected.
   void setSetting(GameType type) {
@@ -84,11 +105,13 @@ class GameSession implements GameSessionInterface {
         (_selectedSetting.availableScore ? 1 : 0);
   }
 
-  Future<void> getSettings() async {
+  Future<List<Settings>> getSettings() async {
+    List<Settings> _fetched = List<Settings>();
+
     await db.collection("settings").getDocuments().then((querySnapshot) {
       querySnapshot.documents.forEach((result) {
         if (result.data["available"] == "true") {
-          _settings.add(Settings(
+          _fetched.add(Settings(
               available: UtilsCSV.booleanCSV(result.data["available"]),
               availableNumPlayers:
                   UtilsCSV.booleanCSV(result.data["availableNumPlayers"]),
@@ -110,10 +133,10 @@ class GameSession implements GameSessionInterface {
         }
       });
     });
-
-    _settings.forEach((element) {
+    _fetched.forEach((element) {
       print(element);
     });
+    return _fetched;
   }
 
   Future<void> createLobby() async {
@@ -125,8 +148,15 @@ class GameSession implements GameSessionInterface {
       'numPlayers': _gameSettings["numPlayers"].toString(),
     });
 
-    lobby = ref.documentID;
+    _lobby = ref.documentID;
 
-    print(lobby);
+    print(_lobby);
+  }
+
+  @override
+  Future<void> fetch() async {
+    List<Settings> _fetched = await this.getSettings();
+    _settings = _fetched;
+    return;
   }
 }

@@ -54,11 +54,11 @@ class _AuthPageState extends State<AuthPage> {
 
   void callback(String user) {
     //
-    GameSession game = GameProvider.of(context).game;
+    GameSessionInterface game = GameProvider.of(context).game;
 
     if (user != null)
       game
-          .getSettings()
+          .fetch()
           .then((value) => Navigator.of(context).pushReplacementNamed('/home'));
     else
       showDialog(context: context, child: Text("error"));

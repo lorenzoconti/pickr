@@ -16,7 +16,7 @@ class _LobbyPageState extends State<LobbyPage> {
   @override
   Widget build(BuildContext context) {
     //
-    GameSession game = GameProvider.of(context).game;
+    GameSessionInterface game = GameProvider.of(context).game;
 
     print(game.check());
 
