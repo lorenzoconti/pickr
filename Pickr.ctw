@@ -1,0 +1,19 @@
+Model Pickr
+
+ Parameters:
+   available : Boolean
+   type : { Briscola, Chiamata, Domino, Marianna, Invalid }
+   numOptions : [-1..2]
+   numPlayers : { COUPLE, FIVE, ANY, Invalid }
+   availableNumPlayers : Boolean
+   availableScore : Boolean
+   maxScore : { -1, 0, 5, 10, 15 }
+
+ Constraints:
+   # type = Chiamata => numPlayers = FIVE #
+   # type = Briscola => numPlayers = COUPLE #
+   # type = Domino or type = Marianna => not(available) #
+   # not(available) => (not(availableNumPlayers) and not(availableScore) and maxScore = 0 and numPlayers = ANY and numOptions = 0)  #
+   # not(availableNumPlayers) and not(availableScore) => numOptions = 0 #
+   # not(availableNumPlayers) and availableScore => numOptions = 1 #
+   # availableNumPlayers and not(availableScore) => numOptions = 1 #

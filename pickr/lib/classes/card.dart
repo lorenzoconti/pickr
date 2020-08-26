@@ -14,7 +14,7 @@ class GamingCard {
 
   int _numToVal({int num}) {
     if (num != 1 && num != 3)
-      return num - 2;
+      return num - 1;
     else
       return num == 1 ? 10 : 9;
   }

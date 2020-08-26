@@ -10,8 +10,7 @@ class BriscolaChiamata extends Game {
   void start() {
     deck.init();
     deck.shuffle();
-    players.forEach((player) => player.hand = deck.picks(_numcards));
-    //players.forEach(print);
+    spread();
     deck.show();
   }
 

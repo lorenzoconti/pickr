@@ -13,11 +13,11 @@ jobs:
     - uses: subosito/flutter-action@v1
     - run: |
         cd pickr
-        echo $PWD
         ls -a
         flutter pub get
         flutter analyze
         flutter test --coverage
+        flutter drive --target=test_driver/app.dart
     - uses: codecov/codecov-action@v1 
       with: 
         token: ${{ secrets.CODECOV_TOKEN }} 

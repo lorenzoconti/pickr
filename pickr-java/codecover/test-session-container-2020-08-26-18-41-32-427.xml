@@ -1,0 +1,2109 @@
+<?xml version="1.0" encoding="UTF-8"?><TestSessionContainer xmlns="http://www.codecover.org/xml/testsession-container" Date="1598460092424" TestSessionContainerId="96013f18-b573-40a9-a2ab-0033c6b2686f" version="1.0">
+<SrcFileList>
+<SrcFile Content="package pickr.classes;&#13;&#10;&#13;&#10;import java.util.ArrayList;&#13;&#10;import java.util.Collections;&#13;&#10;&#13;&#10;import pickr.enums.Suit;&#13;&#10;import pickr.exception.OutOfBoundException;&#13;&#10;import pickr.exception.WrongCardNumberException;&#13;&#10;&#13;&#10;public class Deck {&#13;&#10;&#9;&#13;&#10;&#9;private ArrayList&lt;GamingCard&gt; cards;&#13;&#10;&#9;&#13;&#10;&#9;public Deck() { this.cards = new ArrayList&lt;GamingCard&gt;();&#9;}&#13;&#10;&#13;&#10;&#9;public ArrayList&lt;GamingCard&gt; getCards() { return cards;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public void init() throws WrongCardNumberException {&#13;&#10;&#9;&#9;for(int num = 1; num &lt; 11; num++) {&#13;&#10;&#9;&#9;&#9;for(Suit suit : Suit.values()) {&#13;&#10;&#9;&#9;&#9;&#9;cards.add(new GamingCard(suit, num));&#13;&#10;&#9;&#9;&#9;}&#9;&#9;&#9;&#13;&#10;&#9;&#9;}&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public void shuffle() { Collections.shuffle(cards);&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public GamingCard pick() throws OutOfBoundException {&#13;&#10;&#9;&#9;if(!cards.isEmpty()) return cards.remove(0);&#13;&#10;&#9;&#9;else throw new OutOfBoundException();&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public ArrayList&lt;GamingCard&gt; picks(int n) throws OutOfBoundException {&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;if(cards.size() &gt;= n) {&#13;&#10;&#9;&#9;&#9;ArrayList&lt;GamingCard&gt; picked = new ArrayList&lt;GamingCard&gt;();&#13;&#10;&#9;&#9;&#9;for(int i =0; i &lt; n; i ++) {&#13;&#10;&#9;&#9;&#9;&#9;picked.add(cards.remove(0));&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;return picked;&#9;&#9;&#9;&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;else throw new OutOfBoundException();&#9;&#13;&#10;&#9;}&#9;&#13;&#10;}&#13;&#10;" Filename="Deck.java" Intrnl_Id="1"/>
+<SrcFile Content="package pickr.classes;&#13;&#10;&#13;&#10;import pickr.enums.Suit;&#13;&#10;import pickr.exception.WrongCardNumberException;&#13;&#10;&#13;&#10;public class GamingCard {&#13;&#10;&#9;&#13;&#10;&#9;private Suit suit;&#13;&#10;&#9;private int num;&#13;&#10;&#9;private int val;&#13;&#10;&#9;&#13;&#10;&#9;public GamingCard(Suit suit, int num) throws WrongCardNumberException {&#13;&#10;&#9;&#9;this.suit = suit;&#13;&#10;&#9;&#9;this.val = numToVal(num);&#13;&#10;&#9;&#9;this.num = checkNum(num);&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public Suit getSuit() { return this.suit; }&#13;&#10;&#9;public int getNum() { return this.num; }&#13;&#10;&#9;public int getVal() { return this.val; }&#13;&#10;&#9;&#13;&#10;&#9;&#13;&#10;&#9;int numToVal(int num) {&#13;&#10;&#9;&#9;if(num != 1 &amp;&amp; num != 3) return num-1;&#13;&#10;&#9;&#9;else return num == 1 ? 10 : 9;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;  int checkNum(int num) throws WrongCardNumberException {&#13;&#10;&#9;&#9;    if (num &lt; 1 || num &gt; 10) {&#13;&#10;&#9;&#9;      throw new WrongCardNumberException();&#13;&#10;&#9;&#9;    }&#13;&#10;&#9;&#9;    return num;&#13;&#10;&#9;  }&#13;&#10;&#9;  &#13;&#10;&#9;  @Override&#13;&#10;&#9;public String toString() {&#9;return num + &quot; &quot; + suit.toString() + &quot; value: &quot; + val;&#9;}&#13;&#10;&#13;&#10;}&#13;&#10;" Filename="GamingCard.java" Intrnl_Id="2"/>
+<SrcFile Content="package pickr.classes;&#13;&#10;&#13;&#10;import java.util.ArrayList;&#13;&#10;&#13;&#10;public class Player {&#13;&#10;&#9;&#13;&#10;&#9;private ArrayList&lt;GamingCard&gt; cards;&#13;&#10;&#9;private String id;&#13;&#10;&#9;&#13;&#10;&#9;private int gameScore;&#13;&#10;&#9;private int matchScore;&#13;&#10;&#9;&#13;&#10;&#9;public Player(String id) {&#13;&#10;&#9;&#9;this.id = id;&#13;&#10;&#9;&#9;this.cards = new ArrayList&lt;GamingCard&gt;();&#13;&#10;&#9;&#9;this.gameScore = 0;&#13;&#10;&#9;&#9;this.matchScore = 0;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public ArrayList&lt;GamingCard&gt; getCards() {&#13;&#10;&#9;&#9;return cards;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public void hand(ArrayList&lt;GamingCard&gt; cards) {&#13;&#10;&#9;&#9;this.cards = cards;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public GamingCard drop() { return this.cards.get(0); }&#13;&#10;&#13;&#10;&#9;public int getGameScore() {&#13;&#10;&#9;&#9;return gameScore;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public void setGameScore(int gameScore) {&#13;&#10;&#9;&#9;this.gameScore += gameScore;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public int getMatchScore() {&#13;&#10;&#9;&#9;return matchScore;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public void setMatchScore(int matchScore) {&#13;&#10;&#9;&#9;this.matchScore = matchScore;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public String getId() {&#13;&#10;&#9;&#9;return id;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public void delete() { this.cards.remove(0); }&#13;&#10;&#9;&#13;&#10;&#9;public void pick(GamingCard card) { this.cards.add(card);  }&#13;&#10;&#13;&#10;}&#13;&#10;" Filename="Player.java" Intrnl_Id="3"/>
+<SrcFile Content="package pickr.classes.games;&#13;&#10;&#13;&#10;import pickr.classes.GamingCard;&#13;&#10;import pickr.classes.Player;&#13;&#10;import pickr.enums.Suit;&#13;&#10;import pickr.exception.OutOfBoundException;&#13;&#10;import pickr.exception.WrongCardNumberException;&#13;&#10;&#13;&#10;public class Briscola extends Game{&#13;&#10;&#9;&#13;&#10;&#9;private int numcards = 3;&#13;&#10;&#9;&#13;&#10;&#9;private Suit briscola;&#13;&#10;&#9;&#13;&#10;&#9;public Briscola(int numplayers, int score) {&#13;&#10;&#9;&#9;super(numplayers, score);&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;void spread() throws OutOfBoundException {&#13;&#10;&#9;&#9;for(Player player : players) {&#13;&#10;&#9;&#9;&#9;player.hand(deck.picks(numcards));&#13;&#10;&#9;&#9;}&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void start() throws WrongCardNumberException, OutOfBoundException { &#9;&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;this.deck.init();&#13;&#10;&#9;&#9;this.deck.shuffle();&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;briscola = deck.getCards().get(deck.getCards().size()-1).getSuit();&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;this.spread();&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;// this.deck.show();&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;GamingCard rule() {&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;GamingCard winningCard = this.getTable().get(0);&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;// assert(this.getTable().size() == this.numplayers);&#13;&#10;&#9;&#9;for(GamingCard card : this.getTable()) {&#9;&#9;&#9;&#13;&#10;&#9;&#9;&#9;&#13;&#10;&#9;&#9;&#9;if(card.getVal() &gt; winningCard.getVal()) {&#13;&#10;&#9;&#9;&#9;&#9;// T T T&#13;&#10;&#9;&#9;&#9;&#9;if(winningCard.getSuit() == briscola &amp;&amp; card.getSuit() == briscola) {&#13;&#10;&#9;&#9;&#9;&#9;&#9;winningCard = card;&#13;&#10;&#9;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;&#9;// T F F &#13;&#10;&#9;&#9;&#9;&#9;if(winningCard.getSuit() != briscola &amp;&amp; card.getSuit() != briscola) {&#13;&#10;&#9;&#9;&#9;&#9;&#9;winningCard = card;&#13;&#10;&#9;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;// F T F &#13;&#10;&#9;&#9;&#9;else if(card.getSuit() == briscola &amp;&amp; winningCard.getSuit() != briscola) {&#13;&#10;&#9;&#9;&#9;&#9;winningCard = card;&#13;&#10;&#9;&#9;&#9;}&#9;&#9;&#9;&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;System.out.println(&quot;Briscola.rule() : &quot; + winningCard);&#13;&#10;&#9;&#9;&#9;&#9;&#13;&#10;&#9;&#9;return winningCard;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#9;public void round() throws OutOfBoundException {&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;System.out.println(&quot;Briscola.round() : &quot; + briscola.toString());&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;for(Player player : this.players) {&#13;&#10;&#9;&#9;&#9;this.dropCard(player.drop());&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;System.out.println(&quot;Briscola.round() : &quot; + this.getTable());&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;GamingCard winningCard = this.rule();&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;this.winner(winningCard);&#9;&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;for(Player player : this.players) {&#13;&#10;&#9;&#9;&#9;player.pick(this.deck.pick());&#13;&#10;&#9;&#9;}&#9;&#9;&#13;&#10;&#9;}&#13;&#10;}&#13;&#10;" Filename="Briscola.java" Intrnl_Id="4"/>
+<SrcFile Content="package pickr.classes.games;&#13;&#10;&#13;&#10;import java.util.ArrayList;&#13;&#10;&#13;&#10;import pickr.classes.Deck;&#13;&#10;import pickr.classes.GamingCard;&#13;&#10;import pickr.classes.Player;&#13;&#10;import pickr.exception.OutOfBoundException;&#13;&#10;import pickr.exception.WrongCardNumberException;&#13;&#10;&#13;&#10;public abstract class Game {&#13;&#10;&#9;&#13;&#10;&#9;int numplayers;&#13;&#10;&#9;int score;&#13;&#10;&#9;private int round = 0;&#13;&#10;&#9;protected Deck deck;&#13;&#10;&#9;private ArrayList&lt;GamingCard&gt; table;&#13;&#10;&#9;protected ArrayList&lt;Player&gt; players;&#13;&#10;&#9;&#13;&#10;&#9;public Game(int numplayers, int score) {&#13;&#10;&#9;&#9;this.numplayers = numplayers;&#13;&#10;&#9;&#9;this.score = score;&#13;&#10;&#9;&#9;this.deck = new Deck();&#13;&#10;&#9;&#9;this.table = new ArrayList&lt;GamingCard&gt;();&#13;&#10;&#9;&#9;this.players = new ArrayList&lt;Player&gt;();&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public Deck getDeck() { return deck; }&#13;&#10;&#13;&#10;&#9;public int getRound() { return round; }&#13;&#10;&#13;&#10;&#9;public ArrayList&lt;GamingCard&gt; getTable() { return table; }&#13;&#10;&#13;&#10;&#9;public ArrayList&lt;Player&gt; getPlayers() { return players; }&#13;&#10;&#9;&#13;&#10;&#9;abstract void spread() throws OutOfBoundException;&#13;&#10;&#9;&#13;&#10;&#9;abstract GamingCard rule();&#13;&#10;&#9;&#13;&#10;&#9;public void addPlayer(String id) throws OutOfBoundException {&#13;&#10;&#9;&#9;if(players.size() &lt; this.numplayers) {&#13;&#10;&#9;&#9;&#9;players.add(new Player(id));&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;else throw new OutOfBoundException();&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;int getTableValue() {&#13;&#10;&#9;&#9;int result = 0;&#13;&#10;&#9;&#9;for(GamingCard card : this.table) {&#13;&#10;&#9;&#9;&#9;result += card.getVal();&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;return result;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;void dropCard(GamingCard card) { table.add(card); }&#13;&#10;&#9;&#9;&#13;&#10;&#9;abstract void start() throws WrongCardNumberException, OutOfBoundException;&#9;&#13;&#10;&#9;&#13;&#10;&#9;public Player winner(GamingCard winnerCard) {&#9;&#9;&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;Player winner = this.players.get(0);&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;for(Player player : this.players) {&#13;&#10;&#9;&#9;&#9;&#13;&#10;&#9;&#9;&#9;// System.out.println(&quot;Game.winner() : Player Cards&quot; + p.getCards());&#13;&#10;&#9;&#9;&#9;// System.out.println(&quot;Game,winner() : Winning Card &quot; + winnerCard);&#13;&#10;&#9;&#9;&#9;// System.out.println(&quot;Game.winner() : Contains Winning Card &quot; + p.getCards().contains(winnerCard));&#13;&#10;&#9;&#9;&#9;&#13;&#10;&#9;&#9;&#9;if(player.getCards().contains(winnerCard)) winner = player;&#13;&#10;&#9;&#9;&#9;&#13;&#10;&#9;&#9;&#9;player.delete();&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;System.out.println(&quot;the winner is &quot; + winner.getId());&#9;&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;winner.setGameScore(getTableValue());&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;table.clear();&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;this.round += 1;&#13;&#10;&#9;&#9;&#13;&#10;&#9;&#9;return winner;&#9;&#9;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;}&#13;&#10;" Filename="Game.java" Intrnl_Id="5"/>
+<SrcFile Content="package pickr.enums;&#13;&#10;&#13;&#10;public enum GameType {BRISCOLA_CHIAMATA, BRISCOLA, MARIANNA, DOMINO  }" Filename="GameType.java" Intrnl_Id="6"/>
+<SrcFile Content="package pickr.enums;&#13;&#10;&#13;&#10;public enum Suit {ORI, SPADE, BASTONI, COPPE } &#13;&#10;" Filename="Suit.java" Intrnl_Id="7"/>
+<SrcFile Content="package pickr.exception;&#13;&#10;&#13;&#10;public class OutOfBoundException extends Exception {&#13;&#10;&#13;&#10;&#9;/**&#13;&#10;&#9; * &#13;&#10;&#9; */&#13;&#10;&#9;private static final long serialVersionUID = 1L;&#13;&#10;&#13;&#10;}&#13;&#10;" Filename="OutOfBoundException.java" Intrnl_Id="8"/>
+<SrcFile Content="package pickr.exception;&#13;&#10;&#13;&#10;public class WrongCardNumberException extends Exception {&#13;&#10;&#13;&#10;&#9;/**&#13;&#10;&#9; * &#13;&#10;&#9; */&#13;&#10;&#9;private static final long serialVersionUID = 1L;&#13;&#10;&#13;&#10;}&#13;&#10;" Filename="WrongCardNumberException.java" Intrnl_Id="9"/>
+</SrcFileList>
+<CritList>
+<CritListEntry Name="org.codecover.model.utils.criteria.LoopCoverage" PluginName="org.codecover"/>
+<CritListEntry Name="org.codecover.model.utils.criteria.ConditionCoverage" PluginName="org.codecover"/>
+<CritListEntry Name="org.codecover.model.utils.criteria.BranchCoverage" PluginName="org.codecover"/>
+<CritListEntry Name="org.codecover.model.utils.criteria.StatementCoverage" PluginName="org.codecover"/>
+</CritList>
+<BoolOpList>
+<BoolOp Arity="2" Intrnl_Id="10" Name="conditional and (&amp;&amp;)">
+<BoolAssgnmntBoolMapList>
+<MapEntry BoolAssgnmnt="02" Value="false"/>
+<MapEntry BoolAssgnmnt="10" Value="false"/>
+<MapEntry BoolAssgnmnt="11" Value="true"/>
+</BoolAssgnmntBoolMapList>
+</BoolOp>
+<BoolOp Arity="2" Intrnl_Id="11" Name="conditional or (||)">
+<BoolAssgnmntBoolMapList>
+<MapEntry BoolAssgnmnt="00" Value="false"/>
+<MapEntry BoolAssgnmnt="01" Value="true"/>
+<MapEntry BoolAssgnmnt="12" Value="true"/>
+</BoolAssgnmntBoolMapList>
+</BoolOp>
+<BoolOp Arity="1" Intrnl_Id="12" Name="not (!)">
+<BoolAssgnmntBoolMapList>
+<MapEntry BoolAssgnmnt="1" Value="false"/>
+<MapEntry BoolAssgnmnt="0" Value="true"/>
+</BoolAssgnmntBoolMapList>
+</BoolOp>
+</BoolOpList>
+<HierarchyLvlTypeList>
+<HierarchyLvlType EnglishName="enumeration" IntrnlName="enum" Intrnl_Id="13"/>
+<HierarchyLvlType EnglishName="package" IntrnlName="package" Intrnl_Id="14"/>
+<HierarchyLvlType EnglishName="method" IntrnlName="method" Intrnl_Id="15"/>
+<HierarchyLvlType EnglishName="class" IntrnlName="class" Intrnl_Id="16"/>
+<HierarchyLvlType EnglishName="default package" IntrnlName="default package" Intrnl_Id="17"/>
+</HierarchyLvlTypeList>
+<MASTRoot>
+<HierarchyLvl HierarchyLvlId="1911" HierarchyLvlTypeId="17" Intrnl_Id="18" Name="default package">
+<Header/>
+<LocList/>
+<HierarchyLvl HierarchyLvlId="1910" HierarchyLvlTypeId="14" Intrnl_Id="19" Name="pickr">
+<Header/>
+<LocList/>
+<HierarchyLvl HierarchyLvlId="1907" HierarchyLvlTypeId="14" Intrnl_Id="20" Name="classes">
+<Header/>
+<LocList/>
+<HierarchyLvl HierarchyLvlId="1906" HierarchyLvlTypeId="14" Intrnl_Id="21" Name="games">
+<Header/>
+<LocList/>
+<HierarchyLvl HierarchyLvlId="1888" HierarchyLvlTypeId="16" Intrnl_Id="22" Name="Briscola">
+<Header>
+<Loc EndOffset="253" SrcFileId="4" StartOffset="219"/>
+</Header>
+<LocList>
+<Loc EndOffset="1999" SrcFileId="4" StartOffset="219"/>
+</LocList>
+<StmntSeq Intrnl_Id="23">
+<LocList>
+<Loc EndOffset="285" SrcFileId="4" StartOffset="260"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="24">
+<LocList>
+<Loc EndOffset="285" SrcFileId="4" StartOffset="260"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<HierarchyLvl HierarchyLvlId="1883" HierarchyLvlTypeId="15" Intrnl_Id="25" Name="Briscola">
+<Header>
+<Loc EndOffset="361" SrcFileId="4" StartOffset="319"/>
+</Header>
+<LocList>
+<Loc EndOffset="396" SrcFileId="4" StartOffset="319"/>
+</LocList>
+<StmntSeq Intrnl_Id="26">
+<LocList>
+<Loc EndOffset="392" SrcFileId="4" StartOffset="367"/>
+</LocList>
+<BasicStmnt CovItemId="S2" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="27">
+<LocList>
+<Loc EndOffset="392" SrcFileId="4" StartOffset="367"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1884" HierarchyLvlTypeId="15" Intrnl_Id="28" Name="spread">
+<Header>
+<Loc EndOffset="456" SrcFileId="4" StartOffset="404"/>
+</Header>
+<LocList>
+<Loc EndOffset="542" SrcFileId="4" StartOffset="404"/>
+</LocList>
+<StmntSeq Intrnl_Id="29">
+<LocList>
+<Loc EndOffset="536" SrcFileId="4" StartOffset="462"/>
+</LocList>
+<LoopStmnt CovItemId="S3" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="30" MltplExecId="L1-2" MltplExecPrefix="pickr.classes.games.Briscola.java" NvrExecId="L1-0" NvrExecPrefix="pickr.classes.games.Briscola.java" OnceExecutedId="L1-1" OnceExecutedPrefix="pickr.classes.games.Briscola.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="31">
+<LocList>
+<Loc EndOffset="531" SrcFileId="4" StartOffset="497"/>
+</LocList>
+<BasicStmnt CovItemId="S4" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="32">
+<LocList>
+<Loc EndOffset="531" SrcFileId="4" StartOffset="497"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="465" SrcFileId="4" StartOffset="462"/>
+<LocList>
+<Loc EndOffset="536" SrcFileId="4" StartOffset="462"/>
+</LocList>
+</LoopStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1885" HierarchyLvlTypeId="15" Intrnl_Id="33" Name="start">
+<Header>
+<Loc EndOffset="631" SrcFileId="4" StartOffset="547"/>
+</Header>
+<LocList>
+<Loc EndOffset="813" SrcFileId="4" StartOffset="547"/>
+</LocList>
+<StmntSeq Intrnl_Id="34">
+<LocList>
+<Loc EndOffset="660" SrcFileId="4" StartOffset="643"/>
+<Loc EndOffset="684" SrcFileId="4" StartOffset="664"/>
+<Loc EndOffset="759" SrcFileId="4" StartOffset="692"/>
+<Loc EndOffset="781" SrcFileId="4" StartOffset="767"/>
+</LocList>
+<BasicStmnt CovItemId="S5" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="35">
+<LocList>
+<Loc EndOffset="660" SrcFileId="4" StartOffset="643"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S6" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="36">
+<LocList>
+<Loc EndOffset="684" SrcFileId="4" StartOffset="664"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S7" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="37">
+<LocList>
+<Loc EndOffset="759" SrcFileId="4" StartOffset="692"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S8" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="38">
+<LocList>
+<Loc EndOffset="781" SrcFileId="4" StartOffset="767"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1886" HierarchyLvlTypeId="15" Intrnl_Id="39" Name="rule">
+<Header>
+<Loc EndOffset="849" SrcFileId="4" StartOffset="820"/>
+</Header>
+<LocList>
+<Loc EndOffset="1546" SrcFileId="4" StartOffset="820"/>
+</LocList>
+<StmntSeq Intrnl_Id="40">
+<LocList>
+<Loc EndOffset="907" SrcFileId="4" StartOffset="859"/>
+<Loc EndOffset="1450" SrcFileId="4" StartOffset="972"/>
+<Loc EndOffset="1513" SrcFileId="4" StartOffset="1458"/>
+<Loc EndOffset="1542" SrcFileId="4" StartOffset="1523"/>
+</LocList>
+<BasicStmnt CovItemId="S9" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="41">
+<LocList>
+<Loc EndOffset="907" SrcFileId="4" StartOffset="859"/>
+</LocList>
+</BasicStmnt>
+<LoopStmnt CovItemId="S10" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="42" MltplExecId="L2-2" MltplExecPrefix="pickr.classes.games.Briscola.java" NvrExecId="L2-0" NvrExecPrefix="pickr.classes.games.Briscola.java" OnceExecutedId="L2-1" OnceExecutedPrefix="pickr.classes.games.Briscola.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="43">
+<LocList>
+<Loc EndOffset="1442" SrcFileId="4" StartOffset="1025"/>
+</LocList>
+<CondStmnt CovItemId="S11" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="44">
+<Branch CovItemId="B1" CovItemPrefix="pickr.classes.games.Briscola.java" Implct="false" Intrnl_Id="45">
+<Cond/>
+<LocList>
+<Loc EndOffset="1318" SrcFileId="4" StartOffset="1066"/>
+</LocList>
+<StmntSeq Intrnl_Id="46">
+<LocList>
+<Loc EndOffset="1189" SrcFileId="4" StartOffset="1087"/>
+<Loc EndOffset="1312" SrcFileId="4" StartOffset="1210"/>
+</LocList>
+<CondStmnt CovItemId="S12" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="47">
+<Branch CovItemId="B3" CovItemPrefix="pickr.classes.games.Briscola.java" Implct="false" Intrnl_Id="48">
+<Cond/>
+<LocList>
+<Loc EndOffset="1189" SrcFileId="4" StartOffset="1155"/>
+</LocList>
+<StmntSeq Intrnl_Id="49">
+<LocList>
+<Loc EndOffset="1182" SrcFileId="4" StartOffset="1163"/>
+</LocList>
+<BasicStmnt CovItemId="S13" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="50">
+<LocList>
+<Loc EndOffset="1182" SrcFileId="4" StartOffset="1163"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B4" CovItemPrefix="pickr.classes.games.Briscola.java" Implct="true" Intrnl_Id="51">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="52">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1089" SrcFileId="4" StartOffset="1087"/>
+<LocList>
+<Loc EndOffset="1189" SrcFileId="4" StartOffset="1087"/>
+</LocList>
+<RootTerm CovItemId="C2" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="53">
+<OpTerm BooleanOpId="10" Intrnl_Id="54">
+<BasicBoolTerm Intrnl_Id="55">
+<LocList>
+<Loc EndOffset="1123" SrcFileId="4" StartOffset="1090"/>
+</LocList>
+</BasicBoolTerm>
+<BasicBoolTerm Intrnl_Id="56">
+<LocList>
+<Loc EndOffset="1153" SrcFileId="4" StartOffset="1127"/>
+</LocList>
+</BasicBoolTerm>
+<LocList>
+<Loc EndOffset="1126" SrcFileId="4" StartOffset="1124"/>
+</LocList>
+</OpTerm>
+</RootTerm>
+</CondStmnt>
+<CondStmnt CovItemId="S14" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="57">
+<Branch CovItemId="B5" CovItemPrefix="pickr.classes.games.Briscola.java" Implct="false" Intrnl_Id="58">
+<Cond/>
+<LocList>
+<Loc EndOffset="1312" SrcFileId="4" StartOffset="1278"/>
+</LocList>
+<StmntSeq Intrnl_Id="59">
+<LocList>
+<Loc EndOffset="1305" SrcFileId="4" StartOffset="1286"/>
+</LocList>
+<BasicStmnt CovItemId="S15" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="60">
+<LocList>
+<Loc EndOffset="1305" SrcFileId="4" StartOffset="1286"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B6" CovItemPrefix="pickr.classes.games.Briscola.java" Implct="true" Intrnl_Id="61">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="62">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1212" SrcFileId="4" StartOffset="1210"/>
+<LocList>
+<Loc EndOffset="1312" SrcFileId="4" StartOffset="1210"/>
+</LocList>
+<RootTerm CovItemId="C3" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="63">
+<OpTerm BooleanOpId="10" Intrnl_Id="64">
+<BasicBoolTerm Intrnl_Id="65">
+<LocList>
+<Loc EndOffset="1246" SrcFileId="4" StartOffset="1213"/>
+</LocList>
+</BasicBoolTerm>
+<BasicBoolTerm Intrnl_Id="66">
+<LocList>
+<Loc EndOffset="1276" SrcFileId="4" StartOffset="1250"/>
+</LocList>
+</BasicBoolTerm>
+<LocList>
+<Loc EndOffset="1249" SrcFileId="4" StartOffset="1247"/>
+</LocList>
+</OpTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B2" CovItemPrefix="pickr.classes.games.Briscola.java" Implct="false" Intrnl_Id="67">
+<Cond>
+<Loc EndOffset="1341" SrcFileId="4" StartOffset="1337"/>
+</Cond>
+<LocList>
+<Loc EndOffset="1442" SrcFileId="4" StartOffset="1342"/>
+</LocList>
+<StmntSeq Intrnl_Id="68">
+<LocList>
+<Loc EndOffset="1442" SrcFileId="4" StartOffset="1342"/>
+</LocList>
+<CondStmnt CovItemId="S16" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="69">
+<Branch CovItemId="B7" CovItemPrefix="pickr.classes.games.Briscola.java" Implct="false" Intrnl_Id="70">
+<Cond/>
+<LocList>
+<Loc EndOffset="1442" SrcFileId="4" StartOffset="1410"/>
+</LocList>
+<StmntSeq Intrnl_Id="71">
+<LocList>
+<Loc EndOffset="1436" SrcFileId="4" StartOffset="1417"/>
+</LocList>
+<BasicStmnt CovItemId="S17" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="72">
+<LocList>
+<Loc EndOffset="1436" SrcFileId="4" StartOffset="1417"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B8" CovItemPrefix="pickr.classes.games.Briscola.java" Implct="true" Intrnl_Id="73">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="74">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1344" SrcFileId="4" StartOffset="1342"/>
+<LocList>
+<Loc EndOffset="1442" SrcFileId="4" StartOffset="1342"/>
+</LocList>
+<RootTerm CovItemId="C4" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="75">
+<OpTerm BooleanOpId="10" Intrnl_Id="76">
+<BasicBoolTerm Intrnl_Id="77">
+<LocList>
+<Loc EndOffset="1371" SrcFileId="4" StartOffset="1345"/>
+</LocList>
+</BasicBoolTerm>
+<BasicBoolTerm Intrnl_Id="78">
+<LocList>
+<Loc EndOffset="1408" SrcFileId="4" StartOffset="1375"/>
+</LocList>
+</BasicBoolTerm>
+<LocList>
+<Loc EndOffset="1374" SrcFileId="4" StartOffset="1372"/>
+</LocList>
+</OpTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1027" SrcFileId="4" StartOffset="1025"/>
+<LocList>
+<Loc EndOffset="1442" SrcFileId="4" StartOffset="1025"/>
+</LocList>
+<RootTerm CovItemId="C1" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="79">
+<BasicBoolTerm Intrnl_Id="80">
+<LocList>
+<Loc EndOffset="1064" SrcFileId="4" StartOffset="1028"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+<Keyword EndOffset="975" SrcFileId="4" StartOffset="972"/>
+<LocList>
+<Loc EndOffset="1450" SrcFileId="4" StartOffset="972"/>
+</LocList>
+</LoopStmnt>
+<BasicStmnt CovItemId="S18" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="81">
+<LocList>
+<Loc EndOffset="1513" SrcFileId="4" StartOffset="1458"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S19" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="82">
+<LocList>
+<Loc EndOffset="1542" SrcFileId="4" StartOffset="1523"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1887" HierarchyLvlTypeId="15" Intrnl_Id="83" Name="round">
+<Header>
+<Loc EndOffset="1604" SrcFileId="4" StartOffset="1558"/>
+</Header>
+<LocList>
+<Loc EndOffset="1996" SrcFileId="4" StartOffset="1558"/>
+</LocList>
+<StmntSeq Intrnl_Id="84">
+<LocList>
+<Loc EndOffset="1678" SrcFileId="4" StartOffset="1614"/>
+<Loc EndOffset="1760" SrcFileId="4" StartOffset="1686"/>
+<Loc EndOffset="1828" SrcFileId="4" StartOffset="1768"/>
+<Loc EndOffset="1873" SrcFileId="4" StartOffset="1836"/>
+<Loc EndOffset="1906" SrcFileId="4" StartOffset="1881"/>
+<Loc EndOffset="1990" SrcFileId="4" StartOffset="1915"/>
+</LocList>
+<BasicStmnt CovItemId="S20" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="85">
+<LocList>
+<Loc EndOffset="1678" SrcFileId="4" StartOffset="1614"/>
+</LocList>
+</BasicStmnt>
+<LoopStmnt CovItemId="S21" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="86" MltplExecId="L3-2" MltplExecPrefix="pickr.classes.games.Briscola.java" NvrExecId="L3-0" NvrExecPrefix="pickr.classes.games.Briscola.java" OnceExecutedId="L3-1" OnceExecutedPrefix="pickr.classes.games.Briscola.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="87">
+<LocList>
+<Loc EndOffset="1755" SrcFileId="4" StartOffset="1726"/>
+</LocList>
+<BasicStmnt CovItemId="S22" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="88">
+<LocList>
+<Loc EndOffset="1755" SrcFileId="4" StartOffset="1726"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="1689" SrcFileId="4" StartOffset="1686"/>
+<LocList>
+<Loc EndOffset="1760" SrcFileId="4" StartOffset="1686"/>
+</LocList>
+</LoopStmnt>
+<BasicStmnt CovItemId="S23" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="89">
+<LocList>
+<Loc EndOffset="1828" SrcFileId="4" StartOffset="1768"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S24" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="90">
+<LocList>
+<Loc EndOffset="1873" SrcFileId="4" StartOffset="1836"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S25" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="91">
+<LocList>
+<Loc EndOffset="1906" SrcFileId="4" StartOffset="1881"/>
+</LocList>
+</BasicStmnt>
+<LoopStmnt CovItemId="S26" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="92" MltplExecId="L4-2" MltplExecPrefix="pickr.classes.games.Briscola.java" NvrExecId="L4-0" NvrExecPrefix="pickr.classes.games.Briscola.java" OnceExecutedId="L4-1" OnceExecutedPrefix="pickr.classes.games.Briscola.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="93">
+<LocList>
+<Loc EndOffset="1985" SrcFileId="4" StartOffset="1955"/>
+</LocList>
+<BasicStmnt CovItemId="S27" CovItemPrefix="pickr.classes.games.Briscola.java" Intrnl_Id="94">
+<LocList>
+<Loc EndOffset="1985" SrcFileId="4" StartOffset="1955"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="1918" SrcFileId="4" StartOffset="1915"/>
+<LocList>
+<Loc EndOffset="1990" SrcFileId="4" StartOffset="1915"/>
+</LocList>
+</LoopStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1901" HierarchyLvlTypeId="16" Intrnl_Id="95" Name="Game">
+<Header>
+<Loc EndOffset="278" SrcFileId="5" StartOffset="252"/>
+</Header>
+<LocList>
+<Loc EndOffset="2118" SrcFileId="5" StartOffset="252"/>
+</LocList>
+<StmntSeq Intrnl_Id="96">
+<LocList>
+<Loc EndOffset="339" SrcFileId="5" StartOffset="317"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="97">
+<LocList>
+<Loc EndOffset="339" SrcFileId="5" StartOffset="317"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<HierarchyLvl HierarchyLvlId="1889" HierarchyLvlTypeId="15" Intrnl_Id="98" Name="Game">
+<Header>
+<Loc EndOffset="484" SrcFileId="5" StartOffset="446"/>
+</Header>
+<LocList>
+<Loc EndOffset="661" SrcFileId="5" StartOffset="446"/>
+</LocList>
+<StmntSeq Intrnl_Id="99">
+<LocList>
+<Loc EndOffset="519" SrcFileId="5" StartOffset="490"/>
+<Loc EndOffset="542" SrcFileId="5" StartOffset="523"/>
+<Loc EndOffset="569" SrcFileId="5" StartOffset="546"/>
+<Loc EndOffset="614" SrcFileId="5" StartOffset="573"/>
+<Loc EndOffset="657" SrcFileId="5" StartOffset="618"/>
+</LocList>
+<BasicStmnt CovItemId="S2" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="100">
+<LocList>
+<Loc EndOffset="519" SrcFileId="5" StartOffset="490"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="101">
+<LocList>
+<Loc EndOffset="542" SrcFileId="5" StartOffset="523"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S4" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="102">
+<LocList>
+<Loc EndOffset="569" SrcFileId="5" StartOffset="546"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S5" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="103">
+<LocList>
+<Loc EndOffset="614" SrcFileId="5" StartOffset="573"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S6" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="104">
+<LocList>
+<Loc EndOffset="657" SrcFileId="5" StartOffset="618"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1890" HierarchyLvlTypeId="15" Intrnl_Id="105" Name="getDeck">
+<Header>
+<Loc EndOffset="687" SrcFileId="5" StartOffset="666"/>
+</Header>
+<LocList>
+<Loc EndOffset="704" SrcFileId="5" StartOffset="666"/>
+</LocList>
+<StmntSeq Intrnl_Id="106">
+<LocList>
+<Loc EndOffset="702" SrcFileId="5" StartOffset="690"/>
+</LocList>
+<BasicStmnt CovItemId="S7" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="107">
+<LocList>
+<Loc EndOffset="702" SrcFileId="5" StartOffset="690"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1891" HierarchyLvlTypeId="15" Intrnl_Id="108" Name="getRound">
+<Header>
+<Loc EndOffset="730" SrcFileId="5" StartOffset="709"/>
+</Header>
+<LocList>
+<Loc EndOffset="748" SrcFileId="5" StartOffset="709"/>
+</LocList>
+<StmntSeq Intrnl_Id="109">
+<LocList>
+<Loc EndOffset="746" SrcFileId="5" StartOffset="733"/>
+</LocList>
+<BasicStmnt CovItemId="S8" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="110">
+<LocList>
+<Loc EndOffset="746" SrcFileId="5" StartOffset="733"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1892" HierarchyLvlTypeId="15" Intrnl_Id="111" Name="getTable">
+<Header>
+<Loc EndOffset="792" SrcFileId="5" StartOffset="753"/>
+</Header>
+<LocList>
+<Loc EndOffset="810" SrcFileId="5" StartOffset="753"/>
+</LocList>
+<StmntSeq Intrnl_Id="112">
+<LocList>
+<Loc EndOffset="808" SrcFileId="5" StartOffset="795"/>
+</LocList>
+<BasicStmnt CovItemId="S9" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="113">
+<LocList>
+<Loc EndOffset="808" SrcFileId="5" StartOffset="795"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1893" HierarchyLvlTypeId="15" Intrnl_Id="114" Name="getPlayers">
+<Header>
+<Loc EndOffset="852" SrcFileId="5" StartOffset="815"/>
+</Header>
+<LocList>
+<Loc EndOffset="872" SrcFileId="5" StartOffset="815"/>
+</LocList>
+<StmntSeq Intrnl_Id="115">
+<LocList>
+<Loc EndOffset="870" SrcFileId="5" StartOffset="855"/>
+</LocList>
+<BasicStmnt CovItemId="S10" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="116">
+<LocList>
+<Loc EndOffset="870" SrcFileId="5" StartOffset="855"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1894" HierarchyLvlTypeId="15" Intrnl_Id="117" Name="spread">
+<Header>
+<Loc EndOffset="927" SrcFileId="5" StartOffset="878"/>
+</Header>
+<LocList>
+<Loc EndOffset="928" SrcFileId="5" StartOffset="878"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1895" HierarchyLvlTypeId="15" Intrnl_Id="118" Name="rule">
+<Header>
+<Loc EndOffset="960" SrcFileId="5" StartOffset="934"/>
+</Header>
+<LocList>
+<Loc EndOffset="961" SrcFileId="5" StartOffset="934"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1896" HierarchyLvlTypeId="15" Intrnl_Id="119" Name="addPlayer">
+<Header>
+<Loc EndOffset="1026" SrcFileId="5" StartOffset="967"/>
+</Header>
+<LocList>
+<Loc EndOffset="1153" SrcFileId="5" StartOffset="967"/>
+</LocList>
+<StmntSeq Intrnl_Id="120">
+<LocList>
+<Loc EndOffset="1149" SrcFileId="5" StartOffset="1032"/>
+</LocList>
+<CondStmnt CovItemId="S11" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="121">
+<Branch CovItemId="B1" CovItemPrefix="pickr.classes.games.Game.java" Implct="false" Intrnl_Id="122">
+<Cond/>
+<LocList>
+<Loc EndOffset="1108" SrcFileId="5" StartOffset="1069"/>
+</LocList>
+<StmntSeq Intrnl_Id="123">
+<LocList>
+<Loc EndOffset="1103" SrcFileId="5" StartOffset="1075"/>
+</LocList>
+<BasicStmnt CovItemId="S12" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="124">
+<LocList>
+<Loc EndOffset="1103" SrcFileId="5" StartOffset="1075"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B2" CovItemPrefix="pickr.classes.games.Game.java" Implct="false" Intrnl_Id="125">
+<Cond>
+<Loc EndOffset="1116" SrcFileId="5" StartOffset="1112"/>
+</Cond>
+<LocList>
+<Loc EndOffset="1149" SrcFileId="5" StartOffset="1117"/>
+</LocList>
+<StmntSeq Intrnl_Id="126">
+<LocList>
+<Loc EndOffset="1149" SrcFileId="5" StartOffset="1117"/>
+</LocList>
+<BasicStmnt CovItemId="S13" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="127">
+<LocList>
+<Loc EndOffset="1149" SrcFileId="5" StartOffset="1117"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1034" SrcFileId="5" StartOffset="1032"/>
+<LocList>
+<Loc EndOffset="1149" SrcFileId="5" StartOffset="1032"/>
+</LocList>
+<RootTerm CovItemId="C1" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="128">
+<BasicBoolTerm Intrnl_Id="129">
+<LocList>
+<Loc EndOffset="1067" SrcFileId="5" StartOffset="1035"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1897" HierarchyLvlTypeId="15" Intrnl_Id="130" Name="getTableValue">
+<Header>
+<Loc EndOffset="1178" SrcFileId="5" StartOffset="1159"/>
+</Header>
+<LocList>
+<Loc EndOffset="1294" SrcFileId="5" StartOffset="1159"/>
+</LocList>
+<StmntSeq Intrnl_Id="131">
+<LocList>
+<Loc EndOffset="1199" SrcFileId="5" StartOffset="1184"/>
+<Loc EndOffset="1272" SrcFileId="5" StartOffset="1203"/>
+<Loc EndOffset="1290" SrcFileId="5" StartOffset="1276"/>
+</LocList>
+<BasicStmnt CovItemId="S14" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="132">
+<LocList>
+<Loc EndOffset="1199" SrcFileId="5" StartOffset="1184"/>
+</LocList>
+</BasicStmnt>
+<LoopStmnt CovItemId="S15" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="133" MltplExecId="L1-2" MltplExecPrefix="pickr.classes.games.Game.java" NvrExecId="L1-0" NvrExecPrefix="pickr.classes.games.Game.java" OnceExecutedId="L1-1" OnceExecutedPrefix="pickr.classes.games.Game.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="134">
+<LocList>
+<Loc EndOffset="1267" SrcFileId="5" StartOffset="1243"/>
+</LocList>
+<BasicStmnt CovItemId="S16" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="135">
+<LocList>
+<Loc EndOffset="1267" SrcFileId="5" StartOffset="1243"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="1206" SrcFileId="5" StartOffset="1203"/>
+<LocList>
+<Loc EndOffset="1272" SrcFileId="5" StartOffset="1203"/>
+</LocList>
+</LoopStmnt>
+<BasicStmnt CovItemId="S17" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="136">
+<LocList>
+<Loc EndOffset="1290" SrcFileId="5" StartOffset="1276"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1898" HierarchyLvlTypeId="15" Intrnl_Id="137" Name="dropCard">
+<Header>
+<Loc EndOffset="1330" SrcFileId="5" StartOffset="1300"/>
+</Header>
+<LocList>
+<Loc EndOffset="1351" SrcFileId="5" StartOffset="1300"/>
+</LocList>
+<StmntSeq Intrnl_Id="138">
+<LocList>
+<Loc EndOffset="1349" SrcFileId="5" StartOffset="1333"/>
+</LocList>
+<BasicStmnt CovItemId="S18" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="139">
+<LocList>
+<Loc EndOffset="1349" SrcFileId="5" StartOffset="1333"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1899" HierarchyLvlTypeId="15" Intrnl_Id="140" Name="start">
+<Header>
+<Loc EndOffset="1432" SrcFileId="5" StartOffset="1358"/>
+</Header>
+<LocList>
+<Loc EndOffset="1433" SrcFileId="5" StartOffset="1358"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1900" HierarchyLvlTypeId="15" Intrnl_Id="141" Name="winner">
+<Header>
+<Loc EndOffset="1483" SrcFileId="5" StartOffset="1440"/>
+</Header>
+<LocList>
+<Loc EndOffset="2113" SrcFileId="5" StartOffset="1440"/>
+</LocList>
+<StmntSeq Intrnl_Id="142">
+<LocList>
+<Loc EndOffset="1531" SrcFileId="5" StartOffset="1495"/>
+<Loc EndOffset="1931" SrcFileId="5" StartOffset="1539"/>
+<Loc EndOffset="1993" SrcFileId="5" StartOffset="1939"/>
+<Loc EndOffset="2039" SrcFileId="5" StartOffset="2002"/>
+<Loc EndOffset="2061" SrcFileId="5" StartOffset="2047"/>
+<Loc EndOffset="2085" SrcFileId="5" StartOffset="2069"/>
+<Loc EndOffset="2107" SrcFileId="5" StartOffset="2093"/>
+</LocList>
+<BasicStmnt CovItemId="S19" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="143">
+<LocList>
+<Loc EndOffset="1531" SrcFileId="5" StartOffset="1495"/>
+</LocList>
+</BasicStmnt>
+<LoopStmnt CovItemId="S20" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="144" MltplExecId="L2-2" MltplExecPrefix="pickr.classes.games.Game.java" NvrExecId="L2-0" NvrExecPrefix="pickr.classes.games.Game.java" OnceExecutedId="L2-1" OnceExecutedPrefix="pickr.classes.games.Game.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="145">
+<LocList>
+<Loc EndOffset="1900" SrcFileId="5" StartOffset="1841"/>
+<Loc EndOffset="1926" SrcFileId="5" StartOffset="1910"/>
+</LocList>
+<CondStmnt CovItemId="S21" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="146">
+<Branch CovItemId="B3" CovItemPrefix="pickr.classes.games.Game.java" Implct="false" Intrnl_Id="147">
+<Cond/>
+<LocList>
+<Loc EndOffset="1900" SrcFileId="5" StartOffset="1884"/>
+</LocList>
+<StmntSeq Intrnl_Id="148">
+<LocList>
+<Loc EndOffset="1900" SrcFileId="5" StartOffset="1884"/>
+</LocList>
+<BasicStmnt CovItemId="S22" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="149">
+<LocList>
+<Loc EndOffset="1900" SrcFileId="5" StartOffset="1884"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B4" CovItemPrefix="pickr.classes.games.Game.java" Implct="true" Intrnl_Id="150">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="151">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1843" SrcFileId="5" StartOffset="1841"/>
+<LocList>
+<Loc EndOffset="1900" SrcFileId="5" StartOffset="1841"/>
+</LocList>
+<RootTerm CovItemId="C2" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="152">
+<BasicBoolTerm Intrnl_Id="153">
+<LocList>
+<Loc EndOffset="1882" SrcFileId="5" StartOffset="1844"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<BasicStmnt CovItemId="S23" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="154">
+<LocList>
+<Loc EndOffset="1926" SrcFileId="5" StartOffset="1910"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="1542" SrcFileId="5" StartOffset="1539"/>
+<LocList>
+<Loc EndOffset="1931" SrcFileId="5" StartOffset="1539"/>
+</LocList>
+</LoopStmnt>
+<BasicStmnt CovItemId="S24" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="155">
+<LocList>
+<Loc EndOffset="1993" SrcFileId="5" StartOffset="1939"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S25" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="156">
+<LocList>
+<Loc EndOffset="2039" SrcFileId="5" StartOffset="2002"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S26" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="157">
+<LocList>
+<Loc EndOffset="2061" SrcFileId="5" StartOffset="2047"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S27" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="158">
+<LocList>
+<Loc EndOffset="2085" SrcFileId="5" StartOffset="2069"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S28" CovItemPrefix="pickr.classes.games.Game.java" Intrnl_Id="159">
+<LocList>
+<Loc EndOffset="2107" SrcFileId="5" StartOffset="2093"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1862" HierarchyLvlTypeId="16" Intrnl_Id="160" Name="Deck">
+<Header>
+<Loc EndOffset="228" SrcFileId="1" StartOffset="211"/>
+</Header>
+<LocList>
+<Loc EndOffset="1126" SrcFileId="1" StartOffset="211"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="1856" HierarchyLvlTypeId="15" Intrnl_Id="161" Name="Deck">
+<Header>
+<Loc EndOffset="291" SrcFileId="1" StartOffset="278"/>
+</Header>
+<LocList>
+<Loc EndOffset="337" SrcFileId="1" StartOffset="278"/>
+</LocList>
+<StmntSeq Intrnl_Id="162">
+<LocList>
+<Loc EndOffset="335" SrcFileId="1" StartOffset="294"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="163">
+<LocList>
+<Loc EndOffset="335" SrcFileId="1" StartOffset="294"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1857" HierarchyLvlTypeId="15" Intrnl_Id="164" Name="getCards">
+<Header>
+<Loc EndOffset="381" SrcFileId="1" StartOffset="342"/>
+</Header>
+<LocList>
+<Loc EndOffset="399" SrcFileId="1" StartOffset="342"/>
+</LocList>
+<StmntSeq Intrnl_Id="165">
+<LocList>
+<Loc EndOffset="397" SrcFileId="1" StartOffset="384"/>
+</LocList>
+<BasicStmnt CovItemId="S2" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="166">
+<LocList>
+<Loc EndOffset="397" SrcFileId="1" StartOffset="384"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1858" HierarchyLvlTypeId="15" Intrnl_Id="167" Name="init">
+<Header>
+<Loc EndOffset="455" SrcFileId="1" StartOffset="405"/>
+</Header>
+<LocList>
+<Loc EndOffset="594" SrcFileId="1" StartOffset="405"/>
+</LocList>
+<StmntSeq Intrnl_Id="168">
+<LocList>
+<Loc EndOffset="590" SrcFileId="1" StartOffset="461"/>
+</LocList>
+<LoopStmnt CovItemId="S3" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="169" MltplExecId="L1-2" MltplExecPrefix="pickr.classes.Deck.java" NvrExecId="L1-0" NvrExecPrefix="pickr.classes.Deck.java" OnceExecutedId="L1-1" OnceExecutedPrefix="pickr.classes.Deck.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="170">
+<LocList>
+<Loc EndOffset="582" SrcFileId="1" StartOffset="501"/>
+</LocList>
+<LoopStmnt CovItemId="S4" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="171" MltplExecId="L2-2" MltplExecPrefix="pickr.classes.Deck.java" NvrExecId="L2-0" NvrExecPrefix="pickr.classes.Deck.java" OnceExecutedId="L2-1" OnceExecutedPrefix="pickr.classes.Deck.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="172">
+<LocList>
+<Loc EndOffset="576" SrcFileId="1" StartOffset="539"/>
+</LocList>
+<BasicStmnt CovItemId="S5" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="173">
+<LocList>
+<Loc EndOffset="576" SrcFileId="1" StartOffset="539"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="504" SrcFileId="1" StartOffset="501"/>
+<LocList>
+<Loc EndOffset="582" SrcFileId="1" StartOffset="501"/>
+</LocList>
+</LoopStmnt>
+</StmntSeq>
+<Keyword EndOffset="464" SrcFileId="1" StartOffset="461"/>
+<LocList>
+<Loc EndOffset="590" SrcFileId="1" StartOffset="461"/>
+</LocList>
+<RootTerm CovItemId="C1" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="174">
+<BasicBoolTerm Intrnl_Id="175">
+<LocList>
+<Loc EndOffset="486" SrcFileId="1" StartOffset="478"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</LoopStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1859" HierarchyLvlTypeId="15" Intrnl_Id="176" Name="shuffle">
+<Header>
+<Loc EndOffset="621" SrcFileId="1" StartOffset="600"/>
+</Header>
+<LocList>
+<Loc EndOffset="653" SrcFileId="1" StartOffset="600"/>
+</LocList>
+<StmntSeq Intrnl_Id="177">
+<LocList>
+<Loc EndOffset="651" SrcFileId="1" StartOffset="624"/>
+</LocList>
+<BasicStmnt CovItemId="S6" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="178">
+<LocList>
+<Loc EndOffset="651" SrcFileId="1" StartOffset="624"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1860" HierarchyLvlTypeId="15" Intrnl_Id="179" Name="pick">
+<Header>
+<Loc EndOffset="710" SrcFileId="1" StartOffset="659"/>
+</Header>
+<LocList>
+<Loc EndOffset="805" SrcFileId="1" StartOffset="659"/>
+</LocList>
+<StmntSeq Intrnl_Id="180">
+<LocList>
+<Loc EndOffset="801" SrcFileId="1" StartOffset="716"/>
+</LocList>
+<CondStmnt CovItemId="S7" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="181">
+<Branch CovItemId="B1" CovItemPrefix="pickr.classes.Deck.java" Implct="false" Intrnl_Id="182">
+<Cond/>
+<LocList>
+<Loc EndOffset="760" SrcFileId="1" StartOffset="737"/>
+</LocList>
+<StmntSeq Intrnl_Id="183">
+<LocList>
+<Loc EndOffset="760" SrcFileId="1" StartOffset="737"/>
+</LocList>
+<BasicStmnt CovItemId="S8" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="184">
+<LocList>
+<Loc EndOffset="760" SrcFileId="1" StartOffset="737"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B2" CovItemPrefix="pickr.classes.Deck.java" Implct="false" Intrnl_Id="185">
+<Cond>
+<Loc EndOffset="768" SrcFileId="1" StartOffset="764"/>
+</Cond>
+<LocList>
+<Loc EndOffset="801" SrcFileId="1" StartOffset="769"/>
+</LocList>
+<StmntSeq Intrnl_Id="186">
+<LocList>
+<Loc EndOffset="801" SrcFileId="1" StartOffset="769"/>
+</LocList>
+<BasicStmnt CovItemId="S9" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="187">
+<LocList>
+<Loc EndOffset="801" SrcFileId="1" StartOffset="769"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="718" SrcFileId="1" StartOffset="716"/>
+<LocList>
+<Loc EndOffset="801" SrcFileId="1" StartOffset="716"/>
+</LocList>
+<RootTerm CovItemId="C2" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="188">
+<OpTerm BooleanOpId="12" Intrnl_Id="189">
+<BasicBoolTerm Intrnl_Id="190">
+<LocList>
+<Loc EndOffset="735" SrcFileId="1" StartOffset="720"/>
+</LocList>
+</BasicBoolTerm>
+<LocList>
+<Loc EndOffset="720" SrcFileId="1" StartOffset="719"/>
+</LocList>
+</OpTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1861" HierarchyLvlTypeId="15" Intrnl_Id="191" Name="picks">
+<Header>
+<Loc EndOffset="879" SrcFileId="1" StartOffset="811"/>
+</Header>
+<LocList>
+<Loc EndOffset="1122" SrcFileId="1" StartOffset="811"/>
+</LocList>
+<StmntSeq Intrnl_Id="192">
+<LocList>
+<Loc EndOffset="1117" SrcFileId="1" StartOffset="889"/>
+</LocList>
+<CondStmnt CovItemId="S10" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="193">
+<Branch CovItemId="B3" CovItemPrefix="pickr.classes.Deck.java" Implct="false" Intrnl_Id="194">
+<Cond/>
+<LocList>
+<Loc EndOffset="1076" SrcFileId="1" StartOffset="911"/>
+</LocList>
+<StmntSeq Intrnl_Id="195">
+<LocList>
+<Loc EndOffset="976" SrcFileId="1" StartOffset="917"/>
+<Loc EndOffset="1049" SrcFileId="1" StartOffset="981"/>
+<Loc EndOffset="1068" SrcFileId="1" StartOffset="1054"/>
+</LocList>
+<BasicStmnt CovItemId="S11" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="196">
+<LocList>
+<Loc EndOffset="976" SrcFileId="1" StartOffset="917"/>
+</LocList>
+</BasicStmnt>
+<LoopStmnt CovItemId="S12" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="197" MltplExecId="L3-2" MltplExecPrefix="pickr.classes.Deck.java" NvrExecId="L3-0" NvrExecPrefix="pickr.classes.Deck.java" OnceExecutedId="L3-1" OnceExecutedPrefix="pickr.classes.Deck.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="198">
+<LocList>
+<Loc EndOffset="1043" SrcFileId="1" StartOffset="1015"/>
+</LocList>
+<BasicStmnt CovItemId="S13" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="199">
+<LocList>
+<Loc EndOffset="1043" SrcFileId="1" StartOffset="1015"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="984" SrcFileId="1" StartOffset="981"/>
+<LocList>
+<Loc EndOffset="1049" SrcFileId="1" StartOffset="981"/>
+</LocList>
+<RootTerm CovItemId="C4" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="200">
+<BasicBoolTerm Intrnl_Id="201">
+<LocList>
+<Loc EndOffset="1000" SrcFileId="1" StartOffset="995"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</LoopStmnt>
+<BasicStmnt CovItemId="S14" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="202">
+<LocList>
+<Loc EndOffset="1068" SrcFileId="1" StartOffset="1054"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B4" CovItemPrefix="pickr.classes.Deck.java" Implct="false" Intrnl_Id="203">
+<Cond>
+<Loc EndOffset="1084" SrcFileId="1" StartOffset="1080"/>
+</Cond>
+<LocList>
+<Loc EndOffset="1117" SrcFileId="1" StartOffset="1085"/>
+</LocList>
+<StmntSeq Intrnl_Id="204">
+<LocList>
+<Loc EndOffset="1117" SrcFileId="1" StartOffset="1085"/>
+</LocList>
+<BasicStmnt CovItemId="S15" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="205">
+<LocList>
+<Loc EndOffset="1117" SrcFileId="1" StartOffset="1085"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="891" SrcFileId="1" StartOffset="889"/>
+<LocList>
+<Loc EndOffset="1117" SrcFileId="1" StartOffset="889"/>
+</LocList>
+<RootTerm CovItemId="C3" CovItemPrefix="pickr.classes.Deck.java" Intrnl_Id="206">
+<BasicBoolTerm Intrnl_Id="207">
+<LocList>
+<Loc EndOffset="909" SrcFileId="1" StartOffset="892"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1870" HierarchyLvlTypeId="16" Intrnl_Id="208" Name="GamingCard">
+<Header>
+<Loc EndOffset="127" SrcFileId="2" StartOffset="104"/>
+</Header>
+<LocList>
+<Loc EndOffset="888" SrcFileId="2" StartOffset="104"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="1863" HierarchyLvlTypeId="15" Intrnl_Id="209" Name="GamingCard">
+<Header>
+<Loc EndOffset="266" SrcFileId="2" StartOffset="197"/>
+</Header>
+<LocList>
+<Loc EndOffset="351" SrcFileId="2" StartOffset="197"/>
+</LocList>
+<StmntSeq Intrnl_Id="210">
+<LocList>
+<Loc EndOffset="289" SrcFileId="2" StartOffset="272"/>
+<Loc EndOffset="318" SrcFileId="2" StartOffset="293"/>
+<Loc EndOffset="347" SrcFileId="2" StartOffset="322"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="211">
+<LocList>
+<Loc EndOffset="289" SrcFileId="2" StartOffset="272"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="212">
+<LocList>
+<Loc EndOffset="318" SrcFileId="2" StartOffset="293"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="213">
+<LocList>
+<Loc EndOffset="347" SrcFileId="2" StartOffset="322"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1864" HierarchyLvlTypeId="15" Intrnl_Id="214" Name="getSuit">
+<Header>
+<Loc EndOffset="378" SrcFileId="2" StartOffset="357"/>
+</Header>
+<LocList>
+<Loc EndOffset="400" SrcFileId="2" StartOffset="357"/>
+</LocList>
+<StmntSeq Intrnl_Id="215">
+<LocList>
+<Loc EndOffset="398" SrcFileId="2" StartOffset="381"/>
+</LocList>
+<BasicStmnt CovItemId="S4" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="216">
+<LocList>
+<Loc EndOffset="398" SrcFileId="2" StartOffset="381"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1865" HierarchyLvlTypeId="15" Intrnl_Id="217" Name="getNum">
+<Header>
+<Loc EndOffset="422" SrcFileId="2" StartOffset="403"/>
+</Header>
+<LocList>
+<Loc EndOffset="443" SrcFileId="2" StartOffset="403"/>
+</LocList>
+<StmntSeq Intrnl_Id="218">
+<LocList>
+<Loc EndOffset="441" SrcFileId="2" StartOffset="425"/>
+</LocList>
+<BasicStmnt CovItemId="S5" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="219">
+<LocList>
+<Loc EndOffset="441" SrcFileId="2" StartOffset="425"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1866" HierarchyLvlTypeId="15" Intrnl_Id="220" Name="getVal">
+<Header>
+<Loc EndOffset="465" SrcFileId="2" StartOffset="446"/>
+</Header>
+<LocList>
+<Loc EndOffset="486" SrcFileId="2" StartOffset="446"/>
+</LocList>
+<StmntSeq Intrnl_Id="221">
+<LocList>
+<Loc EndOffset="484" SrcFileId="2" StartOffset="468"/>
+</LocList>
+<BasicStmnt CovItemId="S6" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="222">
+<LocList>
+<Loc EndOffset="484" SrcFileId="2" StartOffset="468"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1867" HierarchyLvlTypeId="15" Intrnl_Id="223" Name="numToVal">
+<Header>
+<Loc EndOffset="516" SrcFileId="2" StartOffset="495"/>
+</Header>
+<LocList>
+<Loc EndOffset="600" SrcFileId="2" StartOffset="495"/>
+</LocList>
+<StmntSeq Intrnl_Id="224">
+<LocList>
+<Loc EndOffset="594" SrcFileId="2" StartOffset="522"/>
+</LocList>
+<CondStmnt CovItemId="S7" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="225">
+<Branch CovItemId="B1" CovItemPrefix="pickr.classes.GamingCard.java" Implct="false" Intrnl_Id="226">
+<Cond/>
+<LocList>
+<Loc EndOffset="560" SrcFileId="2" StartOffset="547"/>
+</LocList>
+<StmntSeq Intrnl_Id="227">
+<LocList>
+<Loc EndOffset="560" SrcFileId="2" StartOffset="547"/>
+</LocList>
+<BasicStmnt CovItemId="S8" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="228">
+<LocList>
+<Loc EndOffset="560" SrcFileId="2" StartOffset="547"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B2" CovItemPrefix="pickr.classes.GamingCard.java" Implct="false" Intrnl_Id="229">
+<Cond>
+<Loc EndOffset="568" SrcFileId="2" StartOffset="564"/>
+</Cond>
+<LocList>
+<Loc EndOffset="594" SrcFileId="2" StartOffset="569"/>
+</LocList>
+<StmntSeq Intrnl_Id="230">
+<LocList>
+<Loc EndOffset="594" SrcFileId="2" StartOffset="569"/>
+</LocList>
+<BasicStmnt CovItemId="S9" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="231">
+<LocList>
+<Loc EndOffset="594" SrcFileId="2" StartOffset="569"/>
+</LocList>
+<QMO CovItemId="Q0" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="232">
+<LocList>
+<Loc EndOffset="584" SrcFileId="2" StartOffset="576"/>
+</LocList>
+<QMO_E CovItemId="Q0-0" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="233">
+<LocList>
+<Loc EndOffset="589" SrcFileId="2" StartOffset="587"/>
+</LocList>
+</QMO_E>
+<QMO_E CovItemId="Q0-1" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="234">
+<LocList>
+<Loc EndOffset="593" SrcFileId="2" StartOffset="592"/>
+</LocList>
+</QMO_E>
+</QMO>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="524" SrcFileId="2" StartOffset="522"/>
+<LocList>
+<Loc EndOffset="594" SrcFileId="2" StartOffset="522"/>
+</LocList>
+<RootTerm CovItemId="C1" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="235">
+<OpTerm BooleanOpId="10" Intrnl_Id="236">
+<BasicBoolTerm Intrnl_Id="237">
+<LocList>
+<Loc EndOffset="533" SrcFileId="2" StartOffset="525"/>
+</LocList>
+</BasicBoolTerm>
+<BasicBoolTerm Intrnl_Id="238">
+<LocList>
+<Loc EndOffset="545" SrcFileId="2" StartOffset="537"/>
+</LocList>
+</BasicBoolTerm>
+<LocList>
+<Loc EndOffset="536" SrcFileId="2" StartOffset="534"/>
+</LocList>
+</OpTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1868" HierarchyLvlTypeId="15" Intrnl_Id="239" Name="checkNum">
+<Header>
+<Loc EndOffset="661" SrcFileId="2" StartOffset="608"/>
+</Header>
+<LocList>
+<Loc EndOffset="778" SrcFileId="2" StartOffset="608"/>
+</LocList>
+<StmntSeq Intrnl_Id="240">
+<LocList>
+<Loc EndOffset="753" SrcFileId="2" StartOffset="671"/>
+<Loc EndOffset="772" SrcFileId="2" StartOffset="761"/>
+</LocList>
+<CondStmnt CovItemId="S10" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="241">
+<Branch CovItemId="B3" CovItemPrefix="pickr.classes.GamingCard.java" Implct="false" Intrnl_Id="242">
+<Cond/>
+<LocList>
+<Loc EndOffset="753" SrcFileId="2" StartOffset="696"/>
+</LocList>
+<StmntSeq Intrnl_Id="243">
+<LocList>
+<Loc EndOffset="744" SrcFileId="2" StartOffset="707"/>
+</LocList>
+<BasicStmnt CovItemId="S11" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="244">
+<LocList>
+<Loc EndOffset="744" SrcFileId="2" StartOffset="707"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B4" CovItemPrefix="pickr.classes.GamingCard.java" Implct="true" Intrnl_Id="245">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="246">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="673" SrcFileId="2" StartOffset="671"/>
+<LocList>
+<Loc EndOffset="753" SrcFileId="2" StartOffset="671"/>
+</LocList>
+<RootTerm CovItemId="C2" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="247">
+<OpTerm BooleanOpId="11" Intrnl_Id="248">
+<BasicBoolTerm Intrnl_Id="249">
+<LocList>
+<Loc EndOffset="682" SrcFileId="2" StartOffset="675"/>
+</LocList>
+</BasicBoolTerm>
+<BasicBoolTerm Intrnl_Id="250">
+<LocList>
+<Loc EndOffset="694" SrcFileId="2" StartOffset="686"/>
+</LocList>
+</BasicBoolTerm>
+<LocList>
+<Loc EndOffset="685" SrcFileId="2" StartOffset="683"/>
+</LocList>
+</OpTerm>
+</RootTerm>
+</CondStmnt>
+<BasicStmnt CovItemId="S12" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="251">
+<LocList>
+<Loc EndOffset="772" SrcFileId="2" StartOffset="761"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1869" HierarchyLvlTypeId="15" Intrnl_Id="252" Name="toString">
+<Header>
+<Loc EndOffset="824" SrcFileId="2" StartOffset="788"/>
+</Header>
+<LocList>
+<Loc EndOffset="883" SrcFileId="2" StartOffset="788"/>
+</LocList>
+<StmntSeq Intrnl_Id="253">
+<LocList>
+<Loc EndOffset="881" SrcFileId="2" StartOffset="827"/>
+</LocList>
+<BasicStmnt CovItemId="S13" CovItemPrefix="pickr.classes.GamingCard.java" Intrnl_Id="254">
+<LocList>
+<Loc EndOffset="881" SrcFileId="2" StartOffset="827"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1882" HierarchyLvlTypeId="16" Intrnl_Id="255" Name="Player">
+<Header>
+<Loc EndOffset="76" SrcFileId="3" StartOffset="57"/>
+</Header>
+<LocList>
+<Loc EndOffset="996" SrcFileId="3" StartOffset="57"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="1871" HierarchyLvlTypeId="15" Intrnl_Id="256" Name="Player">
+<Header>
+<Loc EndOffset="225" SrcFileId="3" StartOffset="201"/>
+</Header>
+<LocList>
+<Loc EndOffset="340" SrcFileId="3" StartOffset="201"/>
+</LocList>
+<StmntSeq Intrnl_Id="257">
+<LocList>
+<Loc EndOffset="244" SrcFileId="3" StartOffset="231"/>
+<Loc EndOffset="289" SrcFileId="3" StartOffset="248"/>
+<Loc EndOffset="312" SrcFileId="3" StartOffset="293"/>
+<Loc EndOffset="336" SrcFileId="3" StartOffset="316"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="258">
+<LocList>
+<Loc EndOffset="244" SrcFileId="3" StartOffset="231"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="259">
+<LocList>
+<Loc EndOffset="289" SrcFileId="3" StartOffset="248"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="260">
+<LocList>
+<Loc EndOffset="312" SrcFileId="3" StartOffset="293"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S4" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="261">
+<LocList>
+<Loc EndOffset="336" SrcFileId="3" StartOffset="316"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1872" HierarchyLvlTypeId="15" Intrnl_Id="262" Name="getCards">
+<Header>
+<Loc EndOffset="384" SrcFileId="3" StartOffset="345"/>
+</Header>
+<LocList>
+<Loc EndOffset="407" SrcFileId="3" StartOffset="345"/>
+</LocList>
+<StmntSeq Intrnl_Id="263">
+<LocList>
+<Loc EndOffset="403" SrcFileId="3" StartOffset="390"/>
+</LocList>
+<BasicStmnt CovItemId="S5" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="264">
+<LocList>
+<Loc EndOffset="403" SrcFileId="3" StartOffset="390"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1873" HierarchyLvlTypeId="15" Intrnl_Id="265" Name="hand">
+<Header>
+<Loc EndOffset="457" SrcFileId="3" StartOffset="412"/>
+</Header>
+<LocList>
+<Loc EndOffset="486" SrcFileId="3" StartOffset="412"/>
+</LocList>
+<StmntSeq Intrnl_Id="266">
+<LocList>
+<Loc EndOffset="482" SrcFileId="3" StartOffset="463"/>
+</LocList>
+<BasicStmnt CovItemId="S6" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="267">
+<LocList>
+<Loc EndOffset="482" SrcFileId="3" StartOffset="463"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1874" HierarchyLvlTypeId="15" Intrnl_Id="268" Name="drop">
+<Header>
+<Loc EndOffset="515" SrcFileId="3" StartOffset="491"/>
+</Header>
+<LocList>
+<Loc EndOffset="545" SrcFileId="3" StartOffset="491"/>
+</LocList>
+<StmntSeq Intrnl_Id="269">
+<LocList>
+<Loc EndOffset="543" SrcFileId="3" StartOffset="518"/>
+</LocList>
+<BasicStmnt CovItemId="S7" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="270">
+<LocList>
+<Loc EndOffset="543" SrcFileId="3" StartOffset="518"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1875" HierarchyLvlTypeId="15" Intrnl_Id="271" Name="getGameScore">
+<Header>
+<Loc EndOffset="575" SrcFileId="3" StartOffset="550"/>
+</Header>
+<LocList>
+<Loc EndOffset="602" SrcFileId="3" StartOffset="550"/>
+</LocList>
+<StmntSeq Intrnl_Id="272">
+<LocList>
+<Loc EndOffset="598" SrcFileId="3" StartOffset="581"/>
+</LocList>
+<BasicStmnt CovItemId="S8" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="273">
+<LocList>
+<Loc EndOffset="598" SrcFileId="3" StartOffset="581"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1876" HierarchyLvlTypeId="15" Intrnl_Id="274" Name="setGameScore">
+<Header>
+<Loc EndOffset="646" SrcFileId="3" StartOffset="607"/>
+</Header>
+<LocList>
+<Loc EndOffset="684" SrcFileId="3" StartOffset="607"/>
+</LocList>
+<StmntSeq Intrnl_Id="275">
+<LocList>
+<Loc EndOffset="680" SrcFileId="3" StartOffset="652"/>
+</LocList>
+<BasicStmnt CovItemId="S9" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="276">
+<LocList>
+<Loc EndOffset="680" SrcFileId="3" StartOffset="652"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1877" HierarchyLvlTypeId="15" Intrnl_Id="277" Name="getMatchScore">
+<Header>
+<Loc EndOffset="715" SrcFileId="3" StartOffset="689"/>
+</Header>
+<LocList>
+<Loc EndOffset="743" SrcFileId="3" StartOffset="689"/>
+</LocList>
+<StmntSeq Intrnl_Id="278">
+<LocList>
+<Loc EndOffset="739" SrcFileId="3" StartOffset="721"/>
+</LocList>
+<BasicStmnt CovItemId="S10" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="279">
+<LocList>
+<Loc EndOffset="739" SrcFileId="3" StartOffset="721"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1878" HierarchyLvlTypeId="15" Intrnl_Id="280" Name="setMatchScore">
+<Header>
+<Loc EndOffset="789" SrcFileId="3" StartOffset="748"/>
+</Header>
+<LocList>
+<Loc EndOffset="828" SrcFileId="3" StartOffset="748"/>
+</LocList>
+<StmntSeq Intrnl_Id="281">
+<LocList>
+<Loc EndOffset="824" SrcFileId="3" StartOffset="795"/>
+</LocList>
+<BasicStmnt CovItemId="S11" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="282">
+<LocList>
+<Loc EndOffset="824" SrcFileId="3" StartOffset="795"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1879" HierarchyLvlTypeId="15" Intrnl_Id="283" Name="getId">
+<Header>
+<Loc EndOffset="854" SrcFileId="3" StartOffset="833"/>
+</Header>
+<LocList>
+<Loc EndOffset="874" SrcFileId="3" StartOffset="833"/>
+</LocList>
+<StmntSeq Intrnl_Id="284">
+<LocList>
+<Loc EndOffset="870" SrcFileId="3" StartOffset="860"/>
+</LocList>
+<BasicStmnt CovItemId="S12" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="285">
+<LocList>
+<Loc EndOffset="870" SrcFileId="3" StartOffset="860"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1880" HierarchyLvlTypeId="15" Intrnl_Id="286" Name="delete">
+<Header>
+<Loc EndOffset="899" SrcFileId="3" StartOffset="879"/>
+</Header>
+<LocList>
+<Loc EndOffset="925" SrcFileId="3" StartOffset="879"/>
+</LocList>
+<StmntSeq Intrnl_Id="287">
+<LocList>
+<Loc EndOffset="923" SrcFileId="3" StartOffset="902"/>
+</LocList>
+<BasicStmnt CovItemId="S13" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="288">
+<LocList>
+<Loc EndOffset="923" SrcFileId="3" StartOffset="902"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1881" HierarchyLvlTypeId="15" Intrnl_Id="289" Name="pick">
+<Header>
+<Loc EndOffset="964" SrcFileId="3" StartOffset="931"/>
+</Header>
+<LocList>
+<Loc EndOffset="991" SrcFileId="3" StartOffset="931"/>
+</LocList>
+<StmntSeq Intrnl_Id="290">
+<LocList>
+<Loc EndOffset="988" SrcFileId="3" StartOffset="967"/>
+</LocList>
+<BasicStmnt CovItemId="S14" CovItemPrefix="pickr.classes.Player.java" Intrnl_Id="291">
+<LocList>
+<Loc EndOffset="988" SrcFileId="3" StartOffset="967"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1908" HierarchyLvlTypeId="14" Intrnl_Id="292" Name="enums">
+<Header/>
+<LocList/>
+<HierarchyLvl HierarchyLvlId="1902" HierarchyLvlTypeId="13" Intrnl_Id="293" Name="GameType">
+<Header>
+<Loc EndOffset="44" SrcFileId="6" StartOffset="24"/>
+</Header>
+<LocList>
+<Loc EndOffset="94" SrcFileId="6" StartOffset="24"/>
+</LocList>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1903" HierarchyLvlTypeId="13" Intrnl_Id="294" Name="Suit">
+<Header>
+<Loc EndOffset="40" SrcFileId="7" StartOffset="24"/>
+</Header>
+<LocList>
+<Loc EndOffset="70" SrcFileId="7" StartOffset="24"/>
+</LocList>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1909" HierarchyLvlTypeId="14" Intrnl_Id="295" Name="exception">
+<Header/>
+<LocList/>
+<HierarchyLvl HierarchyLvlId="1904" HierarchyLvlTypeId="16" Intrnl_Id="296" Name="OutOfBoundException">
+<Header>
+<Loc EndOffset="78" SrcFileId="8" StartOffset="28"/>
+</Header>
+<LocList>
+<Loc EndOffset="156" SrcFileId="8" StartOffset="28"/>
+</LocList>
+<StmntSeq Intrnl_Id="297">
+<LocList>
+<Loc EndOffset="151" SrcFileId="8" StartOffset="103"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="pickr.exception.OutOfBoundException.java" Intrnl_Id="298">
+<LocList>
+<Loc EndOffset="151" SrcFileId="8" StartOffset="103"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="1905" HierarchyLvlTypeId="16" Intrnl_Id="299" Name="WrongCardNumberException">
+<Header>
+<Loc EndOffset="83" SrcFileId="9" StartOffset="28"/>
+</Header>
+<LocList>
+<Loc EndOffset="161" SrcFileId="9" StartOffset="28"/>
+</LocList>
+<StmntSeq Intrnl_Id="300">
+<LocList>
+<Loc EndOffset="156" SrcFileId="9" StartOffset="108"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="pickr.exception.WrongCardNumberException.java" Intrnl_Id="301">
+<LocList>
+<Loc EndOffset="156" SrcFileId="9" StartOffset="108"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+</HierarchyLvl>
+</HierarchyLvl>
+</MASTRoot>
+<TestSession Comment="" Date="1598460095235" Name="26-ago-2020 18.41.35">
+<TestCase Comment="" Date="1598460095175" Name="test.ClassTest:testDeck">
+<CovList>
+<CovPrefix CovItemPrefix="pickr.classes.Deck.java">
+<Cov CovItemId="L1-2" Value="1"/>
+<Cov CovItemId="L2-2" Value="10"/>
+<Cov CovItemId="S1" Value="1"/>
+<Cov CovItemId="S2" Value="3"/>
+<Cov CovItemId="S3" Value="1"/>
+<Cov CovItemId="S4" Value="10"/>
+<Cov CovItemId="S5" Value="40"/>
+<Cov CovItemId="S6" Value="1"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="pickr.classes.GamingCard.java">
+<Cov CovItemId="B1" Value="32"/>
+<Cov CovItemId="B2" Value="8"/>
+<Cov CovItemId="B4" Value="40"/>
+<Cov CovItemId="S1" Value="40"/>
+<Cov CovItemId="S10" Value="40"/>
+<Cov CovItemId="S12" Value="40"/>
+<Cov CovItemId="S2" Value="40"/>
+<Cov CovItemId="S3" Value="40"/>
+<Cov CovItemId="S7" Value="40"/>
+<Cov CovItemId="S8" Value="32"/>
+<Cov CovItemId="S9" Value="8"/>
+</CovPrefix>
+</CovList>
+<AssgnmntList>
+<AssgnmntPrefix RootTermCovItemPrefix="pickr.classes.Deck.java">
+<AssgnmntListEntry Length="1" RootTermCovItemId="C1">
+<MapEntry BoolAssgnmnt="0" Value="1"/>
+<MapEntry BoolAssgnmnt="1" Value="10"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+<AssgnmntPrefix RootTermCovItemPrefix="pickr.classes.GamingCard.java">
+<AssgnmntListEntry Length="2" RootTermCovItemId="C1">
+<MapEntry BoolAssgnmnt="02" Value="4"/>
+<MapEntry BoolAssgnmnt="10" Value="4"/>
+<MapEntry BoolAssgnmnt="11" Value="32"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="2" RootTermCovItemId="C2">
+<MapEntry BoolAssgnmnt="00" Value="40"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+</AssgnmntList>
+<ObjMetaDataList/>
+<MetaDataList/>
+</TestCase>
+<TestCase Comment="" Date="1598460095179" Name="test.ClassTest:testGame">
+<CovList>
+<CovPrefix CovItemPrefix="pickr.classes.Deck.java">
+<Cov CovItemId="B1" Value="28"/>
+<Cov CovItemId="B2" Value="1"/>
+<Cov CovItemId="B3" Value="4"/>
+<Cov CovItemId="L1-2" Value="1"/>
+<Cov CovItemId="L2-2" Value="10"/>
+<Cov CovItemId="L3-2" Value="4"/>
+<Cov CovItemId="S1" Value="1"/>
+<Cov CovItemId="S10" Value="4"/>
+<Cov CovItemId="S11" Value="4"/>
+<Cov CovItemId="S12" Value="4"/>
+<Cov CovItemId="S13" Value="12"/>
+<Cov CovItemId="S14" Value="4"/>
+<Cov CovItemId="S2" Value="3"/>
+<Cov CovItemId="S3" Value="1"/>
+<Cov CovItemId="S4" Value="10"/>
+<Cov CovItemId="S5" Value="40"/>
+<Cov CovItemId="S6" Value="1"/>
+<Cov CovItemId="S7" Value="29"/>
+<Cov CovItemId="S8" Value="28"/>
+<Cov CovItemId="S9" Value="1"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="pickr.classes.GamingCard.java">
+<Cov CovItemId="B1" Value="32"/>
+<Cov CovItemId="B2" Value="8"/>
+<Cov CovItemId="B4" Value="40"/>
+<Cov CovItemId="S1" Value="40"/>
+<Cov CovItemId="S10" Value="40"/>
+<Cov CovItemId="S12" Value="40"/>
+<Cov CovItemId="S13" Value="40"/>
+<Cov CovItemId="S2" Value="40"/>
+<Cov CovItemId="S3" Value="40"/>
+<Cov CovItemId="S4" Value="50"/>
+<Cov CovItemId="S6" Value="96"/>
+<Cov CovItemId="S7" Value="40"/>
+<Cov CovItemId="S8" Value="32"/>
+<Cov CovItemId="S9" Value="8"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="pickr.classes.Player.java">
+<Cov CovItemId="S1" Value="4"/>
+<Cov CovItemId="S12" Value="8"/>
+<Cov CovItemId="S13" Value="32"/>
+<Cov CovItemId="S14" Value="28"/>
+<Cov CovItemId="S2" Value="4"/>
+<Cov CovItemId="S3" Value="4"/>
+<Cov CovItemId="S4" Value="4"/>
+<Cov CovItemId="S5" Value="32"/>
+<Cov CovItemId="S6" Value="4"/>
+<Cov CovItemId="S7" Value="32"/>
+<Cov CovItemId="S9" Value="8"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="pickr.classes.games.Briscola.java">
+<Cov CovItemId="B1" Value="6"/>
+<Cov CovItemId="B2" Value="26"/>
+<Cov CovItemId="B3" Value="2"/>
+<Cov CovItemId="B4" Value="4"/>
+<Cov CovItemId="B5" Value="3"/>
+<Cov CovItemId="B6" Value="3"/>
+<Cov CovItemId="B7" Value="3"/>
+<Cov CovItemId="B8" Value="23"/>
+<Cov CovItemId="L1-2" Value="1"/>
+<Cov CovItemId="L2-2" Value="8"/>
+<Cov CovItemId="L3-2" Value="8"/>
+<Cov CovItemId="L4-1" Value="1"/>
+<Cov CovItemId="L4-2" Value="7"/>
+<Cov CovItemId="S1" Value="1"/>
+<Cov CovItemId="S10" Value="8"/>
+<Cov CovItemId="S11" Value="32"/>
+<Cov CovItemId="S12" Value="6"/>
+<Cov CovItemId="S13" Value="2"/>
+<Cov CovItemId="S14" Value="6"/>
+<Cov CovItemId="S15" Value="3"/>
+<Cov CovItemId="S16" Value="26"/>
+<Cov CovItemId="S17" Value="3"/>
+<Cov CovItemId="S18" Value="8"/>
+<Cov CovItemId="S19" Value="8"/>
+<Cov CovItemId="S2" Value="1"/>
+<Cov CovItemId="S20" Value="8"/>
+<Cov CovItemId="S21" Value="8"/>
+<Cov CovItemId="S22" Value="32"/>
+<Cov CovItemId="S23" Value="8"/>
+<Cov CovItemId="S24" Value="8"/>
+<Cov CovItemId="S25" Value="8"/>
+<Cov CovItemId="S26" Value="8"/>
+<Cov CovItemId="S27" Value="29"/>
+<Cov CovItemId="S3" Value="1"/>
+<Cov CovItemId="S4" Value="4"/>
+<Cov CovItemId="S5" Value="1"/>
+<Cov CovItemId="S6" Value="1"/>
+<Cov CovItemId="S7" Value="1"/>
+<Cov CovItemId="S8" Value="1"/>
+<Cov CovItemId="S9" Value="8"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="pickr.classes.games.Game.java">
+<Cov CovItemId="B1" Value="4"/>
+<Cov CovItemId="B3" Value="8"/>
+<Cov CovItemId="B4" Value="24"/>
+<Cov CovItemId="L1-2" Value="8"/>
+<Cov CovItemId="L2-2" Value="8"/>
+<Cov CovItemId="S1" Value="1"/>
+<Cov CovItemId="S10" Value="9"/>
+<Cov CovItemId="S11" Value="4"/>
+<Cov CovItemId="S12" Value="4"/>
+<Cov CovItemId="S14" Value="8"/>
+<Cov CovItemId="S15" Value="8"/>
+<Cov CovItemId="S16" Value="32"/>
+<Cov CovItemId="S17" Value="8"/>
+<Cov CovItemId="S18" Value="32"/>
+<Cov CovItemId="S19" Value="8"/>
+<Cov CovItemId="S2" Value="1"/>
+<Cov CovItemId="S20" Value="8"/>
+<Cov CovItemId="S21" Value="32"/>
+<Cov CovItemId="S22" Value="8"/>
+<Cov CovItemId="S23" Value="32"/>
+<Cov CovItemId="S24" Value="8"/>
+<Cov CovItemId="S25" Value="8"/>
+<Cov CovItemId="S26" Value="8"/>
+<Cov CovItemId="S27" Value="8"/>
+<Cov CovItemId="S28" Value="8"/>
+<Cov CovItemId="S3" Value="1"/>
+<Cov CovItemId="S4" Value="1"/>
+<Cov CovItemId="S5" Value="1"/>
+<Cov CovItemId="S6" Value="1"/>
+<Cov CovItemId="S7" Value="1"/>
+<Cov CovItemId="S9" Value="24"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="pickr.exception.OutOfBoundException.java">
+<Cov CovItemId="S1" Value="1"/>
+</CovPrefix>
+</CovList>
+<AssgnmntList>
+<AssgnmntPrefix RootTermCovItemPrefix="pickr.classes.Deck.java">
+<AssgnmntListEntry Length="1" RootTermCovItemId="C1">
+<MapEntry BoolAssgnmnt="0" Value="1"/>
+<MapEntry BoolAssgnmnt="1" Value="10"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C2">
+<MapEntry BoolAssgnmnt="0" Value="28"/>
+<MapEntry BoolAssgnmnt="1" Value="1"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C3">
+<MapEntry BoolAssgnmnt="1" Value="4"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C4">
+<MapEntry BoolAssgnmnt="0" Value="4"/>
+<MapEntry BoolAssgnmnt="1" Value="12"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+<AssgnmntPrefix RootTermCovItemPrefix="pickr.classes.GamingCard.java">
+<AssgnmntListEntry Length="2" RootTermCovItemId="C1">
+<MapEntry BoolAssgnmnt="02" Value="4"/>
+<MapEntry BoolAssgnmnt="10" Value="4"/>
+<MapEntry BoolAssgnmnt="11" Value="32"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="2" RootTermCovItemId="C2">
+<MapEntry BoolAssgnmnt="00" Value="40"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+<AssgnmntPrefix RootTermCovItemPrefix="pickr.classes.games.Briscola.java">
+<AssgnmntListEntry Length="1" RootTermCovItemId="C1">
+<MapEntry BoolAssgnmnt="0" Value="26"/>
+<MapEntry BoolAssgnmnt="1" Value="6"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="2" RootTermCovItemId="C2">
+<MapEntry BoolAssgnmnt="02" Value="4"/>
+<MapEntry BoolAssgnmnt="11" Value="2"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="2" RootTermCovItemId="C3">
+<MapEntry BoolAssgnmnt="02" Value="2"/>
+<MapEntry BoolAssgnmnt="10" Value="1"/>
+<MapEntry BoolAssgnmnt="11" Value="3"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="2" RootTermCovItemId="C4">
+<MapEntry BoolAssgnmnt="02" Value="21"/>
+<MapEntry BoolAssgnmnt="10" Value="2"/>
+<MapEntry BoolAssgnmnt="11" Value="3"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+<AssgnmntPrefix RootTermCovItemPrefix="pickr.classes.games.Game.java">
+<AssgnmntListEntry Length="1" RootTermCovItemId="C1">
+<MapEntry BoolAssgnmnt="1" Value="4"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C2">
+<MapEntry BoolAssgnmnt="0" Value="24"/>
+<MapEntry BoolAssgnmnt="1" Value="8"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+</AssgnmntList>
+<ObjMetaDataList/>
+<MetaDataList/>
+</TestCase>
+<TestCase Comment="Error&#10;pickr.exception.WrongCardNumberException&#13;&#10;&#9;at pickr.classes.GamingCard.checkNum(GamingCard.java:68)&#13;&#10;&#9;at pickr.classes.GamingCard.&lt;init&gt;(GamingCard.java:22)&#13;&#10;&#9;at test.ClassTest.testWrongCardNumberException(ClassTest.java:83)&#13;&#10;&#9;at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;&#10;&#9;at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#13;&#10;&#9;at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;&#10;&#9;at java.lang.reflect.Method.invoke(Method.java:498)&#13;&#10;&#9;at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)&#13;&#10;&#9;at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)&#13;&#10;&#9;at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)&#13;&#10;&#9;at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)&#13;&#10;&#9;at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)&#13;&#10;&#9;at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)&#13;&#10;&#9;at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)&#13;&#10;&#9;at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)&#13;&#10;&#9;at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)&#13;&#10;&#9;at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)&#13;&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)&#13;&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)&#13;&#10;&#9;at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)&#13;&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)&#13;&#10;&#9;at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)&#13;&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:413)&#13;&#10;&#9;at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:89)&#13;&#10;&#9;at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)&#13;&#10;&#9;at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:542)&#13;&#10;&#9;at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:770)&#13;&#10;&#9;at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:464)&#13;&#10;&#9;at org.codecover.juniteclipse.runner.EclipseTestRunner.main(EclipseTestRunner.java:40)" Date="1598460095183" Name="test.ClassTest:testWrongCardNumberException">
+<CovList>
+<CovPrefix CovItemPrefix="pickr.classes.GamingCard.java">
+<Cov CovItemId="B1" Value="1"/>
+<Cov CovItemId="B3" Value="1"/>
+<Cov CovItemId="S1" Value="1"/>
+<Cov CovItemId="S10" Value="1"/>
+<Cov CovItemId="S11" Value="1"/>
+<Cov CovItemId="S2" Value="1"/>
+<Cov CovItemId="S3" Value="1"/>
+<Cov CovItemId="S7" Value="1"/>
+<Cov CovItemId="S8" Value="1"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="pickr.exception.WrongCardNumberException.java">
+<Cov CovItemId="S1" Value="1"/>
+</CovPrefix>
+</CovList>
+<AssgnmntList>
+<AssgnmntPrefix RootTermCovItemPrefix="pickr.classes.GamingCard.java">
+<AssgnmntListEntry Length="2" RootTermCovItemId="C1">
+<MapEntry BoolAssgnmnt="11" Value="1"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="2" RootTermCovItemId="C2">
+<MapEntry BoolAssgnmnt="01" Value="1"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+</AssgnmntList>
+<ObjMetaDataList/>
+<MetaDataList/>
+</TestCase>
+<TestCase Comment="Error&#10;pickr.exception.OutOfBoundException&#13;&#10;&#9;at pickr.classes.Deck.picks(Deck.java:127)&#13;&#10;&#9;at test.ClassTest.testOutOfBoundException(ClassTest.java:91)&#13;&#10;&#9;at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;&#10;&#9;at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#13;&#10;&#9;at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;&#10;&#9;at java.lang.reflect.Method.invoke(Method.java:498)&#13;&#10;&#9;at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)&#13;&#10;&#9;at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)&#13;&#10;&#9;at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)&#13;&#10;&#9;at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)&#13;&#10;&#9;at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)&#13;&#10;&#9;at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)&#13;&#10;&#9;at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)&#13;&#10;&#9;at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)&#13;&#10;&#9;at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)&#13;&#10;&#9;at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)&#13;&#10;&#9;at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)&#13;&#10;&#9;at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)&#13;&#10;&#9;at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)&#13;&#10;&#9;at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)&#13;&#10;&#9;at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)&#13;&#10;&#9;at org.junit.runners.ParentRunner.run(ParentRunner.java:413)&#13;&#10;&#9;at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:89)&#13;&#10;&#9;at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)&#13;&#10;&#9;at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:542)&#13;&#10;&#9;at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:770)&#13;&#10;&#9;at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:464)&#13;&#10;&#9;at org.codecover.juniteclipse.runner.EclipseTestRunner.main(EclipseTestRunner.java:40)" Date="1598460095189" Name="test.ClassTest:testOutOfBoundException">
+<CovList>
+<CovPrefix CovItemPrefix="pickr.classes.Deck.java">
+<Cov CovItemId="B4" Value="1"/>
+<Cov CovItemId="S1" Value="1"/>
+<Cov CovItemId="S10" Value="1"/>
+<Cov CovItemId="S15" Value="1"/>
+</CovPrefix>
+</CovList>
+<AssgnmntList>
+<AssgnmntPrefix RootTermCovItemPrefix="pickr.classes.Deck.java">
+<AssgnmntListEntry Length="1" RootTermCovItemId="C3">
+<MapEntry BoolAssgnmnt="0" Value="1"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+</AssgnmntList>
+<ObjMetaDataList/>
+<MetaDataList/>
+</TestCase>
+<TestCase Comment="" Date="1598460095191" Name="test.ClassTest:testBriscola">
+<CovList>
+<CovPrefix CovItemPrefix="pickr.classes.Deck.java">
+<Cov CovItemId="B1" Value="4"/>
+<Cov CovItemId="B3" Value="4"/>
+<Cov CovItemId="L1-2" Value="1"/>
+<Cov CovItemId="L2-2" Value="10"/>
+<Cov CovItemId="L3-2" Value="4"/>
+<Cov CovItemId="S1" Value="1"/>
+<Cov CovItemId="S10" Value="4"/>
+<Cov CovItemId="S11" Value="4"/>
+<Cov CovItemId="S12" Value="4"/>
+<Cov CovItemId="S13" Value="12"/>
+<Cov CovItemId="S14" Value="4"/>
+<Cov CovItemId="S2" Value="5"/>
+<Cov CovItemId="S3" Value="1"/>
+<Cov CovItemId="S4" Value="10"/>
+<Cov CovItemId="S5" Value="40"/>
+<Cov CovItemId="S6" Value="1"/>
+<Cov CovItemId="S7" Value="4"/>
+<Cov CovItemId="S8" Value="4"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="pickr.classes.GamingCard.java">
+<Cov CovItemId="B1" Value="32"/>
+<Cov CovItemId="B2" Value="8"/>
+<Cov CovItemId="B4" Value="40"/>
+<Cov CovItemId="S1" Value="40"/>
+<Cov CovItemId="S10" Value="40"/>
+<Cov CovItemId="S12" Value="40"/>
+<Cov CovItemId="S13" Value="17"/>
+<Cov CovItemId="S2" Value="40"/>
+<Cov CovItemId="S3" Value="40"/>
+<Cov CovItemId="S4" Value="11"/>
+<Cov CovItemId="S6" Value="12"/>
+<Cov CovItemId="S7" Value="40"/>
+<Cov CovItemId="S8" Value="32"/>
+<Cov CovItemId="S9" Value="8"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="pickr.classes.Player.java">
+<Cov CovItemId="S1" Value="4"/>
+<Cov CovItemId="S12" Value="5"/>
+<Cov CovItemId="S13" Value="4"/>
+<Cov CovItemId="S14" Value="4"/>
+<Cov CovItemId="S2" Value="4"/>
+<Cov CovItemId="S3" Value="4"/>
+<Cov CovItemId="S4" Value="4"/>
+<Cov CovItemId="S5" Value="8"/>
+<Cov CovItemId="S6" Value="4"/>
+<Cov CovItemId="S7" Value="4"/>
+<Cov CovItemId="S9" Value="1"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="pickr.classes.games.Briscola.java">
+<Cov CovItemId="B1" Value="3"/>
+<Cov CovItemId="B2" Value="1"/>
+<Cov CovItemId="B4" Value="3"/>
+<Cov CovItemId="B5" Value="3"/>
+<Cov CovItemId="B8" Value="1"/>
+<Cov CovItemId="L1-2" Value="1"/>
+<Cov CovItemId="L2-2" Value="1"/>
+<Cov CovItemId="L3-2" Value="1"/>
+<Cov CovItemId="L4-2" Value="1"/>
+<Cov CovItemId="S1" Value="1"/>
+<Cov CovItemId="S10" Value="1"/>
+<Cov CovItemId="S11" Value="4"/>
+<Cov CovItemId="S12" Value="3"/>
+<Cov CovItemId="S14" Value="3"/>
+<Cov CovItemId="S15" Value="3"/>
+<Cov CovItemId="S16" Value="1"/>
+<Cov CovItemId="S18" Value="1"/>
+<Cov CovItemId="S19" Value="1"/>
+<Cov CovItemId="S2" Value="1"/>
+<Cov CovItemId="S20" Value="1"/>
+<Cov CovItemId="S21" Value="1"/>
+<Cov CovItemId="S22" Value="4"/>
+<Cov CovItemId="S23" Value="1"/>
+<Cov CovItemId="S24" Value="1"/>
+<Cov CovItemId="S25" Value="1"/>
+<Cov CovItemId="S26" Value="1"/>
+<Cov CovItemId="S27" Value="4"/>
+<Cov CovItemId="S3" Value="1"/>
+<Cov CovItemId="S4" Value="4"/>
+<Cov CovItemId="S5" Value="1"/>
+<Cov CovItemId="S6" Value="1"/>
+<Cov CovItemId="S7" Value="1"/>
+<Cov CovItemId="S8" Value="1"/>
+<Cov CovItemId="S9" Value="1"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="pickr.classes.games.Game.java">
+<Cov CovItemId="B1" Value="4"/>
+<Cov CovItemId="B3" Value="1"/>
+<Cov CovItemId="B4" Value="3"/>
+<Cov CovItemId="L1-2" Value="1"/>
+<Cov CovItemId="L2-2" Value="1"/>
+<Cov CovItemId="S1" Value="1"/>
+<Cov CovItemId="S10" Value="4"/>
+<Cov CovItemId="S11" Value="4"/>
+<Cov CovItemId="S12" Value="4"/>
+<Cov CovItemId="S14" Value="1"/>
+<Cov CovItemId="S15" Value="1"/>
+<Cov CovItemId="S16" Value="4"/>
+<Cov CovItemId="S17" Value="1"/>
+<Cov CovItemId="S18" Value="4"/>
+<Cov CovItemId="S19" Value="1"/>
+<Cov CovItemId="S2" Value="1"/>
+<Cov CovItemId="S20" Value="1"/>
+<Cov CovItemId="S21" Value="4"/>
+<Cov CovItemId="S22" Value="1"/>
+<Cov CovItemId="S23" Value="4"/>
+<Cov CovItemId="S24" Value="1"/>
+<Cov CovItemId="S25" Value="1"/>
+<Cov CovItemId="S26" Value="1"/>
+<Cov CovItemId="S27" Value="1"/>
+<Cov CovItemId="S28" Value="1"/>
+<Cov CovItemId="S3" Value="1"/>
+<Cov CovItemId="S4" Value="1"/>
+<Cov CovItemId="S5" Value="1"/>
+<Cov CovItemId="S6" Value="1"/>
+<Cov CovItemId="S7" Value="3"/>
+<Cov CovItemId="S8" Value="1"/>
+<Cov CovItemId="S9" Value="3"/>
+</CovPrefix>
+</CovList>
+<AssgnmntList>
+<AssgnmntPrefix RootTermCovItemPrefix="pickr.classes.Deck.java">
+<AssgnmntListEntry Length="1" RootTermCovItemId="C1">
+<MapEntry BoolAssgnmnt="0" Value="1"/>
+<MapEntry BoolAssgnmnt="1" Value="10"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C2">
+<MapEntry BoolAssgnmnt="0" Value="4"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C3">
+<MapEntry BoolAssgnmnt="1" Value="4"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C4">
+<MapEntry BoolAssgnmnt="0" Value="4"/>
+<MapEntry BoolAssgnmnt="1" Value="12"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+<AssgnmntPrefix RootTermCovItemPrefix="pickr.classes.GamingCard.java">
+<AssgnmntListEntry Length="2" RootTermCovItemId="C1">
+<MapEntry BoolAssgnmnt="02" Value="4"/>
+<MapEntry BoolAssgnmnt="10" Value="4"/>
+<MapEntry BoolAssgnmnt="11" Value="32"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="2" RootTermCovItemId="C2">
+<MapEntry BoolAssgnmnt="00" Value="40"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+<AssgnmntPrefix RootTermCovItemPrefix="pickr.classes.games.Briscola.java">
+<AssgnmntListEntry Length="1" RootTermCovItemId="C1">
+<MapEntry BoolAssgnmnt="0" Value="1"/>
+<MapEntry BoolAssgnmnt="1" Value="3"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="2" RootTermCovItemId="C2">
+<MapEntry BoolAssgnmnt="02" Value="3"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="2" RootTermCovItemId="C3">
+<MapEntry BoolAssgnmnt="11" Value="3"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="2" RootTermCovItemId="C4">
+<MapEntry BoolAssgnmnt="02" Value="1"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+<AssgnmntPrefix RootTermCovItemPrefix="pickr.classes.games.Game.java">
+<AssgnmntListEntry Length="1" RootTermCovItemId="C1">
+<MapEntry BoolAssgnmnt="1" Value="4"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C2">
+<MapEntry BoolAssgnmnt="0" Value="3"/>
+<MapEntry BoolAssgnmnt="1" Value="1"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+</AssgnmntList>
+<ObjMetaDataList/>
+<MetaDataList/>
+</TestCase>
+<MetaDataList/>
+</TestSession>
+</TestSessionContainer>

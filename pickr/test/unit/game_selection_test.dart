@@ -71,32 +71,6 @@ void main() async {
     bool validMaxScore = UtilsCSV.booleanCSV(row[9]);
     List<int> numPlayers = UtilsCSV.playersCSV(row[10]);
 
-    //settings.add(Settings());
-
-    /*print(i.toString() +
-        " : valid: " +
-        valid.toString() +
-        " validType: " +
-        validType.toString() +
-        " validNumPlayers: " +
-        validNumPlayers.toString() +
-        " validMaxScore: " +
-        validMaxScore.toString() +
-        " validNumOptions: " +
-        validNumOptions.toString() +
-        " availableNumPlayers : " +
-        availableNumPlayers.toString() +
-        " availableMaxScore : " +
-        availableMaxScore.toString() +
-        " type: " +
-        type.toShortString() +
-        " numPlayers : " +
-        numPlayers.toString() +
-        " maxScore: " +
-        maxScore.toString() +
-        " numOptions: " +
-        numOptions.toString());*/
-
     Settings setting;
 
     if (valid) {
@@ -152,9 +126,3 @@ void main() async {
     }
   });
 }
-
-//settings.forEach((value) {
-//game.setting = value;
-//print(value);
-//expect(game.currentSettings != null, true);
-//});

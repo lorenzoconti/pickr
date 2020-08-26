@@ -1,4 +1,4 @@
-asm prova
+asm Pickr
 
 import libraries/StandardLibrary
 
