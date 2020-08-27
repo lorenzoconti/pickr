@@ -35,11 +35,6 @@ class UtilsCSV {
     }
   }
 
-  //
-  static int numberCSV(String num) {
-    return int.tryParse(num);
-  }
-
   static List<int> scoreCSV(String score) {
     switch (score) {
       case "Standard":
