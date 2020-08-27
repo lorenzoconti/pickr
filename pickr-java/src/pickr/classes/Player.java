@@ -1,13 +1,16 @@
 package pickr.classes;
 
+
 import java.util.ArrayList;
 
 public class Player {
 	
 	private ArrayList<GamingCard> cards;
+	
 	private String id;
 	
 	private int gameScore;
+	
 	private int matchScore;
 	
 	public Player(String id) {
@@ -17,38 +20,26 @@ public class Player {
 		this.matchScore = 0;
 	}
 
-	public ArrayList<GamingCard> getCards() {
-		return cards;
-	}
+	
+	public ArrayList<GamingCard> getCards() { return cards;	}
 
-	public void hand(ArrayList<GamingCard> cards) {
-		this.cards = cards;
-	}
-
+	public void hand(ArrayList<GamingCard> cards) { this.cards = cards;	}
+	
 	public GamingCard drop() { return this.cards.get(0); }
 
-	public int getGameScore() {
-		return gameScore;
-	}
+	public int getGameScore() {	return gameScore; }
 
-	public void setGameScore(int gameScore) {
-		this.gameScore += gameScore;
-	}
+	public void setGameScore(int gameScore) { this.gameScore += gameScore;	}
 
-	public int getMatchScore() {
-		return matchScore;
-	}
+	public int getMatchScore() { return matchScore; }
 
-	public void setMatchScore(int matchScore) {
-		this.matchScore = matchScore;
-	}
+	public void setMatchScore(int matchScore) {	this.matchScore = matchScore; }
 
-	public String getId() {
-		return id;
-	}
+	public String getId() {	return id;	}
 
 	public void delete() { this.cards.remove(0); }
 	
 	public void pick(GamingCard card) { this.cards.add(card);  }
 
 }
+

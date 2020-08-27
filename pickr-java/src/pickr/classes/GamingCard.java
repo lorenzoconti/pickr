@@ -1,7 +1,7 @@
 package pickr.classes;
 
 import pickr.enums.Suit;
-import pickr.exception.WrongCardNumberException;
+import pickr.exceptions.WrongCardNumberException;
 
 public class GamingCard {
 	
@@ -10,13 +10,16 @@ public class GamingCard {
 	private int val;
 	
 	public GamingCard(Suit suit, int num) throws WrongCardNumberException {
+	
 		this.suit = suit;
 		this.val = numToVal(num);
 		this.num = checkNum(num);
 	}
-	
+	 
 	public Suit getSuit() { return this.suit; }
+	
 	public int getNum() { return this.num; }
+	
 	public int getVal() { return this.val; }
 	
 	
@@ -25,14 +28,15 @@ public class GamingCard {
 		else return num == 1 ? 10 : 9;		
 	}
 	
-	  int checkNum(int num) throws WrongCardNumberException {
+	int checkNum(int num) throws WrongCardNumberException {
+	 
 		    if (num < 1 || num > 10) {
 		      throw new WrongCardNumberException();
 		    }
 		    return num;
-	  }
-	  
-	  @Override
+	 }
+	
+	@Override
 	public String toString() {	return num + " " + suit.toString() + " value: " + val;	}
 
 }

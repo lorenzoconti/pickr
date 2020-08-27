@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;pickr-yakindu/prova.sct&apos; to &apos;yakindu.sct&apos;" description="Rename resource &apos;prova.sct&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="prova.sct" name="yakindu.sct" stamp="1598534403286" updateReferences="true"/>
+</session>

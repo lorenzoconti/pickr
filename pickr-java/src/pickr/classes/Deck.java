@@ -1,15 +1,18 @@
 package pickr.classes;
 
+
 import java.util.ArrayList;
+//import java.util.Collections;
 import java.util.Collections;
 
 import pickr.enums.Suit;
-import pickr.exception.OutOfBoundException;
-import pickr.exception.WrongCardNumberException;
+import pickr.exceptions.OutOfBoundException;
+import pickr.exceptions.WrongCardNumberException;
 
 public class Deck {
 	
-	private ArrayList<GamingCard> cards;
+	public ArrayList<GamingCard> cards;
+	
 	
 	public Deck() { this.cards = new ArrayList<GamingCard>();	}
 
@@ -18,19 +21,24 @@ public class Deck {
 	public void init() throws WrongCardNumberException {
 		for(int num = 1; num < 11; num++) {
 			for(Suit suit : Suit.values()) {
-				cards.add(new GamingCard(suit, num));
-			}			
+				cards.add(new GamingCard(suit, num));			
+			}
 		}
 	}
 	
+
 	public void shuffle() { Collections.shuffle(cards);	}
 	
 	public GamingCard pick() throws OutOfBoundException {
-		if(!cards.isEmpty()) return cards.remove(0);
+	
+		if(!cards.isEmpty()) 
+			return cards.remove(0);
 		else throw new OutOfBoundException();
+	
 	}
 	
-	public ArrayList<GamingCard> picks(int n) throws OutOfBoundException {
+
+	public ArrayList<GamingCard> picks(int n) throws OutOfBoundException {	
 		
 		if(cards.size() >= n) {
 			ArrayList<GamingCard> picked = new ArrayList<GamingCard>();

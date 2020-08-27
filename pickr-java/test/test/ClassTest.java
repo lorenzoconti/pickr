@@ -8,10 +8,10 @@ import org.junit.Test;
 import pickr.classes.Deck;
 import pickr.classes.GamingCard;
 import pickr.classes.Player;
-import pickr.classes.games.Briscola;
 import pickr.enums.Suit;
-import pickr.exception.OutOfBoundException;
-import pickr.exception.WrongCardNumberException;
+import pickr.exceptions.OutOfBoundException;
+import pickr.exceptions.WrongCardNumberException;
+import pickr.games.Briscola;
 
 public class ClassTest {
 	
@@ -30,7 +30,7 @@ public class ClassTest {
 		
 		assertEquals(deck.getCards().size(), 40);
 		
-		deck.shuffle();
+		// deck.shuffle();
 		
 		assertEquals(deck.getCards().size(), 40);
 		
