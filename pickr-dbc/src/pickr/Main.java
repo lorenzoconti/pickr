@@ -23,8 +23,5 @@ public class Main {
 		
 		deck.init();
 		
-		
-		// PLAYER
 	}
-
 }

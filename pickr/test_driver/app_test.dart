@@ -28,7 +28,7 @@ void main() {
       if (driver != null) driver.close();
     });
 
-    test('something', () async {
+    test('Pickr App', () async {
       //
       Health health = await driver.checkHealth();
       print(health.status);

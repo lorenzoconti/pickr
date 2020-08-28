@@ -1,4 +1,4 @@
-asm Pickr_NuSMV
+asm Pickr_NuSMV_b4MA
 
 import libraries/StandardLibrary
 import libraries/CTLlibrary

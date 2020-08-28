@@ -32,8 +32,7 @@ public class ClassTest {
 		
 		// deck.shuffle();
 		
-		assertEquals(deck.getCards().size(), 40);
-		
+		assertEquals(deck.getCards().size(), 40);		
 		
 	}
 	
@@ -80,8 +79,7 @@ public class ClassTest {
 	@Test(expected = Exception.class)
 	public void testWrongCardNumberException() throws WrongCardNumberException {
 		
-		GamingCard toomuch = new GamingCard(Suit.BASTONI, 11);	
-		
+		new GamingCard(Suit.BASTONI, 11);			
 	}
 	
 	@Test(expected = Exception.class)

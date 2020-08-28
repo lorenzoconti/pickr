@@ -13,7 +13,7 @@ abstract class GameSessionInterface {
 
   void setSetting(GameType type);
   int addOption(String title, Object value);
-  Future<void> createLobby();
+  Future<bool> createLobby();
 
   Future<List<Settings>> getSettings();
 
@@ -139,18 +139,22 @@ class GameSession implements GameSessionInterface {
     return _fetched;
   }
 
-  Future<void> createLobby() async {
+  Future<bool> createLobby() async {
     //
+    try {
+      DocumentReference ref = await db.collection("games").add({
+        'type': _type.toShortString(),
+        'maxScore': _gameSettings["maxScore"].toString(),
+        'numPlayers': _gameSettings["numPlayers"].toString(),
+      });
 
-    DocumentReference ref = await db.collection("games").add({
-      'type': _type.toShortString(),
-      'maxScore': _gameSettings["maxScore"].toString(),
-      'numPlayers': _gameSettings["numPlayers"].toString(),
-    });
+      _lobby = ref.documentID;
 
-    _lobby = ref.documentID;
-
-    print(_lobby);
+      print(_lobby);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   @override

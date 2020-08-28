@@ -53,7 +53,7 @@ public abstract class Game {
 		return result;
 	}
 	
-	void dropCard(GamingCard card) { table.add(card); }
+	protected void dropCard(GamingCard card) { table.add(card); }
 		
 	abstract void start() throws WrongCardNumberException, OutOfBoundException;	
 	

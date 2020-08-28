@@ -13,8 +13,7 @@ void main() {
   Widget app(Widget child, GameSessionInterface game) =>
       GameProvider(game: game, child: MaterialApp(home: child));
 
-  testWidgets('Empty Email and Password: Do not sign in.',
-      (WidgetTester tester) async {
+  testWidgets('Home Page Mock', (WidgetTester tester) async {
     //
     MockGame mockGame = MockGame();
 
@@ -33,5 +32,21 @@ void main() {
     HomePage page = HomePage();
 
     await tester.pumpWidget(app(page, mockGame));
+
+    expect(find.text("BRISCOLA"), findsOneWidget);
+
+    await tester.tap(find.byKey(Key("BRISCOLA"))).then((value) async {
+      when(mockGame.currentSetting).thenReturn(settings.first);
+      await tester.pump();
+    });
+
+    expect(find.text("Impostazioni di gioco"), findsOneWidget);
+    expect(find.byKey(Key("numPlayers4")), findsOneWidget);
+    await tester.tap(find.byKey(Key("numPlayers4")));
+
+    expect(find.byKey(Key("maxScore5")), findsOneWidget);
+    await tester.tap(find.byKey(Key("maxScore5")));
+
+    expect(find.byKey(Key("create_lobby")), findsOneWidget);
   });
 }

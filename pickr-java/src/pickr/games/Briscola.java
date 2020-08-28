@@ -10,7 +10,7 @@ public class Briscola extends Game{
 	
 	private int numcards = 3;
 	
-	private Suit briscola;
+	protected Suit briscola;
 	
 	public Briscola(int numplayers, int score) {
 		super(numplayers, score);
@@ -28,7 +28,7 @@ public class Briscola extends Game{
 	public void start() throws WrongCardNumberException, OutOfBoundException { 	
 		
 		this.deck.init();
-		// this.deck.shuffle();
+		this.deck.shuffle();
 		
 		briscola = deck.getCards().get(deck.getCards().size()-1).getSuit();
 		
@@ -39,31 +39,32 @@ public class Briscola extends Game{
 
 
 	@Override
-	GamingCard rule() {
+	protected GamingCard rule() {
 		
 		GamingCard winningCard = this.getTable().get(0);
 		
 		// assert(this.getTable().size() == this.numplayers);
-		for(GamingCard card : this.getTable()) {			
-			
-			if(card.getVal() > winningCard.getVal()) {
-				// T T T
-				if(winningCard.getSuit() == briscola && card.getSuit() == briscola) {
-					winningCard = card;
-				}
-				// T F F 
-				if(winningCard.getSuit() != briscola && card.getSuit() != briscola) {
-					winningCard = card;
-				}
-			}
-			// F T F 
-			else if(card.getSuit() == briscola && winningCard.getSuit() != briscola) {
-				winningCard = card;
-			}			
-		}
-		
-		System.out.println("Briscola.rule() : " + winningCard);
+		for(GamingCard card : this.getTable()) {	
 				
+			// T T T
+			if(card.getVal() > winningCard.getVal() && winningCard.getSuit() == briscola && card.getSuit() == briscola) {
+				System.out.println("TTT: Winning: " + winningCard.toString() + " Card: " + card.toString());
+				winningCard = card;
+			}
+			// T F F 
+			if(card.getVal() > winningCard.getVal() && winningCard.getSuit() != briscola && card.getSuit() != briscola) {
+				System.out.println("TFF: Winning: " + winningCard.toString() + " Card: " + card.toString());
+				winningCard = card;
+			}
+			
+			// F T F 
+			 if(!(card.getVal() > winningCard.getVal()) && card.getSuit() == briscola && winningCard.getSuit() != briscola) {
+				System.out.println("FTF: Winning: " + winningCard.toString() + " Card: " + card.toString());
+				winningCard = card;
+			}	
+			
+		}
+		System.out.println("Briscola.rule() : " + winningCard);
 		return winningCard;
 	}
 	
@@ -71,8 +72,6 @@ public class Briscola extends Game{
 
 
 	public void round() throws OutOfBoundException {
-		
-		System.out.println("Briscola.round() : " + briscola.toString());
 		
 		for(Player player : this.players) {
 			this.dropCard(player.drop());
