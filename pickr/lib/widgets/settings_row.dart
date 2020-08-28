@@ -26,6 +26,7 @@ class _SettingsRowState extends State<SettingsRow> {
     this.widget.options.forEach((element) {
       _options.add(GestureDetector(
           child: Container(
+              key: Key(widget.title.toString() + element.toString()),
               margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               decoration: BoxDecoration(

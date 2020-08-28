@@ -58,22 +58,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: _buildOptions(game)
-                /*RaisedButton(
-                    onPressed: () => _onButtonPressed(GameType.BRISCOLA, game),
-                    child: Text("Briscola Classica")),
-                RaisedButton(
-                    onPressed: () =>
-                        _onButtonPressed(GameType.BRISCOLA_CHIAMATA, game),
-                    child: Text("Briscola Chiamata")),
-                RaisedButton(
-                    onPressed: () => _onButtonPressed(GameType.DOMINO, game),
-                    child: Text("Domino")),
-                RaisedButton(
-                    onPressed: () => _onButtonPressed(GameType.MARIANNA, game),
-                    child: Text("Marianna")),*/
-
-                ),
+                children: _buildOptions(game)),
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -94,6 +79,7 @@ class _HomePageState extends State<HomePage> {
     List<Widget> options = List<Widget>();
     game.settings.forEach((setting) {
       options.add(RaisedButton(
+          key: Key(setting.type.toShortString()),
           onPressed: () => _onButtonPressed(setting.type, game),
           child: Text(setting.type.toShortString())));
     });
@@ -150,6 +136,7 @@ class _HomePageState extends State<HomePage> {
             margin: EdgeInsets.only(top: 40),
             child: Center(
                 child: Text("Crea una partita",
+                    key: Key("create_lobby"),
                     style: TextStyle(fontSize: 18, color: Colors.white)))),
       ));
     }

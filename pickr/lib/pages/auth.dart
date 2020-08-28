@@ -124,6 +124,7 @@ class _AuthPageState extends State<AuthPage> {
           onPressed: validateAndSubmit,
         ),
         FlatButton(
+          key: Key("login_to_create"),
           child: Text('Create an account', style: TextStyle(fontSize: 20.0)),
           onPressed: moveToRegister,
         ),
@@ -131,10 +132,12 @@ class _AuthPageState extends State<AuthPage> {
     } else {
       return <Widget>[
         RaisedButton(
+          key: Key("create_account"),
           child: Text('Create an account', style: TextStyle(fontSize: 20.0)),
           onPressed: validateAndSubmit,
         ),
         FlatButton(
+          key: Key("create_to_login"),
           child:
               Text('Have an account? Login', style: TextStyle(fontSize: 20.0)),
           onPressed: moveToLogin,

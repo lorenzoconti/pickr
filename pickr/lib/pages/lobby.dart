@@ -21,10 +21,28 @@ class _LobbyPageState extends State<LobbyPage> {
     print(game.check());
 
     return Scaffold(
-        body: Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
-      child: Container(child: Text(game.lobby != null ? game.lobby : " NULL")),
-    ));
+      body: Container(
+        margin: EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
+        child: Center(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Game Lobby",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 30),
+                Text("Players: 1/4, waiting ..."),
+                SizedBox(height: 30),
+                Text(game.lobby != null ? game.lobby : " NULL")
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
