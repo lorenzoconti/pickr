@@ -7,8 +7,8 @@ import '../player.dart';
 
 class Briscola extends Game {
   //
-  int _numcards = 3;
-  int _numplayers = 4;
+  final int _numcards = 3;
+  final int _numplayers = 4;
 
   Suit _briscola;
 
@@ -35,10 +35,10 @@ class Briscola extends Game {
 
   @override
   GamingCard rule() {
-    GamingCard winningCard = this.table.first;
+    var winningCard = table.first;
 
     // assert(this.table.size() == this.numplayers);
-    this.table.forEach((card) {
+    table.forEach((card) {
       if (card.val > winningCard.val) {
         // T T T
         if (winningCard.suit == _briscola && card.suit == _briscola) {
@@ -61,24 +61,26 @@ class Briscola extends Game {
 
   @override
   void addPlayer({String id}) {
-    if (players.length <= _numplayers - 1)
+    if (players.length <= _numplayers - 1) {
       players.add(Player(id: id));
-    else
+    } else {
       throw OutOfBoundException();
+    }
   }
 
+  @override
   void gameround() {
     players.forEach((player) {
-      this.dropCard(card: player.drop());
+      dropCard(card: player.drop());
     });
 
-    GamingCard winningCard = this.rule();
+    var winningCard = rule();
 
-    this.winner(winningCard);
+    winner(winningCard);
 
-    if (this.cards.length > _numplayers) {
+    if (cards.length > _numplayers) {
       players.forEach((player) {
-        player.pick(this.deck.pick());
+        player.pick(deck.pick());
       });
     }
   }

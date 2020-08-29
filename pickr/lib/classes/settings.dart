@@ -1,25 +1,36 @@
+import 'package:flutter/material.dart';
 import 'package:pickr/enums/games.dart';
 
 class Settings {
+  /// Type of the game (i.e Briscola, Briscola Chiamata).
   GameType type;
+
+  /// [available] is true if the game is available in this current verison of the application, otherwise false.
   bool available;
 
+  /// Number of selectionable options.
   int numOptions;
 
+  /// [availableNumPlayers] is true if the number of the players is a selectionable option.
   bool availableNumPlayers;
+
+  /// Contains the selectionable options for the game's number of players.
   List<int> numPlayers;
 
+  /// [availableScore] is true if the number of the players is a selectionable option.
   bool availableScore;
+
+  /// Contains the selectionable options for the game's max score.
   List<int> maxScore;
 
   Settings({
-    this.type,
+    @required this.type,
     this.available,
-    this.numOptions,
-    this.numPlayers,
+    @required this.numOptions,
+    @required this.numPlayers,
     this.availableNumPlayers,
     this.availableScore,
-    this.maxScore,
+    @required this.maxScore,
   })  : assert(type != null),
         assert(numOptions != null && numOptions >= 0 && numOptions < 3),
         assert(maxScore != null),
@@ -27,17 +38,17 @@ class Settings {
 
   @override
   String toString() {
-    return "available: " +
+    return 'available: ' +
         available.toString() +
-        " numOptions: " +
+        ' numOptions: ' +
         numOptions.toString() +
-        " availablePlayers: " +
+        ' availablePlayers: ' +
         availableNumPlayers.toString() +
-        " numPlayers: " +
+        ' numPlayers: ' +
         numPlayers.toString() +
-        " availableScore: " +
+        ' availableScore: ' +
         availableScore.toString() +
-        " maxScore: " +
+        ' maxScore: ' +
         maxScore.toString();
   }
 }

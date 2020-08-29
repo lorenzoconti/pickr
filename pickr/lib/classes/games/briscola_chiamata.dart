@@ -5,8 +5,8 @@ import 'package:pickr/enums/suits.dart';
 import 'package:pickr/exceptions/out_of_bound_exception.dart';
 
 class BriscolaChiamata extends Game {
-  int _numplayers = 5;
-  int _numcards = 8;
+  final int _numplayers = 5;
+  final int _numcards = 8;
 
   Suit _briscola;
 
@@ -24,10 +24,11 @@ class BriscolaChiamata extends Game {
 
   @override
   void addPlayer({String id}) {
-    if (players.length <= _numplayers - 1)
+    if (players.length <= _numplayers - 1) {
       players.add(Player(id: id));
-    else
+    } else {
       throw OutOfBoundException();
+    }
   }
 
   @override
@@ -37,22 +38,23 @@ class BriscolaChiamata extends Game {
     });
   }
 
+  @override
   void gameround() {
-    players.forEach((player) => this.dropCard(card: player.drop()));
+    players.forEach((player) => dropCard(card: player.drop()));
 
-    GamingCard winningCard = this.rule();
+    var winningCard = rule();
 
-    this.winner(winningCard);
+    winner(winningCard);
 
     table.clear();
   }
 
   @override
   GamingCard rule() {
-    GamingCard winningCard = this.table.first;
+    var winningCard = table.first;
 
     // assert(this.table.size() == this.numplayers);
-    this.table.forEach((card) {
+    table.forEach((card) {
       if (card.val > winningCard.val) {
         // T T T
         if (winningCard.suit == _briscola && card.suit == _briscola) {

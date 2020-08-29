@@ -17,8 +17,8 @@ abstract class Game {
     numplayers = numplayers;
     score = score;
     _deck = Deck();
-    _table = List<GamingCard>();
-    _players = List<Player>();
+    _table = <GamingCard>[];
+    _players = <Player>[];
   }
 
   /// Getter method for [_deck].
@@ -47,8 +47,8 @@ abstract class Game {
 
   /// Returns the amount of points of the cards on the table.
   int getTableValue() {
-    int result = 0;
-    this.table.forEach((card) {
+    var result = 0;
+    table.forEach((card) {
       result += card.val;
     });
     return result;
@@ -65,9 +65,9 @@ abstract class Game {
   /// Determines the winner of the round and awards him with
   /// the points it deserves.
   Player winner(GamingCard winnerCard) {
-    Player winner = this.players.first;
+    var winner = players.first;
 
-    this._players.forEach((player) {
+    _players.forEach((player) {
       if (player.hand.contains(winnerCard)) winner = player;
 
       player.delete();
@@ -77,7 +77,7 @@ abstract class Game {
 
     table.clear();
 
-    this._round += 1;
+    _round += 1;
 
     return winner;
   }

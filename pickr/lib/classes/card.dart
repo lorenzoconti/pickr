@@ -7,26 +7,27 @@ class GamingCard {
   int _val;
 
   GamingCard({Suit suit, int num}) {
-    this._suit = suit;
-    this._val = _numToVal(num: num);
-    this._num = _checkNum(num: num);
+    _suit = suit;
+    _val = _numToVal(num: num);
+    _num = _checkNum(num: num);
   }
 
   /// Getter method for [_suit].
-  Suit get suit => this._suit;
+  Suit get suit => _suit;
 
   /// Getter method for [_num].
-  int get num => this._num;
+  int get num => _num;
 
   /// Getter method for [_val].
-  int get val => this._val;
+  int get val => _val;
 
   /// Assigns the value of the card according to its number [_num].
   int _numToVal({int num}) {
-    if (num != 1 && num != 3)
+    if (num != 1 && num != 3) {
       return num - 2;
-    else
+    } else {
       return num == 1 ? 10 : 9;
+    }
   }
 
   /// Check whether the card number is valid or not.

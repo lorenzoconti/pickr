@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pickr/handlers/game.dart';
 import 'package:pickr/providers/game-provider.dart';
 
 class LobbyPage extends StatefulWidget {
@@ -16,7 +15,7 @@ class _LobbyPageState extends State<LobbyPage> {
   @override
   Widget build(BuildContext context) {
     //
-    GameSessionInterface game = GameProvider.of(context).game;
+    var game = GameProvider.of(context).game;
 
     print(game.check());
 
@@ -31,13 +30,13 @@ class _LobbyPageState extends State<LobbyPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Game Lobby",
+                  'Game Lobby',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 30),
-                Text("Players: 1/4, waiting ..."),
+                Text('Players: 1/4, waiting ...'),
                 SizedBox(height: 30),
-                Text(game.lobby != null ? game.lobby : " NULL")
+                Text(game.lobby ?? 'Empty')
               ],
             ),
           ),

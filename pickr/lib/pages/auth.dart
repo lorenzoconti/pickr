@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:pickr/enums/auth_mode.dart';
-import 'package:pickr/handlers/auth.dart';
 import 'package:pickr/providers/auth-provider.dart';
 import 'package:pickr/providers/game-provider.dart';
-import 'package:pickr/handlers/game.dart';
 import 'package:pickr/utils/validators.dart';
 
 class AuthPage extends StatefulWidget {
@@ -22,7 +20,7 @@ class _AuthPageState extends State<AuthPage> {
   AuthMode _mode = AuthMode.LOGIN;
 
   bool validateAndSave() {
-    final FormState form = formKey.currentState;
+    final form = formKey.currentState;
     if (form.validate()) {
       form.save();
       return true;
@@ -33,35 +31,36 @@ class _AuthPageState extends State<AuthPage> {
   Future<void> validateAndSubmit() async {
     if (validateAndSave()) {
       try {
-        final BaseAuth auth = AuthProvider.of(context).auth;
+        final auth = AuthProvider.of(context).auth;
         // bool success = await widget.model.signIn(email: _email, password: _password, mode: _mode);
 
         if (_mode == AuthMode.LOGIN) {
-          final String result = await auth.signInWithEmailAndPassword(
+          final result = await auth.signInWithEmailAndPassword(
               email: _email, password: _password);
           callback(result);
         } else {
-          final String result = await auth.createUserWithEmailAndPassword(
+          final result = await auth.createUserWithEmailAndPassword(
               email: _email, password: _password);
           callback(result);
         }
       } catch (e) {
         print('Error: $e');
-        showDialog(context: context, child: Text(e.toString()));
+        await showDialog(context: context, child: Text(e.toString()));
       }
     }
   }
 
   void callback(String user) {
     //
-    GameSessionInterface game = GameProvider.of(context).game;
+    var game = GameProvider.of(context).game;
 
-    if (user != null)
+    if (user != null) {
       game
           .fetch()
           .then((value) => Navigator.of(context).pushReplacementNamed('/home'));
-    else
-      showDialog(context: context, child: Text("error"));
+    } else {
+      showDialog(context: context, child: Text('error'));
+    }
   }
 
   void moveToRegister() {
@@ -124,7 +123,7 @@ class _AuthPageState extends State<AuthPage> {
           onPressed: validateAndSubmit,
         ),
         FlatButton(
-          key: Key("login_to_create"),
+          key: Key('login_to_create'),
           child: Text('Create an account', style: TextStyle(fontSize: 20.0)),
           onPressed: moveToRegister,
         ),
@@ -132,12 +131,12 @@ class _AuthPageState extends State<AuthPage> {
     } else {
       return <Widget>[
         RaisedButton(
-          key: Key("create_account"),
+          key: Key('create_account'),
           child: Text('Create an account', style: TextStyle(fontSize: 20.0)),
           onPressed: validateAndSubmit,
         ),
         FlatButton(
-          key: Key("create_to_login"),
+          key: Key('create_to_login'),
           child:
               Text('Have an account? Login', style: TextStyle(fontSize: 20.0)),
           onPressed: moveToLogin,

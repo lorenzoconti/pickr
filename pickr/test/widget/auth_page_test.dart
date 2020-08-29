@@ -22,9 +22,9 @@ void main() {
   testWidgets('Empty Email and Password: Do not sign in.',
       (WidgetTester tester) async {
     //
-    MockAuth mockAuth = MockAuth();
-    MockGame mockGame = MockGame();
-    AuthPage page = AuthPage();
+    var mockAuth = MockAuth();
+    var mockGame = MockGame();
+    var page = AuthPage();
 
     await tester.pumpWidget(app(page, mockAuth, mockGame));
 
@@ -35,16 +35,16 @@ void main() {
 
   testWidgets('Valid Email and Password: Sign in', (WidgetTester tester) async {
     //
-    MockAuth mockAuth = MockAuth();
-    MockGame mockGame = MockGame();
-    AuthPage page = AuthPage();
+    var mockAuth = MockAuth();
+    var mockGame = MockGame();
+    var page = AuthPage();
 
     await tester.pumpWidget(app(page, mockAuth, mockGame));
 
-    Finder emailField = find.byKey(Key('email'));
+    var emailField = find.byKey(Key('email'));
     await tester.enterText(emailField, 'email@test.com');
 
-    Finder passwordField = find.byKey(Key('password'));
+    var passwordField = find.byKey(Key('password'));
     await tester.enterText(passwordField, 'password');
 
     await tester.tap(find.byKey(Key('login_button')));
@@ -57,16 +57,16 @@ void main() {
   testWidgets('Invalid Email and Password: Do not sign in',
       (WidgetTester tester) async {
     //
-    MockAuth mockAuth = MockAuth();
-    MockGame mockGame = MockGame();
-    AuthPage page = AuthPage();
+    var mockAuth = MockAuth();
+    var mockGame = MockGame();
+    var page = AuthPage();
 
     await tester.pumpWidget(app(page, mockAuth, mockGame));
 
-    Finder emailField = find.byKey(Key('email'));
+    var emailField = find.byKey(Key('email'));
     await tester.enterText(emailField, 'emailtestcom');
 
-    Finder passwordField = find.byKey(Key('password'));
+    var passwordField = find.byKey(Key('password'));
     await tester.enterText(passwordField, 'password');
 
     await tester.tap(find.byKey(Key('login_button')));
@@ -78,18 +78,18 @@ void main() {
   testWidgets('Create Account : Invalid Credentials',
       (WidgetTester tester) async {
     //
-    MockAuth mockAuth = MockAuth();
-    MockGame mockGame = MockGame();
-    AuthPage page = AuthPage();
+    var mockAuth = MockAuth();
+    var mockGame = MockGame();
+    var page = AuthPage();
 
     await tester.pumpWidget(app(page, mockAuth, mockGame));
 
     await tester.tap(find.byKey(Key('login_to_create')));
 
-    Finder emailField = find.byKey(Key('email'));
+    var emailField = find.byKey(Key('email'));
     await tester.enterText(emailField, 'emailtestcom');
 
-    Finder passwordField = find.byKey(Key('password'));
+    var passwordField = find.byKey(Key('password'));
     await tester.enterText(passwordField, 'password');
 
     await tester.tap(find.byKey(Key('create_account')));
@@ -100,9 +100,9 @@ void main() {
 
   testWidgets('Auth Mode Switch', (WidgetTester tester) async {
     //
-    MockAuth mockAuth = MockAuth();
-    MockGame mockGame = MockGame();
-    AuthPage page = AuthPage();
+    var mockAuth = MockAuth();
+    var mockGame = MockGame();
+    var page = AuthPage();
 
     await tester.pumpWidget(app(page, mockAuth, mockGame));
 

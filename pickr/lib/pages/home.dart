@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget unavailable = Container(
       child:
-          Text("Attualmente non disponibile", style: TextStyle(fontSize: 18)));
+          Text('Attualmente non disponibile', style: TextStyle(fontSize: 18)));
 
   /*
    * build
@@ -34,10 +34,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     //
-    final GameSessionInterface game = GameProvider.of(context).game;
+    final game = GameProvider.of(context).game;
 
     return Scaffold(
-        appBar: AppBar(title: Text("Pickr")), body: _buildBody(game));
+        appBar: AppBar(title: Text('Pickr')), body: _buildBody(game));
   }
 
   /// Builds the body of the page.
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            child: Text("Seleziona una modalità di gioco",
+            child: Text('Seleziona una modalità di gioco',
                 style: TextStyle(fontSize: 18)),
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _buildOptions(GameSessionInterface game) {
     //
-    List<Widget> options = List<Widget>();
+    var options = <Widget>[];
     game.settings.forEach((setting) {
       options.add(RaisedButton(
           key: Key(setting.type.toShortString()),
@@ -97,17 +97,17 @@ class _HomePageState extends State<HomePage> {
 
   /// Builds the settings section.
   Widget _settingsSection(GameSessionInterface game) {
-    List<Widget> _settingWidgets = List<Widget>();
+    var _settingWidgets = <Widget>[];
 
     /// Adds the section title
     _settingWidgets.add(Container(
         margin: EdgeInsets.only(bottom: 20),
-        child: Text("Impostazioni di gioco", style: TextStyle(fontSize: 18))));
+        child: Text('Impostazioni di gioco', style: TextStyle(fontSize: 18))));
 
     /// Adds the Number of Players option if it is available.
     if (game.currentSetting.availableNumPlayers) {
       _settingWidgets.add(SettingsRow(
-        title: "numPlayers",
+        title: 'numPlayers',
         options: game.currentSetting.numPlayers,
         callback: game.addOption,
       ));
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
     /// Adds the Max Score option if it is available
     if (game.currentSetting.availableScore) {
       _settingWidgets.add(SettingsRow(
-        title: "maxScore",
+        title: 'maxScore',
         options: game.currentSetting.maxScore,
         callback: game.addOption,
       ));
@@ -135,8 +135,8 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.symmetric(vertical: 10),
             margin: EdgeInsets.only(top: 40),
             child: Center(
-                child: Text("Crea una partita",
-                    key: Key("create_lobby"),
+                child: Text('Crea una partita',
+                    key: Key('create_lobby'),
                     style: TextStyle(fontSize: 18, color: Colors.white)))),
       ));
     }

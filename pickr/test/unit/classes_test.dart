@@ -13,7 +13,7 @@ import 'package:pickr/exceptions/out_of_bound_exception.dart';
 void main() {
   //
   test('Card Test', () {
-    GamingCard card = GamingCard(num: 1, suit: Suit.BASTONI);
+    var card = GamingCard(num: 1, suit: Suit.BASTONI);
     expect(card.num, 1);
     expect(card.suit, Suit.BASTONI);
     expect(card.val, 10);
@@ -26,7 +26,7 @@ void main() {
   });
 
   test('Deck Test', () {
-    Deck deck = Deck();
+    var deck = Deck();
 
     expect(deck.cards.length, 0);
 
@@ -57,13 +57,13 @@ void main() {
 
   test('Player Test', () {
     //
-    Player player = new Player(id: "Player");
-    expect(player.id, "Player");
+    var player = Player(id: 'Player');
+    expect(player.id, 'Player');
     expect(player.hand.length, 0);
     expect(player.matchScore, 0);
     expect(player.gameScore, 0);
 
-    List<GamingCard> hand = List<GamingCard>();
+    var hand = <GamingCard>[];
     hand.add(GamingCard(num: 5, suit: Suit.BASTONI));
     hand.add(GamingCard(num: 6, suit: Suit.COPPE));
     hand.add(GamingCard(num: 7, suit: Suit.ORI));
@@ -71,7 +71,7 @@ void main() {
 
     expect(player.hand.length, 3);
     expect(player.drop() != null, true);
-    GamingCard deleted = player.delete();
+    var deleted = player.delete();
     expect(player.hand.length, 2);
     player.pick(deleted);
     expect(player.hand.length, 3);
@@ -87,21 +87,21 @@ void main() {
 
   test('Briscola Chiamata Test', () {
     //
-    BriscolaChiamata game = BriscolaChiamata();
+    var game = BriscolaChiamata();
     //
     expect(game.runtimeType, BriscolaChiamata);
     expect(game.deck.cards.length, 0);
     expect(game.players.isEmpty, true);
 
-    game.addPlayer(id: "Player1");
-    game.addPlayer(id: "Player2");
-    game.addPlayer(id: "Player3");
-    game.addPlayer(id: "Player4");
-    game.addPlayer(id: "Player5");
+    game.addPlayer(id: 'Player1');
+    game.addPlayer(id: 'Player2');
+    game.addPlayer(id: 'Player3');
+    game.addPlayer(id: 'Player4');
+    game.addPlayer(id: 'Player5');
     expect(game.players.length, 5);
 
     try {
-      game.addPlayer(id: "Player6");
+      game.addPlayer(id: 'Player6');
     } catch (e) {
       expect(e.runtimeType, OutOfBoundException);
     }
@@ -114,10 +114,12 @@ void main() {
     game.gameround();
     game.players.forEach((player) => expect(player.hand.length, 7));
 
-    for (int i = 0; i < 7; i++) game.gameround();
+    for (var i = 0; i < 7; i++) {
+      game.gameround();
+    }
     game.players.forEach((player) => expect(player.hand.length, 0));
 
-    int sum = 0;
+    var sum = 0;
     game.players.forEach((player) {
       expect(player.matchScore, 0);
       sum += player.gameScore;
@@ -128,22 +130,24 @@ void main() {
 
   test('Briscola Test', () {
     //
-    Briscola game = Briscola();
+    var game = Briscola();
     //
     expect(game.runtimeType, Briscola);
     expect(game.deck.cards.length, 0);
     expect(game.players.isEmpty, true);
     expect(game != null, true);
 
-    int numplayers = 4;
-    int numcards = 3;
+    var numplayers = 4;
+    var numcards = 3;
 
-    for (int i = 0; i < numplayers; i++) game.addPlayer(id: "Player $i");
+    for (var i = 0; i < numplayers; i++) {
+      game.addPlayer(id: 'Player $i');
+    }
 
     expect(game.players.length, 4);
 
     try {
-      game.addPlayer(id: "Player 5");
+      game.addPlayer(id: 'Player 5');
     } catch (e) {
       expect(e.runtimeType, OutOfBoundException);
     }
@@ -159,8 +163,8 @@ void main() {
     expect(game.round, 2);
   });
 
-  test("Settings Test", () {
-    Settings setting = Settings(
+  test('Settings Test', () {
+    var setting = Settings(
         available: true,
         availableNumPlayers: true,
         availableScore: true,

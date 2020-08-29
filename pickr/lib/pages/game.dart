@@ -7,8 +7,8 @@ class GamePage extends StatelessWidget {
     //GameSession game = GameProvider.of(context).game;
 
     return Scaffold(
-      appBar: AppBar(title: Text("Game")),
-      body: Container(child: Center(child: Text("Game"))),
+      appBar: AppBar(title: Text('Game')),
+      body: Container(child: Center(child: Text('Game'))),
     );
   }
 }

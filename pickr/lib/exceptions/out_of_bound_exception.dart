@@ -1,6 +1,6 @@
 class OutOfBoundException implements Exception {
   @override
   String toString() {
-    return "Out Of Bound Exception!";
+    return 'Out Of Bound Exception!';
   }
 }

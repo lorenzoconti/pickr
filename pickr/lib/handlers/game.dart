@@ -32,26 +32,31 @@ class GameSession implements GameSessionInterface {
   ///
   String _lobby;
 
+  @override
   String get lobby => _lobby;
 
   /// (Key,Value) map that contains the settings options the user selected
-  Map<String, Object> _gameSettings = Map<String, Object>();
+  final Map<String, Object> _gameSettings = <String, Object>{};
 
   /// List of the settings, one setting for every game type.
-  List<Settings> _settings = List<Settings>();
+  List<Settings> _settings = <Settings>[];
 
+  @override
   List<Settings> get settings => _settings;
 
   /// Selected setting based on [_type]
   Settings _selectedSetting;
 
+  @override
   Settings get currentSetting => _selectedSetting;
 
   set setting(Settings setting) => _selectedSetting = setting;
 
+  @override
   set setSettings(List<Settings> list) => _settings = list;
 
   /// Sets the current settings options based on the game type the user selected.
+  @override
   void setSetting(GameType type) {
     //
     _type = type;
@@ -64,6 +69,7 @@ class GameSession implements GameSessionInterface {
   ///
   /// If a previous value of the same setting is contained, it replaces
   /// it with the new one.
+  @override
   int addOption(String title, Object value) {
     //
     if (_gameSettings.containsKey(title)) _gameSettings.remove(title);
@@ -74,15 +80,20 @@ class GameSession implements GameSessionInterface {
     return _gameSettings.length;
   }
 
+  @override
   bool check() {
     print(_type);
     print(_gameSettings);
 
-    if (_type == GameType.BRISCOLA_CHIAMATA && _gameSettings["numPlayers"] != 5)
+    if (_type == GameType.BRISCOLA_CHIAMATA &&
+        _gameSettings['numPlayers'] != 5) {
       return false;
+    }
     if (_type == GameType.BRISCOLA &&
-        (_gameSettings["numPlayers"] != 2 && _gameSettings["numPlayers"] != 4))
+        (_gameSettings['numPlayers'] != 2 &&
+            _gameSettings['numPlayers'] != 4)) {
       return false;
+    }
     return true;
   }
 
@@ -94,7 +105,7 @@ class GameSession implements GameSessionInterface {
 
   /// Starts the game lobby
   void start() {
-    print("Game Started with the following options:");
+    print('Game Started with the following options:');
     print(_gameSettings);
   }
 
@@ -105,22 +116,23 @@ class GameSession implements GameSessionInterface {
         (_selectedSetting.availableScore ? 1 : 0);
   }
 
+  @override
   Future<List<Settings>> getSettings() async {
-    List<Settings> _fetched = List<Settings>();
+    var _fetched = <Settings>[];
 
-    await db.collection("settings").getDocuments().then((querySnapshot) {
+    await db.collection('settings').getDocuments().then((querySnapshot) {
       querySnapshot.documents.forEach((result) {
-        if (result.data["available"] == "true") {
+        if (result.data['available'] == 'true') {
           _fetched.add(Settings(
-              available: UtilsCSV.booleanCSV(result.data["available"]),
+              available: UtilsCSV.booleanCSV(result.data['available']),
               availableNumPlayers:
-                  UtilsCSV.booleanCSV(result.data["availableNumPlayers"]),
+                  UtilsCSV.booleanCSV(result.data['availableNumPlayers']),
               availableScore:
-                  UtilsCSV.booleanCSV(result.data["availableScore"]),
-              maxScore: UtilsCSV.scoreCSV(result.data["maxScore"]),
-              numOptions: UtilsCSV.numberCSV(result.data["numOptions"]),
-              numPlayers: UtilsCSV.playersCSV(result.data["numPlayers"]),
-              type: UtilsCSV.typeCSV(result.data["type"])));
+                  UtilsCSV.booleanCSV(result.data['availableScore']),
+              maxScore: UtilsCSV.scoreCSV(result.data['maxScore']),
+              numOptions: UtilsCSV.numberCSV(result.data['numOptions']),
+              numPlayers: UtilsCSV.playersCSV(result.data['numPlayers']),
+              type: UtilsCSV.typeCSV(result.data['type'])));
         } else {
           _settings.add(Settings(
               available: false,
@@ -129,7 +141,7 @@ class GameSession implements GameSessionInterface {
               maxScore: [0],
               numOptions: 0,
               numPlayers: [0],
-              type: UtilsCSV.typeCSV(result.data["type"])));
+              type: UtilsCSV.typeCSV(result.data['type'])));
         }
       });
     });
@@ -139,13 +151,14 @@ class GameSession implements GameSessionInterface {
     return _fetched;
   }
 
+  @override
   Future<bool> createLobby() async {
     //
     try {
-      DocumentReference ref = await db.collection("games").add({
+      var ref = await db.collection('games').add({
         'type': _type.toShortString(),
-        'maxScore': _gameSettings["maxScore"].toString(),
-        'numPlayers': _gameSettings["numPlayers"].toString(),
+        'maxScore': _gameSettings['maxScore'].toString(),
+        'numPlayers': _gameSettings['numPlayers'].toString(),
       });
 
       _lobby = ref.documentID;
@@ -159,7 +172,7 @@ class GameSession implements GameSessionInterface {
 
   @override
   Future<void> fetch() async {
-    List<Settings> _fetched = await this.getSettings();
+    var _fetched = await getSettings();
     _settings = _fetched;
     return;
   }

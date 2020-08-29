@@ -15,9 +15,9 @@ void main() {
 
   testWidgets('Home Page Mock', (WidgetTester tester) async {
     //
-    MockGame mockGame = MockGame();
+    var mockGame = MockGame();
 
-    List<Settings> settings = List<Settings>();
+    var settings = <Settings>[];
     settings.add(Settings(
         available: true,
         availableNumPlayers: true,
@@ -29,24 +29,24 @@ void main() {
 
     when(mockGame.settings).thenReturn(settings);
 
-    HomePage page = HomePage();
+    var page = HomePage();
 
     await tester.pumpWidget(app(page, mockGame));
 
-    expect(find.text("BRISCOLA"), findsOneWidget);
+    expect(find.text('BRISCOLA'), findsOneWidget);
 
-    await tester.tap(find.byKey(Key("BRISCOLA"))).then((value) async {
+    await tester.tap(find.byKey(Key('BRISCOLA'))).then((value) async {
       when(mockGame.currentSetting).thenReturn(settings.first);
       await tester.pump();
     });
 
-    expect(find.text("Impostazioni di gioco"), findsOneWidget);
-    expect(find.byKey(Key("numPlayers4")), findsOneWidget);
-    await tester.tap(find.byKey(Key("numPlayers4")));
+    expect(find.text('Impostazioni di gioco'), findsOneWidget);
+    expect(find.byKey(Key('numPlayers4')), findsOneWidget);
+    await tester.tap(find.byKey(Key('numPlayers4')));
 
-    expect(find.byKey(Key("maxScore5")), findsOneWidget);
-    await tester.tap(find.byKey(Key("maxScore5")));
+    expect(find.byKey(Key('maxScore5')), findsOneWidget);
+    await tester.tap(find.byKey(Key('maxScore5')));
 
-    expect(find.byKey(Key("create_lobby")), findsOneWidget);
+    expect(find.byKey(Key('create_lobby')), findsOneWidget);
   });
 }

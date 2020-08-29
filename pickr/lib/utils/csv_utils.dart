@@ -4,16 +4,16 @@ class UtilsCSV {
   //
   static GameType typeCSV(String type) {
     switch (type) {
-      case "Briscola":
+      case 'Briscola':
         return GameType.BRISCOLA;
         break;
-      case "Chiamata":
+      case 'Chiamata':
         return GameType.BRISCOLA_CHIAMATA;
         break;
-      case "Domino":
+      case 'Domino':
         return GameType.DOMINO;
         break;
-      case "Marianna":
+      case 'Marianna':
         return GameType.MARIANNA;
         break;
       default:
@@ -23,10 +23,10 @@ class UtilsCSV {
 
   static bool booleanCSV(String boolean) {
     switch (boolean) {
-      case "true":
+      case 'true':
         return true;
         break;
-      case "false":
+      case 'false':
         return false;
         break;
       default:
@@ -43,10 +43,10 @@ class UtilsCSV {
   //
   static List<int> scoreCSV(String score) {
     switch (score) {
-      case "Standard":
+      case 'Standard':
         return [5, 10, 20];
         break;
-      case "None":
+      case 'None':
         return [0];
         break;
       default:
@@ -56,13 +56,13 @@ class UtilsCSV {
 
   static List<int> playersCSV(String players) {
     switch (players) {
-      case "Couple":
+      case 'Couple':
         return [2, 4];
         break;
-      case "Five":
+      case 'Five':
         return [5];
         break;
-      case "None":
+      case 'None':
         return [0];
         break;
       default:

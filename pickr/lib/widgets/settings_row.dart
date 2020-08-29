@@ -20,10 +20,10 @@ class _SettingsRowState extends State<SettingsRow> {
   }
 
   List<Widget> _makeOptions() {
-    List<Widget> _options = List<Widget>();
+    var _options = <Widget>[];
     _options.add(Container(child: Text(widget.title)));
     _options.add(SizedBox(width: 10));
-    this.widget.options.forEach((element) {
+    widget.options.forEach((element) {
       _options.add(GestureDetector(
           child: Container(
               key: Key(widget.title.toString() + element.toString()),
