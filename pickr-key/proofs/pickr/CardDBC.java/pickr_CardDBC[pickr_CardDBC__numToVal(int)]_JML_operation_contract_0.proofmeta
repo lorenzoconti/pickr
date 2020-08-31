@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proofMetaFile proofFileMD5="4fd5009f77864a778fcdb8dffc4b67c7" proofClosed="true" proofOutdated="false">
+   <markerMessage>
+Closed Proof:
+pickr.CardDBC[pickr.CardDBC::numToVal(int)].JML operation contract.0
+
+Time: 0.750 s
+Nodes: 196
+Branches: 7
+   </markerMessage>
+   <references rep="pre: {heap=and(and(gt(num,Z(0(#))),lt(num,Z(1(1(#))))),java.lang.Object::&lt;inv&gt;(heap,self))}; mby: null; post: {heap=and(imp(equals(exc,null),and(and(gt(result,Z(0(#))),lt(result,Z(1(1(#))))),java.lang.Object::&lt;inv&gt;(heap,self))),imp(not(equals(exc,null)),and(imp(equals(java.lang.Throwable::instance(exc),TRUE),java.lang.Object::&lt;inv&gt;(heap,self)),or(equals(java.lang.Error::instance(exc),TRUE),equals(java.lang.RuntimeException::instance(exc),TRUE)))))}; mods: {heap=allLocs, savedHeap=null}; hasMod: {heap=true, savedHeap=true}; termination: diamond; transaction: false">
+      <type name="pickr.CardDBC">
+         <axiomReferences>
+            <axiomReference kjt="pickr.CardDBC" name="Class invariant axiom for pickr.CardDBC" rep="equiv(java.lang.Object::&lt;inv&gt;(heap,self),not(equals(pickr.Suit::select(heap,self,pickr.CardDBC::$suit),null)))"/>
+         </axiomReferences>
+         <inlineMethodReferences>
+            <inlineMethodReference kjt="pickr.CardDBC" name="numToVal" parameters="int;" src="intnumToVal (int num) {if (num!=1&amp;&amp;num!=3)     return      num-1;                 else      return      num==1 ? 10 : 9; }"/>
+         </inlineMethodReferences>
+      </type>
+   </references>
+</proofMetaFile>

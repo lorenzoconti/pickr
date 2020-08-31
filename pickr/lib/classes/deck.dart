@@ -43,7 +43,4 @@ class Deck {
       throw OutOfBoundException();
     }
   }
-
-  /// Shows the deck content.
-  // void show() => _cards.forEach((print));
 }

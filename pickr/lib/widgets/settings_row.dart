@@ -14,6 +14,7 @@ class SettingsRow extends StatefulWidget {
 class _SettingsRowState extends State<SettingsRow> {
   Object _selected;
 
+  /// Builds the settings row.
   @override
   Widget build(BuildContext context) {
     return Row(children: _makeOptions());

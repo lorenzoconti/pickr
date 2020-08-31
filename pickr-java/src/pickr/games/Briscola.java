@@ -43,28 +43,23 @@ public class Briscola extends Game{
 		
 		GamingCard winningCard = this.getTable().get(0);
 		
-		// assert(this.getTable().size() == this.numplayers);
 		for(GamingCard card : this.getTable()) {	
 				
 			// T T T
 			if(card.getVal() > winningCard.getVal() && winningCard.getSuit() == briscola && card.getSuit() == briscola) {
-				System.out.println("TTT: Winning: " + winningCard.toString() + " Card: " + card.toString());
 				winningCard = card;
 			}
 			// T F F 
 			if(card.getVal() > winningCard.getVal() && winningCard.getSuit() != briscola && card.getSuit() != briscola) {
-				System.out.println("TFF: Winning: " + winningCard.toString() + " Card: " + card.toString());
 				winningCard = card;
 			}
 			
 			// F T F 
 			 if(!(card.getVal() > winningCard.getVal()) && card.getSuit() == briscola && winningCard.getSuit() != briscola) {
-				System.out.println("FTF: Winning: " + winningCard.toString() + " Card: " + card.toString());
 				winningCard = card;
 			}	
 			
 		}
-		System.out.println("Briscola.rule() : " + winningCard);
 		return winningCard;
 	}
 	

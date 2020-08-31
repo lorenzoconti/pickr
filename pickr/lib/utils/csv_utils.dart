@@ -2,6 +2,7 @@ import 'package:pickr/enums/games.dart';
 
 class UtilsCSV {
   //
+  /// Returns the game type corresponding to the string.
   static GameType typeCSV(String type) {
     switch (type) {
       case 'Briscola':
@@ -21,6 +22,7 @@ class UtilsCSV {
     }
   }
 
+  /// Returns the boolean value corresponding to the string.
   static bool booleanCSV(String boolean) {
     switch (boolean) {
       case 'true':
@@ -30,17 +32,16 @@ class UtilsCSV {
         return false;
         break;
       default:
-        print(boolean);
         return true;
     }
   }
 
-  //
+  /// Returns the integer corresponding to the string.
   static int numberCSV(String num) {
     return int.tryParse(num);
   }
 
-  //
+  /// Returns the list of scores corresponding to the string.
   static List<int> scoreCSV(String score) {
     switch (score) {
       case 'Standard':
@@ -54,6 +55,7 @@ class UtilsCSV {
     }
   }
 
+  /// Returns the list of number of players corresponding to the string.
   static List<int> playersCSV(String players) {
     switch (players) {
       case 'Couple':

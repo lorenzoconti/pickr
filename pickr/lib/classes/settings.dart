@@ -36,6 +36,7 @@ class Settings {
         assert(maxScore != null),
         assert(numPlayers != null);
 
+  /// Returns all the information of the settings object in a string format.
   @override
   String toString() {
     return 'available: ' +

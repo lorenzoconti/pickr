@@ -30,9 +30,6 @@ void main() {
 
     test('Pickr App', () async {
       //
-      var health = await driver.checkHealth();
-      print(health.status);
-      //
       await driver.tap(emailField);
       await driver.enterText('lorenzoconti@gmail.com');
       await driver.waitFor(find.text('lorenzoconti@gmail.com'));

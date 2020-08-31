@@ -5,9 +5,17 @@ import 'package:pickr/enums/suits.dart';
 import 'package:pickr/exceptions/out_of_bound_exception.dart';
 
 class BriscolaChiamata extends Game {
+  //
+  /// Number of beginning cards for each player.
   final int _numplayers = 5;
+
+  /// Number of players.
+  ///
+  /// DEBUG: this value is set to 4 for debug purposes. Its real values should
+  /// be selected by the user in the game options selection page.
   final int _numcards = 8;
 
+  /// Briscola suit selected for the game
   Suit _briscola;
 
   @override
@@ -53,7 +61,6 @@ class BriscolaChiamata extends Game {
   GamingCard rule() {
     var winningCard = table.first;
 
-    // assert(this.table.size() == this.numplayers);
     table.forEach((card) {
       if (card.val > winningCard.val) {
         // T T T
@@ -71,7 +78,6 @@ class BriscolaChiamata extends Game {
       }
     });
 
-    //print(winningCard.toString());
     return winningCard;
   }
 }

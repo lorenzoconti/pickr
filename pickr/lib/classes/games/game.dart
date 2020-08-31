@@ -60,6 +60,7 @@ abstract class Game {
   /// Starts the game
   void start();
 
+  /// Sequence of actions in an entire round of game.
   void gameround();
 
   /// Determines the winner of the round and awards him with

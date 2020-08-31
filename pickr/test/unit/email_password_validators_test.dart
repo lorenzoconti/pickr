@@ -3,6 +3,8 @@ import 'package:pickr/utils/validators.dart';
 
 void main() {
   //
+  /// Testing the validator classes with different inputs: valid, short, empty
+  /// or not satisfying the regexp expression.
   test('Email Validator Test', () {
     expect(EmailFieldValidator.validate(''), 'EMPTY EMAIL');
     expect(EmailFieldValidator.validate('psw'), 'TOO SHORT EMAIL');

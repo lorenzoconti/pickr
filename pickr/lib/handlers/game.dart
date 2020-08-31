@@ -29,9 +29,10 @@ class GameSession implements GameSessionInterface {
   /// Contains the game type that the user chose.
   GameType _type;
 
-  ///
+  /// The lobby database id.
   String _lobby;
 
+  /// Getter method for [_lobby]
   @override
   String get lobby => _lobby;
 
@@ -41,17 +42,21 @@ class GameSession implements GameSessionInterface {
   /// List of the settings, one setting for every game type.
   List<Settings> _settings = <Settings>[];
 
+  /// Getter method for [_settings].
   @override
   List<Settings> get settings => _settings;
 
-  /// Selected setting based on [_type]
+  /// Selected setting based on [_type].
   Settings _selectedSetting;
 
+  /// Getter method for [_selectedSetting].
   @override
   Settings get currentSetting => _selectedSetting;
 
+  /// Setter method for [_selectedSetting].
   set setting(Settings setting) => _selectedSetting = setting;
 
+  /// Setter method for [_settings].
   @override
   set setSettings(List<Settings> list) => _settings = list;
 
@@ -75,16 +80,16 @@ class GameSession implements GameSessionInterface {
     if (_gameSettings.containsKey(title)) _gameSettings.remove(title);
 
     _gameSettings.putIfAbsent(title, () => value);
-    print(_gameSettings);
 
     return _gameSettings.length;
   }
 
+  /// Consinstency check method.
+  ///
+  /// It checks that for game type Briscola Chiamata the number of
+  /// players is five and for Briscola it is two or four.
   @override
   bool check() {
-    print(_type);
-    print(_gameSettings);
-
     if (_type == GameType.BRISCOLA_CHIAMATA &&
         _gameSettings['numPlayers'] != 5) {
       return false;
@@ -104,10 +109,7 @@ class GameSession implements GameSessionInterface {
   }
 
   /// Starts the game lobby
-  void start() {
-    print('Game Started with the following options:');
-    print(_gameSettings);
-  }
+  void start() {}
 
   /// Returns the number of selectable options based on
   /// availableNumPlayers and availableScore
@@ -116,6 +118,7 @@ class GameSession implements GameSessionInterface {
         (_selectedSetting.availableScore ? 1 : 0);
   }
 
+  /// Gets from the database the settings options.
   @override
   Future<List<Settings>> getSettings() async {
     var _fetched = <Settings>[];
@@ -145,12 +148,10 @@ class GameSession implements GameSessionInterface {
         }
       });
     });
-    _fetched.forEach((element) {
-      print(element);
-    });
     return _fetched;
   }
 
+  /// Creates a lobby instance on the database.
   @override
   Future<bool> createLobby() async {
     //
@@ -163,13 +164,13 @@ class GameSession implements GameSessionInterface {
 
       _lobby = ref.documentID;
 
-      print(_lobby);
       return true;
     } catch (e) {
       return false;
     }
   }
 
+  /// Gets the settings options.
   @override
   Future<void> fetch() async {
     var _fetched = await getSettings();

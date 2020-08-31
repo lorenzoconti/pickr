@@ -3,13 +3,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class BaseAuth {
   //
+  /// Logs the user in the application
+  ///
+  /// Given a [username] and a [password], if they are valid, logs the user
+  /// in the applicatio. Returns the id of the logged user.
   Future<String> signInWithEmailAndPassword({String email, String password});
 
+  /// Creates a user with given [username] and [password]
+  ///
+  /// If not exists, creates a user entry in the database and logs it in
+  /// the application.
   Future<String> createUserWithEmailAndPassword(
       {String email, String password});
 
+  /// Returns the currently logged in user id.
   Future<String> currentUser();
 
+  /// Signs out the current user.
   Future<void> signOut();
 }
 

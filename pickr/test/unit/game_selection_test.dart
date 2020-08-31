@@ -21,6 +21,7 @@ void main() async {
   var decoder = FirstOccurrenceSettingsDetector(
       eols: ['\r\n', '\n'], textDelimiters: ['"', "'"]);
 
+  /// Finds the absolute path of the current folder.
   String toAbsPath(path, basedir) {
     Path.Context context;
     if (Platform.isWindows) {
@@ -30,7 +31,6 @@ void main() async {
     }
     basedir ??= Path.dirname(Platform.script.toFilePath());
     path = context.join(basedir, path);
-    print(path);
     return context.normalize(path);
   }
 
@@ -39,17 +39,17 @@ void main() async {
 
   path = path.replaceAll(RegExp(r'\\'), '\\\\');
 
-  print(path);
-
-  //final input = new File('./test/unit/pickr.csv').openRead();
   final input = File(path).openRead();
   final fields = await input
       .transform(utf8.decoder)
       .transform(CsvToListConverter(csvSettingsDetector: decoder))
       .toList();
 
-  // fields.forEach(print);
-  /// [valid, validType, validNumPlayers, availableNumPlayers, availableMaxScore, validNumOptions, type, maxScore, numOptions, validMaxScore, numPlayers]
+  /// List of the parameters:
+  ///
+  /// [ valid, validType, validNumPlayers, availableNumPlayers,
+  ///   availableMaxScore, validNumOptions, type, maxScore, numOptions,
+  ///   validMaxScore, numPlayers ]
   fields.removeAt(0);
 
   var i = 0;
@@ -85,8 +85,7 @@ void main() async {
           type: type);
 
       /// Parametrized Test: Valid Parameters, Consistency Check
-      // ignore: prefer_single_quotes
-      test("Test Parametrico $i", () {
+      test('Test Parametrico $i', () {
         //
         game.setting = setting;
         expect(game.currentSetting != null, true);
@@ -112,9 +111,8 @@ void main() async {
         /// format is wrong, the corresponding UtilsCSV method returns a null
         /// value.
         /// So, the Settings constructor throws an AssertionError.
-        // ignore: prefer_single_quotes
-        test("Test Parametrico $i : Invalid Type", () {
-          /// expect Settings constructor throws an AssertionError
+        test('Test Parametrico $i : Invalid Type', () {
+          /// Expects Settings constructor throws an AssertionError
           expect(() {
             setting = Settings(
                 available: true,

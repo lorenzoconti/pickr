@@ -12,12 +12,17 @@ import 'package:pickr/exceptions/out_of_bound_exception.dart';
 
 void main() {
   //
+  /// Testing the card class.
   test('Card Test', () {
+    /// Testing the constructor with valid parameters and expecting a succesfully
+    /// created instance of the class.
     var card = GamingCard(num: 1, suit: Suit.BASTONI);
     expect(card.num, 1);
     expect(card.suit, Suit.BASTONI);
     expect(card.val, 10);
 
+    /// Testing the constructor with invvalid parameters and expecting an
+    /// exception to be thrown.
     try {
       GamingCard(num: 11, suit: Suit.BASTONI);
     } catch (e) {
@@ -25,17 +30,23 @@ void main() {
     }
   });
 
+  /// Testing the card class.
   test('Deck Test', () {
+    /// Testing the constructor expecting a succesfully created instance of
+    /// the class.
     var deck = Deck();
 
     expect(deck.cards.length, 0);
 
+    /// Testing the init method. The number of cards should now be 40.
     deck.init();
     expect(deck.cards.length, 40);
 
     deck.shuffle();
     expect(deck.cards.length, 40);
 
+    /// Trying to pick a card. The number of the deck cards should decrease by
+    /// the number of picked cards.
     var card = deck.pick();
     expect(card.runtimeType, GamingCard);
     expect(card != null, true);
@@ -48,6 +59,7 @@ void main() {
     deck.picks(34);
     expect(deck.cards.length, 0);
 
+    /// Trying to pick from an empty deck. An exception should be thrown.
     try {
       deck.pick();
     } catch (e) {
@@ -55,24 +67,30 @@ void main() {
     }
   });
 
+  /// Testing the player class.
   test('Player Test', () {
     //
+    /// Testing the constructor of the class.
     var player = Player(id: 'Player');
     expect(player.id, 'Player');
     expect(player.hand.length, 0);
     expect(player.matchScore, 0);
     expect(player.gameScore, 0);
 
+    /// Adding some cards to the player hand.
     var hand = <GamingCard>[];
     hand.add(GamingCard(num: 5, suit: Suit.BASTONI));
     hand.add(GamingCard(num: 6, suit: Suit.COPPE));
     hand.add(GamingCard(num: 7, suit: Suit.ORI));
     player.hand = hand;
 
+    /// Trying to drop a card. The number of cards should decrease by one.
     expect(player.hand.length, 3);
     expect(player.drop() != null, true);
     var deleted = player.delete();
     expect(player.hand.length, 2);
+
+    /// Trying to pick a card.  The number of cards should increase by one.
     player.pick(deleted);
     expect(player.hand.length, 3);
 
@@ -85,14 +103,17 @@ void main() {
     expect(player.matchScore, 3);
   });
 
+  /// Testing the Briscola class.
   test('Briscola Chiamata Test', () {
     //
+    /// Testing the constructor of the class.
     var game = BriscolaChiamata();
     //
     expect(game.runtimeType, BriscolaChiamata);
     expect(game.deck.cards.length, 0);
     expect(game.players.isEmpty, true);
 
+    /// Adding some players to the game instance.
     game.addPlayer(id: 'Player1');
     game.addPlayer(id: 'Player2');
     game.addPlayer(id: 'Player3');
@@ -100,17 +121,23 @@ void main() {
     game.addPlayer(id: 'Player5');
     expect(game.players.length, 5);
 
+    /// Trying to add more players then the game supports. An exception should
+    /// be thrown.
     try {
       game.addPlayer(id: 'Player6');
     } catch (e) {
       expect(e.runtimeType, OutOfBoundException);
     }
 
+    /// Simulating the beginning of the game, spreading a certain number of
+    /// cards to each player.
     game.start();
     expect(game.cards.length, 0);
     expect(game.players.length, 5);
     game.players.forEach((player) => expect(player.hand.length, 8));
 
+    /// Testing a single game round. Expecting every player dropped a card and
+    /// later pick one.
     game.gameround();
     game.players.forEach((player) => expect(player.hand.length, 7));
 
@@ -125,6 +152,7 @@ void main() {
       sum += player.gameScore;
     });
 
+    /// Checking the total amount of cards score.
     expect(sum, (2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10) * 4);
   });
 

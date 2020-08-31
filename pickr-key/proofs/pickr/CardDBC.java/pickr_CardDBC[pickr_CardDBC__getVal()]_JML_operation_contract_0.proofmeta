@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proofMetaFile proofFileMD5="a24d78bae9797bb215734ebef430a840" proofClosed="true" proofOutdated="false">
+   <markerMessage>
+Closed Proof:
+pickr.CardDBC[pickr.CardDBC::getVal()].JML operation contract.0
+
+Time: 0.86 s
+Nodes: 36
+Branches: 3
+   </markerMessage>
+   <references rep="pre: {heap=java.lang.Object::&lt;inv&gt;(heap,self)}; mby: null; post: {heap=and(imp(equals(exc,null),and(equals(result,int::select(heap,self,pickr.CardDBC::$val)),java.lang.Object::&lt;inv&gt;(heap,self))),imp(not(equals(exc,null)),and(imp(equals(java.lang.Throwable::instance(exc),TRUE),java.lang.Object::&lt;inv&gt;(heap,self)),or(equals(java.lang.Error::instance(exc),TRUE),equals(java.lang.RuntimeException::instance(exc),TRUE)))))}; mods: {heap=allLocs, savedHeap=null}; hasMod: {heap=true, savedHeap=true}; termination: diamond; transaction: false">
+      <type name="pickr.CardDBC">
+         <axiomReferences>
+            <axiomReference kjt="pickr.CardDBC" name="Class invariant axiom for pickr.CardDBC" rep="equiv(java.lang.Object::&lt;inv&gt;(heap,self),not(equals(pickr.Suit::select(heap,self,pickr.CardDBC::$suit),null)))"/>
+         </axiomReferences>
+         <accessReferences>
+            <accessReference kjt="pickr.CardDBC" name="pickr.CardDBC::val" type="int" visibility="private" isStatic="false" isFinal="false" initializer=""/>
+         </accessReferences>
+         <inlineMethodReferences>
+            <inlineMethodReference kjt="pickr.CardDBC" name="getVal" parameters="" src="publicintgetVal () {return this.val;}"/>
+         </inlineMethodReferences>
+      </type>
+   </references>
+</proofMetaFile>

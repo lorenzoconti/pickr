@@ -1,6 +1,10 @@
 class EmailFieldValidator {
   //
 
+  /// Validate an email field.
+  ///
+  /// An email is valid if it satisfies the regexp expression, if it is not empty
+  /// and if it is not shorter then 6 characters.
   static String validate(String value) {
     //
     final emailRegExp = RegExp(
@@ -15,6 +19,11 @@ class EmailFieldValidator {
 }
 
 class PasswordFieldValidator {
+  //
+  /// Validate a password field.
+  ///
+  /// An password is valid if it is not empty and if it is not
+  /// shorter then 6 characters.
   static String validate(String value) {
     if (value.isEmpty) return 'EMPTY PASSWORD';
     if (value.length < 6) return 'TOO SHORT PASSWORD';

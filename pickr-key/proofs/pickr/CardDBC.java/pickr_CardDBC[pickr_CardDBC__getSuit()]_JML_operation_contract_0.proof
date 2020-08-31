@@ -1,0 +1,98 @@
+\profile "Java Profile";
+
+\settings {
+"#Proof-Settings-Config-File
+#Sat Aug 29 23:47:50 CEST 2020
+[StrategyProperty]VBT_PHASE=VBT_SYM_EX
+[SMTSettings]useUninterpretedMultiplication=true
+[SMTSettings]SelectedTaclets=
+[StrategyProperty]METHOD_OPTIONS_KEY=METHOD_CONTRACT
+[StrategyProperty]USER_TACLETS_OPTIONS_KEY3=USER_TACLETS_OFF
+[StrategyProperty]LOOP_OPTIONS_KEY=LOOP_INVARIANT
+[StrategyProperty]USER_TACLETS_OPTIONS_KEY2=USER_TACLETS_OFF
+[StrategyProperty]USER_TACLETS_OPTIONS_KEY1=USER_TACLETS_OFF
+[StrategyProperty]QUANTIFIERS_OPTIONS_KEY=QUANTIFIERS_NON_SPLITTING_WITH_PROGS
+[StrategyProperty]NON_LIN_ARITH_OPTIONS_KEY=NON_LIN_ARITH_NONE
+[SMTSettings]instantiateHierarchyAssumptions=true
+[StrategyProperty]AUTO_INDUCTION_OPTIONS_KEY=AUTO_INDUCTION_OFF
+[StrategyProperty]DEP_OPTIONS_KEY=DEP_ON
+[StrategyProperty]BLOCK_OPTIONS_KEY=BLOCK_CONTRACT
+[StrategyProperty]CLASS_AXIOM_OPTIONS_KEY=CLASS_AXIOM_FREE
+[StrategyProperty]QUERY_NEW_OPTIONS_KEY=QUERY_OFF
+[Strategy]Timeout=-1
+[Strategy]MaximumNumberOfAutomaticApplications=10000
+[SMTSettings]integersMaximum=2147483645
+[Choice]DefaultChoices=assertions-assertions\\:on , initialisation-initialisation\\:disableStaticInitialisation , intRules-intRules\\:arithmeticSemanticsIgnoringOF , programRules-programRules\\:Java , runtimeExceptions-runtimeExceptions\\:allow , JavaCard-JavaCard\\:off , Strings-Strings\\:on , modelFields-modelFields\\:showSatisfiability , bigint-bigint\\:on , sequences-sequences\\:on , moreSeqRules-moreSeqRules\\:off , reach-reach\\:on , integerSimplificationRules-integerSimplificationRules\\:full , permissions-permissions\\:off , wdOperator-wdOperator\\:L , wdChecks-wdChecks\\:off , joinGenerateIsWeakeningGoal-joinGenerateIsWeakeningGoal\\:off
+[SMTSettings]useConstantsForBigOrSmallIntegers=true
+[StrategyProperty]STOPMODE_OPTIONS_KEY=STOPMODE_NONCLOSE
+[StrategyProperty]QUERYAXIOM_OPTIONS_KEY=QUERYAXIOM_ON
+[StrategyProperty]INF_FLOW_CHECK_PROPERTY=INF_FLOW_CHECK_FALSE
+[SMTSettings]maxGenericSorts=2
+[SMTSettings]integersMinimum=-2147483645
+[SMTSettings]invariantForall=false
+[SMTSettings]UseBuiltUniqueness=false
+[SMTSettings]explicitTypeHierarchy=false
+[Strategy]ActiveStrategy=JavaCardDLStrategy
+[StrategyProperty]SPLITTING_OPTIONS_KEY=SPLITTING_DELAYED
+"
+}
+
+\javaSource "../../../src";
+
+\proofObligation "#Proof Obligation Settings
+#Sat Aug 29 23:47:50 CEST 2020
+name=pickr.CardDBC[pickr.CardDBC\\:\\:getSuit()].JML operation contract.0
+contract=pickr.CardDBC[pickr.CardDBC\\:\\:getSuit()].JML operation contract.0
+class=de.uka.ilkd.key.proof.init.FunctionalOperationContractPO
+";
+
+\proof {
+(keyLog "0" (keyUser "loren" ) (keyVersion "19f0b8c2a4fe689cd76be6cd1753b36e2e825a89"))
+
+(autoModeTime "43")
+
+(branch "dummy ID"
+(builtin "One Step Simplification" (formula "1") (newnames "self,result,exc,heapAtPre,o,f"))
+(rule "impRight" (formula "1"))
+(rule "andLeft" (formula "1"))
+(rule "andLeft" (formula "1"))
+(rule "andLeft" (formula "1"))
+(rule "andLeft" (formula "1"))
+(rule "andLeft" (formula "1"))
+(rule "notLeft" (formula "2"))
+(rule "eqSymm" (formula "7") (term "0,1,0,0"))
+(rule "assignment" (formula "7"))
+(rule "Class_invariant_axiom_for_pickr_CardDBC" (formula "5") (inst "sk=sk_0") (ifseqformula "3"))
+(branch "Use Axiom"
+   (rule "notLeft" (formula "5"))
+   (rule "methodBodyExpand" (formula "7") (term "1") (newnames "heapBefore_getSuit,savedHeapBefore_getSuit"))
+   (builtin "One Step Simplification" (formula "7"))
+   (rule "returnUnfold" (formula "7") (term "1") (inst "#v0=s"))
+   (rule "variableDeclarationAssign" (formula "7") (term "1"))
+   (rule "variableDeclaration" (formula "7") (term "1") (newnames "s"))
+   (rule "assignment_read_attribute_this" (formula "7") (term "1"))
+   (builtin "One Step Simplification" (formula "7"))
+   (rule "methodCallReturn" (formula "7") (term "1"))
+   (rule "assignment" (formula "7") (term "1"))
+   (builtin "One Step Simplification" (formula "7"))
+   (rule "methodCallEmpty" (formula "7") (term "1"))
+   (rule "tryEmpty" (formula "7") (term "1"))
+   (rule "emptyModality" (formula "7") (term "1"))
+   (builtin "One Step Simplification" (formula "7") (ifInst ""  (formula "5")))
+   (rule "Class_invariant_axiom_for_pickr_CardDBC" (formula "7") (inst "sk=sk_1") (ifseqformula "3"))
+   (branch "Use Axiom"
+      (rule "notRight" (formula "7"))
+      (rule "close" (formula "6") (ifseqformula "1"))
+   )
+   (branch "Show Axiom Satisfiability"
+      (builtin "One Step Simplification" (formula "7") (ifInst ""  (formula "5")) (ifInst ""  (formula "5")))
+      (rule "closeTrue" (formula "7"))
+   )
+)
+(branch "Show Axiom Satisfiability"
+   (builtin "One Step Simplification" (formula "6"))
+   (rule "closeTrue" (formula "6"))
+)
+)
+
+}

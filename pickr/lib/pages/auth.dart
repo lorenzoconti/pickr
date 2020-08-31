@@ -19,6 +19,7 @@ class _AuthPageState extends State<AuthPage> {
   String _password;
   AuthMode _mode = AuthMode.LOGIN;
 
+  /// Validates the form.
   bool validateAndSave() {
     final form = formKey.currentState;
     if (form.validate()) {
@@ -28,11 +29,14 @@ class _AuthPageState extends State<AuthPage> {
     return false;
   }
 
+  /// Validates and submits the form.
+  ///
+  /// If the form is right validated, it invokes the signIn or createUser method
+  /// and waits for the result.
   Future<void> validateAndSubmit() async {
     if (validateAndSave()) {
       try {
         final auth = AuthProvider.of(context).auth;
-        // bool success = await widget.model.signIn(email: _email, password: _password, mode: _mode);
 
         if (_mode == AuthMode.LOGIN) {
           final result = await auth.signInWithEmailAndPassword(
@@ -44,12 +48,15 @@ class _AuthPageState extends State<AuthPage> {
           callback(result);
         }
       } catch (e) {
-        print('Error: $e');
         await showDialog(context: context, child: Text(e.toString()));
       }
     }
   }
 
+  /// Set of actions to be done after the validation.
+  ///
+  /// Starts fetching the informations in order to create the game options page
+  /// and then navigates to that page.
   void callback(String user) {
     //
     var game = GameProvider.of(context).game;
@@ -63,6 +70,7 @@ class _AuthPageState extends State<AuthPage> {
     }
   }
 
+  /// Switches from login auth mode to register auth mode.
   void moveToRegister() {
     formKey.currentState.reset();
     setState(() {
@@ -70,6 +78,7 @@ class _AuthPageState extends State<AuthPage> {
     });
   }
 
+  /// Switches from register auth mode to login auth mode.
   void moveToLogin() {
     formKey.currentState.reset();
     setState(() {
@@ -77,6 +86,7 @@ class _AuthPageState extends State<AuthPage> {
     });
   }
 
+  /// Builds the auth page.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,6 +106,7 @@ class _AuthPageState extends State<AuthPage> {
     );
   }
 
+  /// Builds the form fields.
   List<Widget> buildInputs() {
     return <Widget>[
       TextFormField(
@@ -114,6 +125,7 @@ class _AuthPageState extends State<AuthPage> {
     ];
   }
 
+  /// Builds the submit button and the switch auth mode button.
   List<Widget> buildSubmitButtons() {
     if (_mode == AuthMode.LOGIN) {
       return <Widget>[

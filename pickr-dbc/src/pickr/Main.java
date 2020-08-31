@@ -2,7 +2,6 @@ package pickr;
 
 import pickr.classes.Deck;
 import pickr.classes.GamingCard;
-import pickr.classes.Player;
 import pickr.enums.Suit;
 import pickr.exceptions.WrongCardNumberException;
 

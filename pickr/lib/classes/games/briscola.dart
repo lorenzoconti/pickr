@@ -7,9 +7,16 @@ import '../player.dart';
 
 class Briscola extends Game {
   //
+  /// Number of beginning cards for each player.
   final int _numcards = 3;
+
+  /// Number of players.
+  ///
+  /// DEBUG: this value is set to 4 for debug purposes. Its real values should
+  /// be selected by the user in the game options selection page.
   final int _numplayers = 4;
 
+  /// Briscola suit selected for the game
   Suit _briscola;
 
   Briscola();
@@ -37,7 +44,6 @@ class Briscola extends Game {
   GamingCard rule() {
     var winningCard = table.first;
 
-    // assert(this.table.size() == this.numplayers);
     table.forEach((card) {
       if (card.val > winningCard.val) {
         // T T T
@@ -55,7 +61,6 @@ class Briscola extends Game {
       }
     });
 
-    print(winningCard.toString());
     return winningCard;
   }
 

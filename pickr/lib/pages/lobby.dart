@@ -11,13 +11,11 @@ class LobbyPage extends StatefulWidget {
 
 class _LobbyPageState extends State<LobbyPage> {
   //
-
+  /// Builds the lobby page.
   @override
   Widget build(BuildContext context) {
     //
     var game = GameProvider.of(context).game;
-
-    print(game.check());
 
     return Scaffold(
       body: Container(
