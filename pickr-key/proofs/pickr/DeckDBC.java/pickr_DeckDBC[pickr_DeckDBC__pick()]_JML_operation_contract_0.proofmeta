@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proofMetaFile proofFileMD5="4c1f7dbdd3b363370da9601299eb2b5" proofClosed="true" proofOutdated="false">
+   <markerMessage>
+Closed Proof:
+pickr.DeckDBC[pickr.DeckDBC::pick()].JML operation contract.0
+
+Time: 0.250 s
+Nodes: 532
+Branches: 13
+   </markerMessage>
+   <calledMethods>
+      <calledMethod fullQualifiedName="java.lang.ArrayIndexOutOfBoundsException#&lt;createObject&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.ArrayIndexOutOfBoundsException#&lt;allocate&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.ArrayIndexOutOfBoundsException#&lt;prepareEnter&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.IndexOutOfBoundsException#&lt;prepare&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.RuntimeException#&lt;prepare&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.Exception#&lt;prepare&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.Throwable#&lt;prepare&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.Object#&lt;prepare&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.IndexOutOfBoundsException#&lt;init&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.RuntimeException#&lt;init&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.Exception#&lt;init&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.Throwable#&lt;init&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.Object#&lt;init&gt;()"/>
+   </calledMethods>
+   <references rep="pre: {heap=and(gt(int::select(heap,self,pickr.DeckDBC::$index),Z(0(#))),java.lang.Object::&lt;inv&gt;(heap,self))}; mby: null; post: {heap=and(imp(equals(exc,null),and(equals(length(pickr.CardDBC[]::select(heap,self,pickr.DeckDBC::$cards)),length(pickr.CardDBC[]::select(heapAtPre,self,pickr.DeckDBC::$cards))),and(equals(int::select(heap,self,pickr.DeckDBC::$index),javaSubInt(int::select(heapAtPre,self,pickr.DeckDBC::$index),Z(1(#)))),and(java.lang.Object::&lt;inv&gt;(heap,self),not(equals(result,null)))))),imp(not(equals(exc,null)),and(imp(equals(java.lang.Throwable::instance(exc),TRUE),java.lang.Object::&lt;inv&gt;(heap,self)),or(equals(java.lang.Error::instance(exc),TRUE),equals(java.lang.RuntimeException::instance(exc),TRUE)))))}; mods: {heap=allLocs, savedHeap=null}; hasMod: {heap=true, savedHeap=true}; termination: diamond; transaction: false">
+      <type name="pickr.DeckDBC">
+         <axiomReferences>
+            <axiomReference kjt="pickr.DeckDBC" name="Class invariant axiom for pickr.DeckDBC" rep="equiv(java.lang.Object::&lt;inv&gt;(heap,self),nonNull(heap,pickr.CardDBC[]::select(heap,self,pickr.DeckDBC::$cards),Z(1(#))))"/>
+         </axiomReferences>
+         <accessReferences>
+            <accessReference kjt="pickr.DeckDBC" name="pickr.DeckDBC::index" type="int" visibility="public" isStatic="false" isFinal="false" initializer=""/>
+            <accessReference kjt="pickr.DeckDBC" name="pickr.DeckDBC::cards" type="" visibility="private" isStatic="false" isFinal="false" initializer=""/>
+         </accessReferences>
+         <inlineMethodReferences>
+            <inlineMethodReference kjt="pickr.DeckDBC" name="pick" parameters="" src="publicCardDBCpick () {if (this.index&gt;0) {     CardDBC last = this.cards[this.index];     this.index--;                         return  last;   }                 return  null; }"/>
+         </inlineMethodReferences>
+      </type>
+   </references>
+</proofMetaFile>

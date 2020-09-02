@@ -39,7 +39,7 @@ signature:
 
 definitions:
 
-	domain Card = { 0, 4 }
+	domain Card = { 0, 8 }
 
 	domain NumPlayers = { 0, 1, 2, 3, 4, 5}
 
@@ -53,20 +53,20 @@ macro rule r_menu =
 	if( stato = MENU ) then
 		par
 			if ( operazione = JOIN ) then
-				if ( numOfPlayers < 4) then
+				//if ( numOfPlayers < 4) then
 					par
 						stato := WAITING_PLAYERS
 						numOfPlayers := numOfPlayers + 1
 						joined := true
-						hand(utenteAttivo) := 4
+						hand(utenteAttivo) := 8
 					endpar
-				else					
-					par
-						stato := PLAYING
-						joined := true
-					endpar
-				endif
-			else skip
+				//else					
+					//par
+						//stato := PLAYING
+						//joined := true
+					//endpar
+				//endif
+			//else skip
 			endif
 
 			if( operazione = LOGOUT ) then
@@ -84,13 +84,13 @@ macro rule r_waiting_room =
 				if ( numOfPlayers < 4) then
 					numOfPlayers := numOfPlayers + 1
 				else
-					if ( numOfPlayers = 4 ) then
+					//if ( numOfPlayers = 4 ) then
 						par
 							stato := PLAYING
 							numOfPlayers := numOfPlayers + 1
 						endpar
-					else skip
-					endif			
+					//else skip
+					//endif			
 				endif
 			else skip
 			endif
@@ -128,15 +128,15 @@ macro rule r_Playing =
 	else skip
 	endif
 
-	CTLSPEC ag (numOfPlayers <= 5)
-
 	CTLSPEC ag (stato = PLAYING implies numOfPlayers = 5)
 
-	CTLSPEC ef (stato = MENU and joined implies getHand = 0)
-
+	CTLSPEC ef (stato = MENU implies ef(joined and not(getHand = 0)))
+	
 	CTLSPEC ag ((lobby = INVITE and numOfPlayers > 1) implies ex(lobby = LEAVE and numOfPlayers > 0 ))
 
-	CTLSPEC ag ((numOfPlayers >0 and joined) implies not(stato = MENU))
+	CTLSPEC ag ((numOfPlayers > 0 and joined) implies not(stato = MENU))
+	
+	invariant over numOfPlayers : numOfPlayers <= 5
 
 main rule r_Main =
 	par
@@ -149,8 +149,7 @@ main rule r_Main =
 
 default init s0:
 	function stato = MENU
-
-	function hand($u in Utente) = 4
+	function hand($u in Utente) = 0
 	function numOfPlayers = 0
 	function joined = false
 

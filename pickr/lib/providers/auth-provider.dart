@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:pickr/handlers/auth.dart';
 
 class AuthProvider extends InheritedWidget {

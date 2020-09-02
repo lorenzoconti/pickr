@@ -1,17 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:csv/csv.dart';
-import 'package:csv/csv_settings_autodetection.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:pickr/classes/settings.dart';
-import 'package:pickr/handlers/game.dart';
-import 'package:pickr/utils/csv_utils.dart';
+import 'dart:io' show Platform, Directory;
 
 // ignore: library_prefixes
 import 'package:path/path.dart' as Path;
-import 'dart:io' show Platform, Directory;
+
+import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
+
+import 'package:csv/csv.dart';
+import 'package:csv/csv_settings_autodetection.dart';
+
+import 'package:pickr/classes/settings.dart';
+import 'package:pickr/handlers/game.dart';
+import 'package:pickr/utils/csv_utils.dart';
 
 void main() async {
   //

@@ -16,12 +16,27 @@
          <method displayName="numToVal(int)" name="numToVal" declaringType="pickr.CardDBC" declaringFilePath="/pickr-key/src/pickr/CardDBC.java" parameterTypes="int">
             <contract name="pickr.CardDBC[pickr.CardDBC::numToVal(int)].JML operation contract.0" modality="DIAMOND" proofFilePath="/pickr-key/proofs/pickr/CardDBC.java/pickr_CardDBC[pickr_CardDBC__numToVal(int)]_JML_operation_contract_0.proof" metaFilePath="/pickr-key/proofs/pickr/CardDBC.java/pickr_CardDBC[pickr_CardDBC__numToVal(int)]_JML_operation_contract_0.proofmeta"/>
          </method>
+         <method displayName="toString()" name="toString" declaringType="pickr.CardDBC" declaringFilePath="/pickr-key/src/pickr/CardDBC.java" parameterTypes="">
+         </method>
          <method displayName="checkNum(int)" name="checkNum" declaringType="pickr.CardDBC" declaringFilePath="/pickr-key/src/pickr/CardDBC.java" parameterTypes="int">
-            <contract name="pickr.CardDBC[pickr.CardDBC::checkNum(int)].JML operation contract.0" modality="DIAMOND" proofFilePath="/pickr-key/proofs/pickr/CardDBC.java/pickr_CardDBC[pickr_CardDBC__checkNum(int)]_JML_operation_contract_0.proof" metaFilePath="/pickr-key/proofs/pickr/CardDBC.java/pickr_CardDBC[pickr_CardDBC__checkNum(int)]_JML_operation_contract_0.proofmeta"/>
+            <contract name="pickr.CardDBC[pickr.CardDBC::checkNum(int)].JML normal_behavior operation contract.0" modality="DIAMOND" proofFilePath="/pickr-key/proofs/pickr/CardDBC.java/pickr_CardDBC[pickr_CardDBC__checkNum(int)]_JML_normal_behavior_operation_contract_0.proof" metaFilePath="/pickr-key/proofs/pickr/CardDBC.java/pickr_CardDBC[pickr_CardDBC__checkNum(int)]_JML_normal_behavior_operation_contract_0.proofmeta"/>
+            <contract name="pickr.CardDBC[pickr.CardDBC::checkNum(int)].JML exceptional_behavior operation contract.0" modality="DIAMOND" proofFilePath="/pickr-key/proofs/pickr/CardDBC.java/pickr_CardDBC[pickr_CardDBC__checkNum(int)]_JML_exceptional_behavior_operation_contract_0.proof" metaFilePath="/pickr-key/proofs/pickr/CardDBC.java/pickr_CardDBC[pickr_CardDBC__checkNum(int)]_JML_exceptional_behavior_operation_contract_0.proofmeta"/>
          </method>
       </type>
       <type name="DeckDBC" path="/pickr-key/src/pickr/DeckDBC.java">
          <method displayName="DeckDBC()" name="DeckDBC" declaringType="pickr.DeckDBC" declaringFilePath="/pickr-key/src/pickr/DeckDBC.java" parameterTypes="">
+         </method>
+         <method displayName="getCards()" name="getCards" declaringType="pickr.DeckDBC" declaringFilePath="/pickr-key/src/pickr/DeckDBC.java" parameterTypes="">
+         </method>
+         <method displayName="init()" name="init" declaringType="pickr.DeckDBC" declaringFilePath="/pickr-key/src/pickr/DeckDBC.java" parameterTypes="">
+            <contract name="pickr.DeckDBC[pickr.DeckDBC::init()].JML operation contract.0" modality="DIAMOND" proofFilePath="/pickr-key/proofs/pickr/DeckDBC.java/pickr_DeckDBC[pickr_DeckDBC__init()]_JML_operation_contract_0.proof" metaFilePath="/pickr-key/proofs/pickr/DeckDBC.java/pickr_DeckDBC[pickr_DeckDBC__init()]_JML_operation_contract_0.proofmeta"/>
+            <contract name="pickr.DeckDBC[pickr.DeckDBC::init()].JML operation contract.1" modality="DIAMOND" proofFilePath="/pickr-key/proofs/pickr/DeckDBC.java/pickr_DeckDBC[pickr_DeckDBC__init()]_JML_operation_contract_1.proof" metaFilePath="/pickr-key/proofs/pickr/DeckDBC.java/pickr_DeckDBC[pickr_DeckDBC__init()]_JML_operation_contract_1.proofmeta"/>
+         </method>
+         <method displayName="pick()" name="pick" declaringType="pickr.DeckDBC" declaringFilePath="/pickr-key/src/pickr/DeckDBC.java" parameterTypes="">
+            <contract name="pickr.DeckDBC[pickr.DeckDBC::pick()].JML operation contract.0" modality="DIAMOND" proofFilePath="/pickr-key/proofs/pickr/DeckDBC.java/pickr_DeckDBC[pickr_DeckDBC__pick()]_JML_operation_contract_0.proof" metaFilePath="/pickr-key/proofs/pickr/DeckDBC.java/pickr_DeckDBC[pickr_DeckDBC__pick()]_JML_operation_contract_0.proofmeta"/>
+         </method>
+         <method displayName="picks(int)" name="picks" declaringType="pickr.DeckDBC" declaringFilePath="/pickr-key/src/pickr/DeckDBC.java" parameterTypes="int">
+            <contract name="pickr.DeckDBC[pickr.DeckDBC::picks(int)].JML operation contract.0" modality="DIAMOND" proofFilePath="/pickr-key/proofs/pickr/DeckDBC.java/pickr_DeckDBC[pickr_DeckDBC__picks(int)]_JML_operation_contract_0.proof" metaFilePath="/pickr-key/proofs/pickr/DeckDBC.java/pickr_DeckDBC[pickr_DeckDBC__picks(int)]_JML_operation_contract_0.proofmeta"/>
          </method>
       </type>
       <type name="Main" path="/pickr-key/src/pickr/Main.java">
@@ -38,6 +53,19 @@
          <method displayName="values()" name="values" declaringType="pickr.Suit" declaringFilePath="/pickr-key/src/pickr/CardDBC.java" parameterTypes="">
          </method>
          <method displayName="name()" name="name" declaringType="pickr.Suit" declaringFilePath="/pickr-key/src/pickr/CardDBC.java" parameterTypes="">
+         </method>
+      </type>
+      <type name="WrongNumberException" path="/pickr-key/src/pickr/WrongNumberException.java">
+         <method displayName="WrongNumberException()" name="WrongNumberException" declaringType="pickr.WrongNumberException" declaringFilePath="/pickr-key/src/pickr/WrongNumberException.java" parameterTypes="">
+         </method>
+         <method displayName="getMessage()" name="getMessage" declaringType="java.lang.Throwable" parameterTypes="">
+            <contract name="pickr.WrongNumberException[java.lang.Throwable::getMessage()].JML normal_behavior operation contract.0" modality="DIAMOND" proofFilePath="/pickr-key/proofs/pickr/WrongNumberException.java/pickr_WrongNumberException[java_lang_Throwable__getMessage()]_JML_normal_behavior_operation_contract_0.proof" metaFilePath="/pickr-key/proofs/pickr/WrongNumberException.java/pickr_WrongNumberException[java_lang_Throwable__getMessage()]_JML_normal_behavior_operation_contract_0.proofmeta"/>
+         </method>
+         <method displayName="getCause()" name="getCause" declaringType="java.lang.Throwable" parameterTypes="">
+            <contract name="pickr.WrongNumberException[java.lang.Throwable::getCause()].JML normal_behavior operation contract.0" modality="DIAMOND" proofFilePath="/pickr-key/proofs/pickr/WrongNumberException.java/pickr_WrongNumberException[java_lang_Throwable__getCause()]_JML_normal_behavior_operation_contract_0.proof" metaFilePath="/pickr-key/proofs/pickr/WrongNumberException.java/pickr_WrongNumberException[java_lang_Throwable__getCause()]_JML_normal_behavior_operation_contract_0.proofmeta"/>
+         </method>
+         <method displayName="initCause(java.lang.Throwable)" name="initCause" declaringType="java.lang.Throwable" parameterTypes="java.lang.Throwable">
+            <contract name="pickr.WrongNumberException[java.lang.Throwable::initCause(java.lang.Throwable)].JML normal_behavior operation contract.0" modality="DIAMOND" proofFilePath="/pickr-key/proofs/pickr/WrongNumberException.java/pickr_WrongNumberException[java_lang_Throwable__initCause(java_lang_Throwable)]_JML_normal_behavior_operation_contract_0.proof" metaFilePath="/pickr-key/proofs/pickr/WrongNumberException.java/pickr_WrongNumberException[java_lang_Throwable__initCause(java_lang_Throwable)]_JML_normal_behavior_operation_contract_0.proofmeta"/>
          </method>
       </type>
    </package>

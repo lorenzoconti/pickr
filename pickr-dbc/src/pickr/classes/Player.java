@@ -5,16 +5,16 @@ import java.util.ArrayList;
 
 public class Player {
 	
-	// @ spec_public
+	//@ spec_public
 	private ArrayList<GamingCard> cards;
 	
-	// @ spec_public
+	//@ spec_public
 	private String id;
 	
-	// @ spec_public
+	//@ spec_public
 	private int gameScore;
 	
-	// @ spec_public
+	//@ spec_public
 	private int matchScore;
 	
 	public Player(String id) {
@@ -29,30 +29,32 @@ public class Player {
 
 	public void hand(ArrayList<GamingCard> cards) { this.cards = cards;	}
 	
-	// @ ensures this.cards.size() == \old(this.cards.size()) ;
+	//@ ensures this.cards.size() == \old(this.cards.size()) ;
 	public GamingCard drop() { return this.cards.get(0); }
 
-	// @ ensures \result == this.gameScore ;
+	//@ ensures \result == this.gameScore ;
 	public int getGameScore() {	return gameScore; }
 
-	// @ requires gameScore >= 0 ;
-	// @ ensures this.gameScore == \old(this.gameScore) + gameScore ;
+	//@ requires gameScore >= 0 ;
+	//@ ensures this.gameScore == \old(this.gameScore) + gameScore ;
 	public void setGameScore(int gameScore) { this.gameScore += gameScore;	}
 
-	// @ ensures \result == this.matchScore ;
+	//@ ensures \result == this.matchScore ;
 	public int getMatchScore() { return matchScore; }
 
-	// @ ensures this.matchScore == \old(this.matchScore) + matchScore ;
+	//@ ensures this.matchScore == \old(this.matchScore) + matchScore ;
 	public void setMatchScore(int matchScore) {	this.matchScore = matchScore; }
 
-	// @ ensures \result == this.id ;
-	public String getId() {	return id;	}
+	//@ requires this.id != null;
+	//@ ensures \result == this.id ;
+	public String getId() {	return this.id;	}
 
-	// @ requires cards.size() > 0 ;
-	// @ ensures this.cards.size() == \old(this.cards.size()) -1 ;
+	//@ requires cards.size() > 0 ;
+	//@ ensures this.cards.size() == \old(this.cards.size()) -1 ;
 	public void delete() { this.cards.remove(0); }
 	
-	// @ ensures cards.size() == \old(cards.size()) + 1 ;
+	//@ requires this.cards != null;
+	//@ ensures cards.size() == \old(cards.size()) + 1 ;
 	public void pick(GamingCard card) { this.cards.add(card);  }
 
 }

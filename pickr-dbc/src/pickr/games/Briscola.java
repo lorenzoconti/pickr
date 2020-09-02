@@ -28,13 +28,10 @@ public class Briscola extends Game{
 	public void start() throws WrongCardNumberException, OutOfBoundException { 	
 		
 		this.deck.init();
-		// this.deck.shuffle();
 		
 		briscola = deck.getCards().get(deck.getCards().size()-1).getSuit();
 		
 		this.spread();
-		
-		// this.deck.show();
 	}
 
 
@@ -43,7 +40,6 @@ public class Briscola extends Game{
 		
 		GamingCard winningCard = this.getTable().get(0);
 		
-		// assert(this.getTable().size() == this.numplayers);
 		for(GamingCard card : this.getTable()) {			
 			
 			if(card.getVal() > winningCard.getVal()) {

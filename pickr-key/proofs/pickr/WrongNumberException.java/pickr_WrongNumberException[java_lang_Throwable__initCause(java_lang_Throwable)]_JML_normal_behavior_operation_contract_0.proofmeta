@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proofMetaFile proofFileMD5="3931e961427cc2975c701de9166d8459" proofClosed="false" proofOutdated="false">
+   <markerMessage>
+Open Proof:
+pickr.WrongNumberException[java.lang.Throwable::initCause(java.lang.Throwable)].JML normal_behavior operation contract.0
+
+Reason: Goal can&apos;t be closed automatically.
+Hint: Check code and specifications for bugs or continue proof interactively.
+
+Time: 0.20 s
+Nodes: 26
+Branches: 1
+   </markerMessage>
+   <references rep="pre: {heap=and(equals(java.lang.Throwable::select(heap,self,java.lang.Throwable::$cause),null),not(equals(arg0,null)))}; mby: null; post: {heap=and(and(and(equals(result,self),equals(java.lang.Throwable::select(heap,self,java.lang.Throwable::$cause),arg0)),not(equals(result,null))),equals(exc,null))}; mods: {heap=singleton(self,java.lang.Throwable::$cause), savedHeap=null}; hasMod: {heap=true, savedHeap=true}; termination: diamond; transaction: false">
+   </references>
+</proofMetaFile>

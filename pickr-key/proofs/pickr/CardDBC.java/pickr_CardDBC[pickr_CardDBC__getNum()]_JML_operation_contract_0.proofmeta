@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<proofMetaFile proofFileMD5="5474d0112231b2840abf577cc6620c1e" proofClosed="true" proofOutdated="false">
+<proofMetaFile proofFileMD5="780161728f733d94801d55e74eb8890" proofClosed="true" proofOutdated="false">
    <markerMessage>
 Closed Proof:
 pickr.CardDBC[pickr.CardDBC::getNum()].JML operation contract.0
 
-Time: 0.88 s
+Time: 0.19 s
 Nodes: 36
 Branches: 3
    </markerMessage>
@@ -14,7 +14,7 @@ Branches: 3
             <axiomReference kjt="pickr.CardDBC" name="Class invariant axiom for pickr.CardDBC" rep="equiv(java.lang.Object::&lt;inv&gt;(heap,self),not(equals(pickr.Suit::select(heap,self,pickr.CardDBC::$suit),null)))"/>
          </axiomReferences>
          <accessReferences>
-            <accessReference kjt="pickr.CardDBC" name="pickr.CardDBC::num" type="int" visibility="private" isStatic="false" isFinal="false" initializer=""/>
+            <accessReference kjt="pickr.CardDBC" name="pickr.CardDBC::num" type="int" visibility="public" isStatic="false" isFinal="false" initializer=""/>
          </accessReferences>
          <inlineMethodReferences>
             <inlineMethodReference kjt="pickr.CardDBC" name="getNum" parameters="" src="publicintgetNum () {return this.num;}"/>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<proofMetaFile proofFileMD5="a24d78bae9797bb215734ebef430a840" proofClosed="true" proofOutdated="false">
+<proofMetaFile proofFileMD5="cf520b194af6a73ac57897e33bfa566b" proofClosed="true" proofOutdated="false">
    <markerMessage>
 Closed Proof:
 pickr.CardDBC[pickr.CardDBC::getVal()].JML operation contract.0
 
-Time: 0.86 s
+Time: 0.17 s
 Nodes: 36
 Branches: 3
    </markerMessage>

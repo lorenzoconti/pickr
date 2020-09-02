@@ -1,19 +1,30 @@
 Model Pickr
 
  Parameters:
-   available : Boolean
-   type : { Briscola, Chiamata, Domino, Marianna, Invalid }
-   numOptions : [-1..2]
-   numPlayers : { COUPLE, FIVE, ANY, Invalid }
-   availableNumPlayers : Boolean
-   availableScore : Boolean
-   maxScore : { -1, 0, 5, 10, 15 }
+
+	validType : Boolean
+	type : { Invalid, Briscola, Chiamata }
+	
+	validNumPlayers : Boolean
+	availableNumPlayers : Boolean
+	numPlayers : { Invalid, None, Couple, Five } 
+	
+	validMaxScore : Boolean
+	availableMaxScore : Boolean
+	maxScore : { Invalid, None, Standard }
+	
+	validNumOptions : Boolean
+	numOptions : [-1..3]
+	
+	valid : Boolean
 
  Constraints:
-   # type = Chiamata => numPlayers = FIVE #
-   # type = Briscola => numPlayers = COUPLE #
-   # type = Domino or type = Marianna => not(available) #
-   # not(available) => (not(availableNumPlayers) and not(availableScore) and maxScore = 0 and numPlayers = ANY and numOptions = 0)  #
-   # not(availableNumPlayers) and not(availableScore) => numOptions = 0 #
-   # not(availableNumPlayers) and availableScore => numOptions = 1 #
-   # availableNumPlayers and not(availableScore) => numOptions = 1 #
+ 
+   # valid => validType and validNumPlayers and validMaxScore and validNumOptions #	
+   # not(validType) <=> type = Invalid #
+   # not(validNumPlayers) <=> numPlayers = Invalid  #
+   # not(validMaxScore) <=> maxScore = Invalid  #
+   # not(validNumOptions) <=> numOptions < 0 or numOptions > 2  #
+   # not(availableNumPlayers) <=> numPlayers = None #
+   # not(availableMaxScore) <=> maxScore = None #
+  

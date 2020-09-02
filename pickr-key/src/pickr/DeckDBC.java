@@ -1,60 +1,60 @@
 package pickr;
 
-
-import java.util.ArrayList;
-//import java.util.Collections;
-
 public class DeckDBC {
 	
-	// @ spec_public
-	public ArrayList<CardDBC> cards;
+	public int index = 40;
 	
-	// @ invariant this.cards != null ;
-	// @ invariant this.cards.size() <= 40
-	
-	public DeckDBC() { this.cards = new ArrayList<CardDBC>();	}
+	//@ spec_public
+	private CardDBC[] cards;
 
-	public ArrayList<CardDBC> getCards() { return cards;	}
+	public DeckDBC() { this.cards = new CardDBC[40]; }
+
+	public CardDBC[] getCards() { return cards;	}
 	
-	// @ requires this.cards.size() == 0 ;
-	// @ ensures this.cards.size() == 40 ;
-	public void init() {
+	
+	public void init() throws WrongNumberException {
+		int ind = 0;
 		for(int num = 1; num < 11; num++) {
 			for(int i=0; i < 4; i++) {
 				switch(i) {
-					case 0: cards.add(new CardDBC(Suit.COPPE, num)); break;
-					case 1: cards.add(new CardDBC(Suit.BASTONI, num)); break;
-					case 2: cards.add(new CardDBC(Suit.SPADE, num)); break;
-					case 3: cards.add(new GamingCard(Suit.ORI, num)); break;
+					case 0: cards[ind] = new CardDBC(Suit.BASTONI, num);
+					case 1: cards[ind] = new CardDBC(Suit.ORI, num);
+					case 2: cards[ind] = new CardDBC(Suit.SPADE, num);
+					case 3: cards[ind] = new CardDBC(Suit.COPPE, num);
 				}
+				ind ++;
 			}			
 		}
 	}
 	
-	// @ requires cards.size() > 0 ;
-	// @ ensures \old(cards.size()) == cards.size() ;
-	// @ public void shuffle() { Collections.shuffle(cards);	}
-	
-	// @ ensure cards.size() == \old(cards.size()) ;
-	public GamingCard pick() throws OutOfBoundException {
-	
-		if(!cards.isEmpty()) 
-			return cards.remove(0);
-		else throw new OutOfBoundException();
-	
+	//@ requires index > 0;
+	//@ ensures cards.length == \old(cards.length) ;
+	//@ ensures index == \old(index)-1 ;
+	public CardDBC pick() {
+		if(index > 0) {
+			CardDBC last = this.cards[index];
+			index--;
+			return last;
+		}
+		return null;			
 	}
 	
-	// @ requires n > 0 ;
-	// @ ensures cards.size() == \old(cards.size()) - n ;
-	public ArrayList<GamingCard> picks(int n) throws OutOfBoundException {	
+	//@ requires n > 0 && n < 6 && index >= n ;
+	//@ ensures index >=0 ;
+	//@ ensures index == \old(index) - n ;
+	public CardDBC[] picks(int n) {	
 		
-		if(cards.size() >= n) {
-			ArrayList<GamingCard> picked = new ArrayList<GamingCard>();
+		CardDBC[] picks = new CardDBC[n];
+		
+		if(index >= n) {
+			//@ loop_invariant (index-i-1 >= 0) && picks[i] != null;
+			//@ loop_invariant (\forall int j; 0<=j && j<i; picks[j].num != 0);
 			for(int i =0; i < n; i ++) {
-				picked.add(cards.remove(0));
+				picks[i] = this.cards[index-i-1];
 			}
-			return picked;			
+			index -= n;
+			return picks;			
 		}
-		else throw new OutOfBoundException();	
+		else return new CardDBC[n];	
 	}	
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proofMetaFile proofFileMD5="72a781b272cb1edf3b473b7ffe22099f" proofClosed="true" proofOutdated="false">
+   <markerMessage>
+Closed Proof:
+pickr.CardDBC[pickr.CardDBC::checkNum(int)].JML normal_behavior operation contract.0
+
+Time: 0.40 s
+Nodes: 94
+Branches: 5
+   </markerMessage>
+   <references rep="pre: {heap=and(and(gt(num,Z(0(#))),lt(num,Z(1(1(#))))),java.lang.Object::&lt;inv&gt;(heap,self))}; mby: null; post: {heap=and(and(and(gt(result,Z(0(#))),lt(result,Z(1(1(#))))),java.lang.Object::&lt;inv&gt;(heap,self)),equals(exc,null))}; mods: {heap=allLocs, savedHeap=null}; hasMod: {heap=true, savedHeap=true}; termination: diamond; transaction: false">
+      <type name="pickr.CardDBC">
+         <axiomReferences>
+            <axiomReference kjt="pickr.CardDBC" name="Class invariant axiom for pickr.CardDBC" rep="equiv(java.lang.Object::&lt;inv&gt;(heap,self),not(equals(pickr.Suit::select(heap,self,pickr.CardDBC::$suit),null)))"/>
+         </axiomReferences>
+         <inlineMethodReferences>
+            <inlineMethodReference kjt="pickr.CardDBC" name="checkNum" parameters="int;" src="intcheckNum (int num)throwsWrongNumberException {if (num&lt;1||num&gt;10) {                         throw  new  WrongNumberException ();   }                     return  num; }"/>
+         </inlineMethodReferences>
+      </type>
+   </references>
+</proofMetaFile>

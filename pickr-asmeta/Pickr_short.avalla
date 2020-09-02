@@ -1,0 +1,34 @@
+scenario SCENARIO_NAME
+load Pickr.asm
+set username := lorenzo;
+set password := "password";
+step
+check stato = MENU;
+check utenteAttivo = lorenzo;
+set username := lorenzo;
+set password := "password";
+set operazione := JOIN;
+step
+check stato = WAITING_PLAYERS;
+check utenteAttivo = lorenzo;
+check numOfPlayers = 1;
+check joined = true;
+set username := lorenzo;
+set password := "password";
+set operazione := JOIN;
+set lobby := LEAVE;
+step
+check stato = MENU;
+check utenteAttivo = lorenzo;
+check numOfPlayers = 0;
+check joined = false;
+set username := lorenzo;
+set password := "password";
+set operazione := LOGOUT;
+set lobby := LEAVE;
+step
+check stato = INSERISCI_USERNAME;
+check utenteAttivo = lorenzo;
+check numOfPlayers = 0;
+check joined = false;
+step

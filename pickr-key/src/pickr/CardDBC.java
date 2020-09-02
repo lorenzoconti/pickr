@@ -1,17 +1,17 @@
 package pickr;
 
-enum Suit { BRISCOLA, ORI, BASTONI, COPPE }
+enum Suit { SPADE, ORI, BASTONI, COPPE }
 
 public class CardDBC {
 	
 	//@ spec_public
 	private Suit suit;
-	//@ spec_public
-	private int num;
+	
+	public int num;
 	//@ spec_public
 	private int val;
 	
-	public CardDBC(Suit suit, int num) {
+	public CardDBC(Suit suit, int num) throws WrongNumberException {
 	
 		this.suit = suit;
 		this.val = numToVal(num);
@@ -35,12 +35,19 @@ public class CardDBC {
 		else return num == 1 ? 10 : 9;		
 	}
 	
+	public String toString() { return this.num + " di " + this.suit; }
+	 
+	//@ normal_behavior
 	//@ requires num > 0 && num < 11 ;
 	//@ ensures \result > 0 && \result < 11 ;
-	int checkNum(int num) {
+	//@ also
+	//@ exceptional_behavior
+	//@ requires num<1 || num > 10;
+	//@ signals (Exception e) e instanceof WrongNumberException;
+	int checkNum(int num) throws WrongNumberException {
 	 
 		    if (num < 1 || num > 10) {
-		     return 0;
+		    	throw new WrongNumberException();
 		    }
 		    return num;
 	 }

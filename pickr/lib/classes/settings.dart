@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:pickr/enums/games.dart';
 
 class Settings {

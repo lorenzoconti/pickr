@@ -1,0 +1,125 @@
+** Simulation **
+
+<Run>
+<Transition>
+<State 1 (controlled)>
+Utente={admin,lorenzo}
+operazione=JOIN
+password=password
+print=Benvenuto, seleziona l'operazione che vuoi eseguire
+stato=MENU
+step__=1
+username=lorenzo
+utenteAttivo=lorenzo
+</State 1 (controlled)>
+clear monitored vars
+</Transition>
+<Transition>
+check succeeded: stato = MENU 
+check succeeded: utenteAttivo = lorenzo 
+<State 2 (controlled)>
+Utente={admin,lorenzo}
+joined=true
+lobby=INVITE
+numOfPlayers=1
+operazione=JOIN
+password=password
+print=Sei entrato nella partita, in attesa di giocatori.
+result=1
+stato=WAITING_PLAYERS
+step__=2
+username=lorenzo
+utenteAttivo=lorenzo
+</State 2 (controlled)>
+clear monitored vars
+</Transition>
+<Transition>
+check succeeded: stato = WAITING_PLAYERS 
+check succeeded: utenteAttivo = lorenzo 
+check succeeded: numOfPlayers = 1 
+check succeeded: joined = true 
+<State 3 (controlled)>
+Utente={admin,lorenzo}
+joined=true
+lobby=INVITE
+numOfPlayers=2
+operazione=JOIN
+password=password
+print=Sei entrato nella partita, in attesa di giocatori.
+result=1
+stato=WAITING_PLAYERS
+step__=3
+username=lorenzo
+utenteAttivo=lorenzo
+</State 3 (controlled)>
+clear monitored vars
+</Transition>
+<Transition>
+check succeeded: stato = WAITING_PLAYERS 
+check succeeded: utenteAttivo = lorenzo 
+check succeeded: numOfPlayers = 2 
+check succeeded: joined = true 
+<State 4 (controlled)>
+Utente={admin,lorenzo}
+joined=true
+lobby=INVITE
+numOfPlayers=3
+operazione=JOIN
+password=password
+print=La partita ? cominciata.
+result=1
+stato=PLAYING
+step__=4
+username=lorenzo
+utenteAttivo=lorenzo
+</State 4 (controlled)>
+clear monitored vars
+</Transition>
+<Transition>
+CHECK FAILED: stato = WAITING_PLAYERS at step 4 
+check succeeded: utenteAttivo = lorenzo 
+check succeeded: numOfPlayers = 3 
+check succeeded: joined = true 
+<State 5 (controlled)>
+Utente={admin,lorenzo}
+joined=true
+lobby=INVITE
+numOfPlayers=3
+operazione=JOIN
+password=password
+print=La partita ? cominciata.
+result=1
+stato=PLAYING
+step__=-1
+username=lorenzo
+utenteAttivo=lorenzo
+</State 5 (controlled)>
+clear monitored vars
+</Transition>
+<Transition>
+<State 6 (controlled)>
+Utente={admin,lorenzo}
+joined=true
+lobby=INVITE
+numOfPlayers=3
+operazione=JOIN
+password=password
+print=La partita ? cominciata.
+result=1
+stato=PLAYING
+step__=-1
+username=lorenzo
+utenteAttivo=lorenzo
+</State 6 (controlled)>
+clear monitored vars
+</Transition>
+</Run>
+
+** Coverage Info: **
+
+r_Main
+r_inserisciUsername
+r_Playing
+r_waiting_room
+r_menu
+r_inserisciPassword

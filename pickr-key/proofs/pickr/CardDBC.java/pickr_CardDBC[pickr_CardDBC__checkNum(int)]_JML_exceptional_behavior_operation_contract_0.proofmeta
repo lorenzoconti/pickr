@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proofMetaFile proofFileMD5="a1c612d219500fd87b369ad6d1fbef45" proofClosed="true" proofOutdated="false">
+   <markerMessage>
+Closed Proof:
+pickr.CardDBC[pickr.CardDBC::checkNum(int)].JML exceptional_behavior operation contract.0
+
+Time: 0.169 s
+Nodes: 361
+Branches: 14
+   </markerMessage>
+   <calledMethods>
+      <calledMethod fullQualifiedName="pickr.WrongNumberException#&lt;createObject&gt;()"/>
+      <calledMethod fullQualifiedName="pickr.WrongNumberException#&lt;allocate&gt;()"/>
+      <calledMethod fullQualifiedName="pickr.WrongNumberException#&lt;prepareEnter&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.Exception#&lt;prepare&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.Throwable#&lt;prepare&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.Object#&lt;prepare&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.Exception#&lt;init&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.Throwable#&lt;init&gt;()"/>
+      <calledMethod fullQualifiedName="java.lang.Object#&lt;init&gt;()"/>
+   </calledMethods>
+   <references rep="pre: {heap=and(or(lt(num,Z(1(#))),gt(num,Z(0(1(#))))),java.lang.Object::&lt;inv&gt;(heap,self))}; mby: null; post: {heap=and(not(equals(exc,null)),and(and(imp(equals(java.lang.Exception::instance(exc),TRUE),and(not(equals(exc,null)),equals(pickr.WrongNumberException::instance(exc),TRUE))),imp(equals(java.lang.Throwable::instance(exc),TRUE),java.lang.Object::&lt;inv&gt;(heap,self))),or(or(equals(java.lang.Error::instance(exc),TRUE),equals(java.lang.RuntimeException::instance(exc),TRUE)),equals(pickr.WrongNumberException::instance(exc),TRUE))))}; mods: {heap=allLocs, savedHeap=null}; hasMod: {heap=true, savedHeap=true}; termination: diamond; transaction: false">
+      <type name="pickr.CardDBC">
+         <axiomReferences>
+            <axiomReference kjt="pickr.CardDBC" name="Class invariant axiom for pickr.CardDBC" rep="equiv(java.lang.Object::&lt;inv&gt;(heap,self),not(equals(pickr.Suit::select(heap,self,pickr.CardDBC::$suit),null)))"/>
+         </axiomReferences>
+         <inlineMethodReferences>
+            <inlineMethodReference kjt="pickr.CardDBC" name="checkNum" parameters="int;" src="intcheckNum (int num)throwsWrongNumberException {if (num&lt;1||num&gt;10) {                         throw  new  WrongNumberException ();   }                     return  num; }"/>
+         </inlineMethodReferences>
+      </type>
+      <type name="pickr.WrongNumberException">
+         <inlineMethodReferences>
+            <inlineMethodReference kjt="pickr.WrongNumberException" name="&lt;init&gt;" parameters="" src="public void &lt;init&gt; () {super.&lt;init&gt;();}"/>
+         </inlineMethodReferences>
+      </type>
+   </references>
+</proofMetaFile>

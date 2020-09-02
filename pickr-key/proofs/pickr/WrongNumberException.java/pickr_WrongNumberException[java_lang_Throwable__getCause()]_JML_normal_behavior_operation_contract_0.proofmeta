@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proofMetaFile proofFileMD5="dd4f1d4c590df94ecc0137dfb0db167e" proofClosed="false" proofOutdated="false">
+   <markerMessage>
+Open Proof:
+pickr.WrongNumberException[java.lang.Throwable::getCause()].JML normal_behavior operation contract.0
+
+Reason: Goal can&apos;t be closed automatically.
+Hint: Check code and specifications for bugs or continue proof interactively.
+
+Time: 0.10 s
+Nodes: 16
+Branches: 2
+   </markerMessage>
+   <references rep="pre: {heap=java.lang.Object::&lt;inv&gt;(heap,self)}; mby: null; post: {heap=and(and(equals(result,java.lang.Throwable::select(heap,self,java.lang.Throwable::$cause)),and(java.lang.Object::&lt;inv&gt;(heap,self),not(equals(result,null)))),equals(exc,null))}; mods: {heap=allLocs, savedHeap=null}; hasMod: {heap=true, savedHeap=true}; termination: diamond; transaction: false">
+      <type name="pickr.WrongNumberException">
+         <axiomReferences>
+            <axiomReference kjt="pickr.WrongNumberException" name="Class invariant axiom for pickr.WrongNumberException" rep="equiv(java.lang.Object::&lt;inv&gt;(heap,self),true)"/>
+         </axiomReferences>
+      </type>
+   </references>
+</proofMetaFile>

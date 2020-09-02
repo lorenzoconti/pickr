@@ -8,7 +8,7 @@ signature:
 
 	enum domain Operazione = { JOIN | LOGOUT }
 
-	enum domain Azione = { DROP }
+	enum domain Azione = { DROP | PICK}
 
 	enum domain Stato = { INSERISCI_USERNAME | INSERISCI_PASSWORD | MENU | WAITING_PLAYERS | PLAYING }
 
@@ -115,14 +115,14 @@ macro rule r_waiting_room =
 	if ( stato = WAITING_PLAYERS ) then
 		par
 			if ( lobby = INVITE )  then
-				if ( numOfPlayers < 4) then
+				if ( numOfPlayers < 2) then
 					par
 						stato := WAITING_PLAYERS
 						numOfPlayers := numOfPlayers + 1
 						print := "Sei entrato nella partita, in attesa di giocatori."
 					endpar
 				else
-					if ( numOfPlayers = 4 ) then
+					if ( numOfPlayers = 2 ) then
 						par
 							stato := PLAYING
 							print := "La partita è cominciata."
@@ -184,5 +184,5 @@ default init s0:
 	function print = "Inserire username"
 	function numOfPlayers = 0
 	function joined = false
-	function hand( $u in Utente ) = 4
+	function hand( $u in Utente ) = 2
 

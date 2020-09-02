@@ -1,5 +1,5 @@
 scenario Pickr
-load prova.asm
+load Pickr.asm
 set username := lorenzo;
 set password := "password";
 step

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+
 import 'package:pickr/classes/settings.dart';
 import 'package:pickr/enums/games.dart';
 import 'package:pickr/handlers/game.dart';

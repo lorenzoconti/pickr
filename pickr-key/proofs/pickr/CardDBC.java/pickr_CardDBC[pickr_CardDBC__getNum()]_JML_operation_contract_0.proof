@@ -2,7 +2,7 @@
 
 \settings {
 "#Proof-Settings-Config-File
-#Sat Aug 29 23:47:50 CEST 2020
+#Wed Sep 02 13:00:09 CEST 2020
 [StrategyProperty]VBT_PHASE=VBT_SYM_EX
 [SMTSettings]useUninterpretedMultiplication=true
 [SMTSettings]SelectedTaclets=
@@ -40,7 +40,7 @@
 \javaSource "../../../src";
 
 \proofObligation "#Proof Obligation Settings
-#Sat Aug 29 23:47:50 CEST 2020
+#Wed Sep 02 13:00:09 CEST 2020
 name=pickr.CardDBC[pickr.CardDBC\\:\\:getNum()].JML operation contract.0
 contract=pickr.CardDBC[pickr.CardDBC\\:\\:getNum()].JML operation contract.0
 class=de.uka.ilkd.key.proof.init.FunctionalOperationContractPO
@@ -49,7 +49,7 @@ class=de.uka.ilkd.key.proof.init.FunctionalOperationContractPO
 \proof {
 (keyLog "0" (keyUser "loren" ) (keyVersion "19f0b8c2a4fe689cd76be6cd1753b36e2e825a89"))
 
-(autoModeTime "55")
+(autoModeTime "12")
 
 (branch "dummy ID"
 (builtin "One Step Simplification" (formula "1") (newnames "self,result,exc,heapAtPre,o,f"))

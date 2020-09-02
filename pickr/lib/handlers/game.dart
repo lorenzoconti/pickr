@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:pickr/classes/settings.dart';
 import 'package:pickr/enums/games.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pickr/utils/csv_utils.dart';
 
 abstract class GameSessionInterface {

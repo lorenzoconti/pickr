@@ -5,8 +5,11 @@ import pickr.exceptions.WrongCardNumberException;
 
 public class GamingCard {
 	
+	//@ spec_public
 	private Suit suit;
+	//@ spec_public
 	private int num;
+	//@ spec_public
 	private int val;
 	
 	public GamingCard(Suit suit, int num) throws WrongCardNumberException {
@@ -16,25 +19,25 @@ public class GamingCard {
 		this.num = checkNum(num);
 	}
 	
-	// @ ensures \result == this.suit ;
+	//@ ensures \result == this.suit ;
 	public Suit getSuit() { return this.suit; }
 	
-	// @ ensures \result == this.num ;
+	//@ ensures \result == this.num ;
 	public int getNum() { return this.num; }
 	
-	// @ ensures \result == this.val ;
+	//@ ensures \result == this.val ;
 	public int getVal() { return this.val; }
 	
 	
-	// @ requires num > 0 && num < 11 ;
-	// @ ensures \result > 0 && \result < 11 ;
+	//@ requires num > 0 && num < 11 ;
+	//@ ensures \result > 0 && \result < 11 ;
 	int numToVal(int num) {
 		if(num != 1 && num != 3) return num-1;
 		else return num == 1 ? 10 : 9;		
 	}
 	
-	// @ requires num > 0 && num < 11 ;
-	// @ ensures \result > 0 && \result < 11 ;
+	//@ requires num > 0 && num < 11 ;
+	//@ ensures \result > 0 && \result < 11 ;
 	int checkNum(int num) throws WrongCardNumberException {
 	 
 		    if (num < 1 || num > 10) {

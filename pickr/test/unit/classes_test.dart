@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:pickr/classes/card.dart';
 import 'package:pickr/classes/deck.dart';
 import 'package:pickr/classes/games/briscola.dart';

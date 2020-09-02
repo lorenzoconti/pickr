@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+
+import 'package:pickr/handlers/auth.dart';
 import 'package:pickr/handlers/game.dart';
 import 'package:pickr/pages/auth.dart';
+import 'package:pickr/pages/home.dart';
 import 'package:pickr/pages/lobby.dart';
 import 'package:pickr/providers/auth-provider.dart';
 import 'package:pickr/providers/game-provider.dart';
-
-import 'handlers/auth.dart';
-import 'pages/home.dart';
 
 void main() => runApp(Pickr());
 

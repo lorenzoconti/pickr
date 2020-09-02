@@ -39,7 +39,7 @@ signature:
 
 definitions:
 
-	domain Card = { 0, 4 }
+	domain Card = { 0, 1, 2, 3, 4, 5 }
 
 	domain NumPlayers = { 0, 1, 2, 3, 4, 5}
 

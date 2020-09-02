@@ -10,18 +10,17 @@ import pickr.exceptions.WrongCardNumberException;
 
 public class Deck {
 	
-	// @ spec_public
 	public ArrayList<GamingCard> cards;
 	
-	// @ invariant this.cards != null ;
-	// @ invariant this.cards.size() <= 40
+	//@ public invariant this.cards != null ;
+	//@ public invariant this.cards.size() <= 40 ;
 	
 	public Deck() { this.cards = new ArrayList<GamingCard>();	}
 
 	public ArrayList<GamingCard> getCards() { return cards;	}
 	
-	// @ requires this.cards.size() == 0 ;
-	// @ ensures this.cards.size() == 40 ;
+	//@ requires this.cards.size() == 0 ;
+	//@ ensures this.cards.size() == 40 ;
 	public void init() throws WrongCardNumberException {
 		for(int num = 1; num < 11; num++) {
 			for(int i=0; i < 4; i++) {
@@ -35,11 +34,14 @@ public class Deck {
 		}
 	}
 	
-	// @ requires cards.size() > 0 ;
-	// @ ensures \old(cards.size()) == cards.size() ;
-	// @ public void shuffle() { Collections.shuffle(cards);	}
-	
-	// @ ensure cards.size() == \old(cards.size()) ;
+	//@ normal_behavior
+	//@ requires !this.cards.isEmpty();
+	//@ ensures cards.size() == \old(cards.size()) ;
+	//@ ensures \result != null;
+	//@ also
+	//@ exceptional_behavior
+	//@ requires this.cards.isEmpty();
+	//@ signals (Exception e) e instanceof OutOfBoundException;
 	public GamingCard pick() throws OutOfBoundException {
 	
 		if(!cards.isEmpty()) 
@@ -48,8 +50,8 @@ public class Deck {
 	
 	}
 	
-	// @ requires n > 0 ;
-	// @ ensures cards.size() == \old(cards.size()) - n ;
+	//@ requires n > 0 ;
+	//@ ensures cards.size() == \old(cards.size()) - n ;
 	public ArrayList<GamingCard> picks(int n) throws OutOfBoundException {	
 		
 		if(cards.size() >= n) {

@@ -1,9 +1,8 @@
 import 'package:pickr/classes/card.dart';
 import 'package:pickr/classes/games/game.dart';
+import 'package:pickr/classes/player.dart';
 import 'package:pickr/enums/suits.dart';
 import 'package:pickr/exceptions/out_of_bound_exception.dart';
-
-import '../player.dart';
 
 class Briscola extends Game {
   //
