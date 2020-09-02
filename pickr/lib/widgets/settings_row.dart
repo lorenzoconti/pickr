@@ -31,10 +31,14 @@ class _SettingsRowState extends State<SettingsRow> {
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               decoration: BoxDecoration(
                   color: _selected == element
-                      ? Colors.green.shade200
+                      ? Colors.green.shade600
                       : Colors.grey.shade300,
                   borderRadius: BorderRadius.circular(8)),
-              child: Text(element.toString())),
+              child: Text(
+                element.toString(),
+                style: TextStyle(
+                    color: _selected == element ? Colors.white : Colors.black),
+              )),
           onTap: () {
             setState(() {
               widget.callback(widget.title, element);

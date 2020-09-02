@@ -91,9 +91,11 @@ class _AuthPageState extends State<AuthPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter login demo'),
+        backgroundColor: Colors.green.shade600,
+        title: Text('Pickr Login'),
       ),
       body: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         padding: EdgeInsets.all(16.0),
         child: Form(
           key: formKey,
@@ -108,16 +110,30 @@ class _AuthPageState extends State<AuthPage> {
 
   /// Builds the form fields.
   List<Widget> buildInputs() {
+    var myFocusNode = FocusNode();
     return <Widget>[
       TextFormField(
+        cursorColor: Colors.green.shade600,
         key: Key('email'),
-        decoration: InputDecoration(labelText: 'Email'),
+        decoration: InputDecoration(
+            labelText: 'Email',
+            labelStyle: TextStyle(
+                color: myFocusNode.hasFocus ? Colors.blue : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.green))),
         validator: EmailFieldValidator.validate,
         onSaved: (String value) => _email = value,
       ),
       TextFormField(
+        focusNode: myFocusNode,
+        cursorColor: Colors.green.shade600,
         key: Key('password'),
-        decoration: InputDecoration(labelText: 'Password'),
+        decoration: InputDecoration(
+            labelText: 'Password',
+            labelStyle: TextStyle(
+                color: myFocusNode.hasFocus ? Colors.blue : Colors.black),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.green))),
         obscureText: true,
         validator: PasswordFieldValidator.validate,
         onSaved: (String value) => _password = value,
@@ -129,28 +145,49 @@ class _AuthPageState extends State<AuthPage> {
   List<Widget> buildSubmitButtons() {
     if (_mode == AuthMode.LOGIN) {
       return <Widget>[
-        RaisedButton(
-          key: Key('login_button'),
-          child: Text('Login', style: TextStyle(fontSize: 20.0)),
-          onPressed: validateAndSubmit,
+        GestureDetector(
+          onTap: validateAndSubmit,
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.grey.shade300),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            margin: EdgeInsets.fromLTRB(20, 30, 20, 10),
+            key: Key('login_button'),
+            child: Center(child: Text('Login', style: TextStyle(fontSize: 18))),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.all(15),
+          child: Center(
+            child: Text("Don't you have an account?"),
+          ),
         ),
         FlatButton(
           key: Key('login_to_create'),
-          child: Text('Create an account', style: TextStyle(fontSize: 20.0)),
+          child: Text('Create an account', style: TextStyle(fontSize: 18)),
           onPressed: moveToRegister,
         ),
       ];
     } else {
       return <Widget>[
-        RaisedButton(
-          key: Key('create_account'),
-          child: Text('Create an account', style: TextStyle(fontSize: 20.0)),
-          onPressed: validateAndSubmit,
+        GestureDetector(
+          onTap: validateAndSubmit,
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.grey.shade300),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            margin: EdgeInsets.fromLTRB(20, 30, 20, 10),
+            key: Key('create_account'),
+            child: Center(
+                child:
+                    Text('Create an account', style: TextStyle(fontSize: 18))),
+          ),
         ),
         FlatButton(
           key: Key('create_to_login'),
-          child:
-              Text('Have an account? Login', style: TextStyle(fontSize: 20.0)),
+          child: Text('Have an account? Login', style: TextStyle(fontSize: 18)),
           onPressed: moveToLogin,
         ),
       ];

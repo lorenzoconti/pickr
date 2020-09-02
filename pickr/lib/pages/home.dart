@@ -22,23 +22,15 @@ class _HomePageState extends State<HomePage> {
       child:
           Text('Attualmente non disponibile', style: TextStyle(fontSize: 18)));
 
-  /*
-   * build
-   *    _buildBody
-   *      _title
-   *      _gameSection
-   *      _settingsSection
-   *      
-   * 
-   */
-
   @override
   Widget build(BuildContext context) {
     //
     final game = GameProvider.of(context).game;
 
     return Scaffold(
-        appBar: AppBar(title: Text('Pickr')), body: _buildBody(game));
+        appBar: AppBar(
+            title: Text('Pickr'), backgroundColor: Colors.green.shade600),
+        body: _buildBody(game));
   }
 
   /// Builds the body of the page.
