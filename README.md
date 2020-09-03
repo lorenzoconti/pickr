@@ -23,8 +23,13 @@ This project is carried out for the testing course of the University of Bergamo.
 
 ### Additional info
 
-- It is not possible to reproduce the app since the google-services.json file (to connect it with my firebase account) is missing.
-- To run the unit tests (that do not requires firebase interaction), run the following command in the Flutter project folder.
+- To run the app
+```
+flutter pub get
+flutter run
+```
+
+- To run the unit tests, run the following command in the Flutter project folder.
 ```
 flutter test
 ```
